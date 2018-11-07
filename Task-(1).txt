@@ -1,0 +1,1 @@
+- Whole configuration Python/Django
