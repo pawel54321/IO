@@ -1,2 +1,0 @@
-- Models in Django (blog)
-- Admin Django
