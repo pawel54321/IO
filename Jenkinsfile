@@ -1,18 +1,24 @@
 // Jenkinsfile
-node('docker') {
+pipeline {
   checkout scm
   def pythonImage
-  stage('build docker image') {
-    pythonImage = docker.build("io:build")
-  }
-/*
-  stage('test') {
-    pythonImage.inside {
-      sh '''. /tmp/venv/bin/activate && python -m pytest --junitxml=results.xml'''
+  agent {
+    docker {
+      image 'node'
+      args '-u root'
     }
+    stage('build docker image') {
+      pythonImage = docker.build("io:build")
+    }
+  /*
+    stage('test') {
+      pythonImage.inside {
+        sh '''. /tmp/venv/bin/activate && python -m pytest --junitxml=results.xml'''
+      }
+    }
+    stage('collect test results') {
+      junit 'results.xml'
+    }
+  */  
   }
-  stage('collect test results') {
-    junit 'results.xml'
-  }
-*/  
 }
