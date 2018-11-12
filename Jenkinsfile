@@ -1,24 +1,17 @@
 // Jenkinsfile
 pipeline {
-  checkout scm
-  def pythonImage
+  
   agent {
     docker {
-      image 'node'
-      args '-u root'
+      image 'python:3.7'
     }
-    stage('build docker image') {
-      pythonImage = docker.build("io:build")
-    }
-  /*
-    stage('test') {
-      pythonImage.inside {
-        sh '''. /tmp/venv/bin/activate && python -m pytest --junitxml=results.xml'''
+  }
+  
+  stages {
+    stage('build') {
+      steps {
+        sh 'python --version'
       }
     }
-    stage('collect test results') {
-      junit 'results.xml'
-    }
-  */  
   }
 }
