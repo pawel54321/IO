@@ -1,4 +1,10 @@
-FROM jenkins:latest
-User root
-RUN apt-get update
-RUN apt-get install -y python-pip
+# Dockerfile
+FROM python:3.7
+
+WORKDIR /tmp/app
+
+COPY requirements.txt requirements.txt
+
+RUN virtualenv /tmp/venv && \
+    . /tmp/venv/bin/activate && \
+    pip install -r requirements.txt
