@@ -5,6 +5,7 @@ node('docker') {
   stage('build docker image') {
     pythonImage = docker.build("io:build")
   }
+/*
   stage('test') {
     pythonImage.inside {
       sh '''. /tmp/venv/bin/activate && python -m pytest --junitxml=results.xml'''
@@ -13,4 +14,5 @@ node('docker') {
   stage('collect test results') {
     junit 'results.xml'
   }
+*/  
 }
