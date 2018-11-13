@@ -11,8 +11,12 @@ pipeline {
     stage('test') {
       steps {
         sh 'python --version'
-        sh 'python manage runserver'
-        sh 'docker ps'
+        sh 'python manage.py runserver'
+      }
+    }
+    stage('build') {
+      script {
+        docker.build -t test@python .
       }
     }
   }
