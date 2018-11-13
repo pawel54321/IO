@@ -16,7 +16,7 @@ pipeline {
     }
     stage('build') {
       script {
-        docker.build test@python
+        docker.build test_image
       }
     }
   }
