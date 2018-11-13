@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh 'ls'
         sh 'python --version'
-        sh 'docker build'
+        sh 'docker build -t test@python .'
       }
     }
   }
