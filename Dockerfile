@@ -8,3 +8,5 @@ COPY requirements.txt requirements.txt
 RUN virtualenv /tmp/venv && \
     . /tmp/venv/bin/activate && \
     pip install -r requirements.txt
+
+CMD ["python", "manage.py", "runserver"]
