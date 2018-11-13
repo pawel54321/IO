@@ -15,8 +15,10 @@ pipeline {
       }
     }
     stage('build') {
-      script {
-        docker.build test_image
+      steps {
+        script {
+          docker.build test_image
+        }
       }
     }
   }
