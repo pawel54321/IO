@@ -5,6 +5,6 @@
   "repository": "https://github.com/gpzak/IO",
   "license": "MIT",
   "scripts": {
-    "bowerInstall": "bower install",
+    "bowerInstall": "bower install"
   }
 }
