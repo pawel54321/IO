@@ -8,7 +8,7 @@ pipeline {
   agent any
   tools {nodejs “node” }
   stages {
-    stage(‘Cloning Git’) {
+    stage(‘Cloning’) {
       steps {
         git ‘https://github.com/gpzak/IO.git'
       }
