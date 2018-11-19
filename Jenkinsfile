@@ -1,7 +1,7 @@
 // Jenkinsfile
 pipeline {
   environment {
-    registry = "gpzak/IO"
+    registry = "gpzak/io"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
