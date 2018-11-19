@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage(‘Cloning’) {
       steps {
-        git ‘github.com/gpzak/IO.git'
+        git ‘github.com/gpzak/IO.git’
       }
     }
     stage(‘Build’) {
