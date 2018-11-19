@@ -1,19 +1,51 @@
 // Jenkinsfile
 pipeline {
 
+  environment {
+    registry = “gpzak/IO”
+    registryCredential = ‘dockerhub’
+    dockerImage = ‘’
+  }
+
   agent {
     dockerfile true
   }
 
-  stages {
-    stage('build') {
+  tools {
+    nodejs “node”
+  }
+
+  stage('Cloning Git') {
       steps {
-        sh 'php --version'
+        git 'https://github.com/gpzak/IO.git'
       }
     }
-    stage('test') {
+
+    stage('Install dependencies') {
       steps {
-        echo 'Hello, World!'
+        sh 'npm install'
+        sh 'npm run bowerInstall'
+      }
+    }
+
+    stage('Test') {
+      steps {
+         sh 'npm test'
+      }
+    }
+  stage(‘Building image’) {
+    steps{
+      script {
+        dockerImage = docker.build registry + “:$BUILD_NUMBER”
+      }
+    }
+  }
+  stage(‘Deploy Image’) {
+    steps{
+       script {
+          docker.withRegistry( ‘’, registryCredential ) {
+          dockerImage.push()
+        }
       }
     }
   }
