@@ -3,22 +3,14 @@ pipeline {
 
   agent {
     docker {
-      image 'alang/django'
+      image 'php'
     }
   }
 
   stages {
-    stage('test') {
-      steps {
-        sh 'python --version'
-        // sh 'python manage.py runserver'
-      }
-    }
     stage('build') {
       steps {
-        script {
-          docker.build
-        }
+        sh 'php --version'
       }
     }
   }
