@@ -33,14 +33,14 @@ pipeline {
          sh 'npm test'
       }
     }
-  stage(‘Building Image’) {
+  stage(‘Building’) {
     steps{
       script {
         dockerImage = docker.build registry + “:$BUILD_NUMBER”
       }
     }
   }
-  stage(‘Deploy Image’) {
+  stage(‘Deploy’) {
     steps{
        script {
           docker.withRegistry( ‘’, registryCredential ) {
