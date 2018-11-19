@@ -2,15 +2,18 @@
 pipeline {
 
   agent {
-    docker {
-      image 'php'
-    }
+    dockerfile true
   }
 
   stages {
     stage('build') {
       steps {
         sh 'php --version'
+      }
+    }
+    stage('test') {
+      steps {
+        echo 'Hello, World!'
       }
     }
   }
