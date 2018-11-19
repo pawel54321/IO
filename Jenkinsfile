@@ -5,7 +5,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-  agent {docker}
+  agent any
   tools {nodejs "node" }
   stages {
     stage('Cloning') {
