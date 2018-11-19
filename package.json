@@ -1,4 +1,7 @@
 {
   "name": "IO",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "description": "Opis",
+  "repository": "https://github.com/gpzak/IO",
+  "license": "MIT"
 }
