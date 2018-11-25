@@ -13,7 +13,7 @@ pipeline {
       steps {
         sh 'cd my-app'
         sh 'npm install'
-        sh 'npm build'
+        sh 'npm run-script build'
       }
     }
     stage('Test'){
