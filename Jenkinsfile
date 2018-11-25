@@ -1,43 +1,24 @@
-// Jenkinsfile
 pipeline {
-  environment {
-    registry = "gpzak/io"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
+
   agent any
-  tools {nodejs "node" }
+
   stages {
-    stage('Cloning') {
-      steps {
-        git 'https://github.com/gpzak/IO.git'
-      }
+    stage('Checkout') {
+      checkout scm
     }
-    stage('Build') {
-       steps {
-         sh 'npm install'
-       }
+    stage('Build'){
+     sh 'cd my-app'
+     sh 'npm install'
+     sh 'npm build'
     }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
+    stage('Test'){
+      sh 'npm test'
     }
-    stage('Building') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-              dockerImage.push()
-            }
-         }
-      }
+    stage('Deploy'){
+        sh 'docker build -t react-app --no-cache .'
+        sh 'docker tag react-app localhost:5000/react-app'
+        sh 'docker push localhost:5000/react-app'
+        sh 'docker rmi -f react-app localhost:5000/react-app'
     }
   }
 }
