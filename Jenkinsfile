@@ -15,12 +15,12 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm test'
+        sh 'npm test --prefix react-app'
       }
     }
     stage('Deploy'){
       steps {
-        sh 'npm start'
+        sh 'npm start --prefix react-app'
       }
     }
   }
