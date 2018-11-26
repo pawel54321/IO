@@ -9,8 +9,7 @@ pipeline {
   stages {
     stage('Build'){
       steps{
-        sh 'npm install'
-        sh 'npm install react-scripts'
+        sh 'npm install --prefix react-app'
         sh 'npm run build --prefix react-app'
       }
     }
