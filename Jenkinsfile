@@ -15,7 +15,7 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm test --prefix react-app --detectOpenHandles --forceExit'
+        sh 'npm test --prefix react-app --exit'
       }
     }
     stage('Deploy'){
