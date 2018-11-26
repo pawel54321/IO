@@ -9,19 +9,18 @@ pipeline {
   stages {
     stage('Build'){
       steps{
-        sh 'npm install --prefix react-app'
-        sh 'npm run build --prefix react-app'
+        sh 'docker-compose build test'
       }
     }
     stage('Test'){
       steps{
-        sh 'npm test --prefix react-app'
-        sh 'exit'
+        sh 'docker-compose run --rm test'
       }
     }
     stage('Deploy'){
       steps {
-        sh 'npm start --prefix react-app'
+        sh 'docker-compose build dev'
+        sh 'docker-compose up dev'
       }
     }
   }
