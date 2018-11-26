@@ -15,7 +15,8 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm test --prefix react-app --exit'
+        sh 'npm test --prefix react-app'
+        sh 'exit'
       }
     }
     stage('Deploy'){
