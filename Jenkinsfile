@@ -8,11 +8,15 @@ pipeline {
 
   stages {
     stage('Build'){
-     sh 'npm install'
-     sh 'npm run-script build --prefix react-app'
+      steps{
+        sh 'npm install'
+        sh 'npm run-script build --prefix react-app'
+      }
     }
     stage('Test'){
-      sh 'npm test'
+      steps{
+        sh 'npm test'
+      }
     }
     stage('Deploy'){
 
