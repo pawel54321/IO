@@ -10,7 +10,7 @@ pipeline {
     stage('Build'){
       steps{
         sh 'npm install'
-        sh 'npm run-script build --prefix react-app'
+        sh 'npm run build --prefix react-app'
       }
     }
     stage('Test'){
@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh ''
+        sh 'npm start'
       }
     }
   }
