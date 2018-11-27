@@ -6,6 +6,10 @@ pipeline {
     }
   }
 
+  environment {
+    PATH = "$PATH:/usr/local/bin"
+  }
+
   stages {
     stage('Build'){
       steps{
@@ -16,12 +20,11 @@ pipeline {
     stage('Test'){
       steps{
         sh 'npm test --prefix react-app'
-        sh 'exit'
       }
     }
     stage('Deploy'){
       steps {
-        sh 'npm start --prefix react-app'
+        sh 'docker-compose up'
       }
     }
   }
