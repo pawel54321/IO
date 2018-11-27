@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm test --prefix react-app/src'
+        sh 'npm test --prefix react-app'
       }
     }
     stage('Deploy'){
