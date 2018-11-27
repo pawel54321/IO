@@ -13,13 +13,17 @@ pipeline {
   stages {
     stage('Build'){
       steps{
-        sh 'npm install --prefix react-app'
-        sh 'npm run build --prefix react-app'
+        dir('react-app') {
+          sh 'npm install'
+          sh 'npm run build'
+        }
       }
     }
     stage('Test'){
       steps{
-        sh 'npm run test --prefix react-app --coverage'
+        dir('react-app') {
+          sh 'npm run test -- --coverage'
+        }
       }
     }
     stage('Deploy'){
