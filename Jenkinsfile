@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm run test -- --coverage --prefix react-app'
+        sh 'npm run test --prefix react-app --coverage'
       }
     }
     stage('Deploy'){
