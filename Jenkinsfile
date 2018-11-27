@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Test'){
       steps{
-        sh 'npm test --prefix react-app --no-watchman'
+        sh 'npm test --prefix react-app -- --verbose --no-watchman'
       }
     }
     stage('Deploy'){
