@@ -7,7 +7,7 @@ pipeline {
   }
 
   environment {
-    PATH = "/usr/local/bin/docker-compose:$PATH"
+    PATH = "/usr/local/bin:$PATH"
   }
 
   stages {
