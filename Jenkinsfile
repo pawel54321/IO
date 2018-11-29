@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    PATH = "$PATH:/usr/local/bin"
+    PATH = "$PATH:/usr/bin"
   }
 
   agent {
