@@ -24,7 +24,9 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'docker-compose up'
+        withEnv(["PATH=$PATH:/usr/bin"]){
+          sh 'docker-compose up'
+        }
       }
     }
   }
