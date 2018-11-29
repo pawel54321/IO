@@ -28,10 +28,7 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        dir('react-app') {
-          sh 'sysctl -w fs.inotify.max_user_watches=10000'
-          sh 'npm start'
-        }
+        sh 'docker-compose up'
       }
     }
   }
