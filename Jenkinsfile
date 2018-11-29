@@ -28,7 +28,9 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'docker-compose up'
+        dir('react-app') {
+          sh 'npm start'
+        }
       }
     }
   }
