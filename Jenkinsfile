@@ -6,10 +6,6 @@ pipeline {
     }
   }
 
-  environment {
-    Path = "/usr/local/bin:$PATH"
-  }
-
   stages {
     stage('Build'){
       steps{
