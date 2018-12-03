@@ -28,8 +28,8 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o docker-compose'
-        sh 'sudo chmod +x docker-compose'
+        sh 'curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o docker-compose'
+        sh 'chmod +x docker-compose'
         sh 'docker-compose up'
       }
     }
