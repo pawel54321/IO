@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    PATH = "$PATH:/usr/bin"
+    PATH = "$PATH:/usr/local/bin"
   }
 
   agent {
@@ -28,8 +28,6 @@ pipeline {
     }
     stage('Deploy'){
       steps {
-        sh 'curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o docker-compose'
-        sh 'chmod +x docker-compose'
         sh 'docker-compose up'
       }
     }
