@@ -7,10 +7,6 @@ pipeline {
     }
   }
 
-  environment {
-    PATH = "$PATH:/usr/local/bin/docker-compose"
-  }
-
   stages {
     stage('Build'){
       steps{
@@ -27,10 +23,12 @@ pipeline {
         }
       }
     }
-    stage('Deploy'){
-      steps {
-        sh 'echo PATH'
-        sh 'docker-compose up'
+    
+    withEnv(['PATH=/usr/local/bin']) {
+      stage('Deploy'){
+        steps {
+          sh 'docker-compose up'
+        }
       }
     }
   }
