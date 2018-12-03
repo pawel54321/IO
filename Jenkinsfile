@@ -23,10 +23,10 @@ pipeline {
         }
       }
     }
-    
-    withEnv(['PATH=/usr/local/bin']) {
-      stage('Deploy'){
-        steps {
+
+    stage('Deploy'){
+      steps {
+        withEnv(['PATH=/usr/local/bin']) {
           sh 'docker-compose up'
         }
       }
