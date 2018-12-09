@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
+
 // express app setup
 const appHandlers = [
     cors(), 
@@ -37,6 +39,27 @@ pgClient
 app.get('/', (req, res) => {
     res.send('Hi');
 });
+
+
+app.get('/values/all', async (req, res) => {
+    const values = await pgClient.query('SELECT * from values');
+
+    res.send(values.rows);
+});
+
+
+
+app.post('/values', async (req, res) => {
+    const index = req.body.index;
+
+    pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
+
+    res.send({
+        working: true
+    });
+});
+
+
 
 app.listen(5000, error => {
     console.log('Listening on port 5000');
