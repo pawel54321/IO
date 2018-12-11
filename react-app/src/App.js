@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import OtherPage from './Components/OtherPage';
 import Site from './Components/Site';
 import Login from './Components/Login';
+import Header from './Components/Header';
+import Foother from './Components/Foother'
 
 class App extends Component {
 
@@ -13,20 +15,17 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <Link to="/">Home</Link>
-            <Link to="/other-page">Other Page</Link>
-          </header>
-          <div>               
+          <Header/>
+          <main>            
             <Route exact path="/" component={Site} />
             <Route exact path="/other-page" component={OtherPage} />
-
-            <Route component={Login} />
-          </div>
+            <Route exact path="/logowanie" component={Login} />
+          </main>
+          <Foother/>
         </div>
       </Router>
     );
   }
 }
-
+     
 export default App;

@@ -5,7 +5,7 @@ class Site extends Component {
     render() {
         return (
             <div>
-                <p>Hello world</p>
+                <p>Hello World</p>
             </div>
         );
     }

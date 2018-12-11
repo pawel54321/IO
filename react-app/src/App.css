@@ -1,26 +1,62 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
-
+body
+{
+  background-color: #a36e18; /*Tlo*/
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 20vh;
+.App-header, .App-foother {
+  background-color: #775012;
+  min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  /*flex-direction: column;*/
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.App-foother
+{
+  min-height: 5vh !important;
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Element-menu
+{
+  padding-right: 3%;
+}
+
+p, h1, h2, h3 ,h4, div
+{
+  color: #31220b;
+}
+/*
+.App-header > :link
+{
+}
+*/
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:active, a:hover
+{
+  color: #969696;
+  text-decoration: none;
+}
+/*
 .App-link {
   color: #61dafb;
 }
+*/
 
 @keyframes App-logo-spin {
   from {
@@ -29,4 +65,37 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.Logow
+{
+width: 150px;
+}
+
+#BarLogow
+{
+width: 56%;
+float:left;
+min-height: 10vh;
+font-size: calc(10px + 2vmin);
+background-color: #a36e18;
+font-style: italic;
+padding-left:44%;
+}
+
+#BarLogow2
+{
+width: 56%;
+float:left;
+min-height: 5vh;
+font-size: calc(5px + 2vmin);
+background-color: #a36e18;
+line-height: 1.3;
+font-style: italic;
+padding-left:44%;
+}
+button
+{
+  width: 165px;
 }

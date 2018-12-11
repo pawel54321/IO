@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+//import axios from 'axios';
 
-import axios from 'axios';
 
 class Login extends Component {
-    
+   /* 
     constructor(props) {
     super(props);
 
@@ -23,14 +24,27 @@ class Login extends Component {
 renderSeenIndexes() {
   return this.state.seenIndexes.map(({ number }) => number).join(', ');
 }
+<p>INDEX:{this.renderSeenIndexes()}</p>
+*/
 
 
 
 
 render() {
     return (
-        <div>
-        <p>INDEX:{this.renderSeenIndexes()}</p>
+        <div>  
+            <div id="BarLogow">
+                <h3>Logowanie:</h3>
+            </div>
+            <div id="BarLogow2">
+                <form onSubmit=""> 
+                    <label>Login: </label><br/>
+                    <input type="text" onChange="" className="Logow" /><br/>
+                    <label>Hasło: </label><br/>
+                    <input type="password" onChange="" className="Logow"/><br/><br/>
+                    <button>Zaloguj</button>
+                </form>
+            </div>
         </div>
     );
   }
