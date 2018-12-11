@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import OtherPage from './Components/OtherPage';
+import Page from './Components/Page';
 import Site from './Components/Site';
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -21,7 +21,7 @@ class App extends Component {
           <Header/>
           <main>            
             <Route exact path="/" component={Site} />
-            <Route exact path="/other-page" component={OtherPage} />
+            <Route exact path="/strona" component={Page} />
             <Route exact path="/logowanie" component={Login} />
             <Route exact path="/rejestracja" component={Register} />  
           </main>

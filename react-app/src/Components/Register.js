@@ -12,6 +12,10 @@ class Register extends Component {
                 </div>
                 <div id="BarLogow2">
                     <form onSubmit=""> 
+                        <label>Imię: </label><br/>
+                        <input type="text" onChange=""/><br/>
+                        <label>Nazwisko: </label><br/>
+                        <input type="text" onChange=""/><br/>
                         <label>Login: </label><br/>
                         <input type="text" onChange=""/><br/>
                         <label>Hasło: </label><br/>
