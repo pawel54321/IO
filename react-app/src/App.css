@@ -68,34 +68,35 @@ a:active, a:hover
 }
 
 
-.Logow
-{
-width: 150px;
-}
-
 #BarLogow
 {
-width: 56%;
 float:left;
 min-height: 10vh;
 font-size: calc(10px + 2vmin);
 background-color: #a36e18;
 font-style: italic;
-padding-left:44%;
+padding-left:45%;
+padding-right:45%;
 }
 
 #BarLogow2
 {
-width: 56%;
 float:left;
 min-height: 5vh;
 font-size: calc(5px + 2vmin);
 background-color: #a36e18;
 line-height: 1.3;
 font-style: italic;
-padding-left:44%;
+padding-left:42%;
+padding-right:42%;
 }
-button
+button#zalo
 {
-  width: 165px;
+  padding-left:31.5%;
+  padding-right:31.5%;
+}
+button#zarej
+{
+  padding-left:26.5%;
+  padding-right:26.5%;
 }

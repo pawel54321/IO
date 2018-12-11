@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 //import axios from 'axios';
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class Login extends Component {
    /* 
@@ -39,10 +38,13 @@ render() {
             <div id="BarLogow2">
                 <form onSubmit=""> 
                     <label>Login: </label><br/>
-                    <input type="text" onChange="" className="Logow" /><br/>
+                    <input type="text" onChange=""/><br/>
                     <label>Hasło: </label><br/>
-                    <input type="password" onChange="" className="Logow"/><br/><br/>
-                    <button>Zaloguj</button>
+                    <input type="password" onChange=""/><br/><br/>
+                    <button id="zalo">Zaloguj się!</button>
+
+                    <center><p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link></center>
+                    
                 </form>
             </div>
         </div>

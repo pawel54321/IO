@@ -12,6 +12,9 @@ const Header = () => (
         </div>
         <div className="Element-menu">
             <Link to="/logowanie">Zaloguj się</Link>   
+        </div>     
+        <div className="Element-menu">
+            <Link to="/rejestracja">Zarejestruj się</Link>   
         </div>         
     </header>
   </nav>
