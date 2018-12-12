@@ -10,7 +10,7 @@ body
   height: 40vmin;
 }
 
-.App-header, .App-foother {
+.App-header, .App-footer {
   background-color: #775012;
   min-height: 10vh;
   display: flex;
@@ -21,7 +21,7 @@ body
   color: white;
 }
 
-.App-foother
+.App-footer
 {
   min-height: 5vh !important;
   position: fixed; 

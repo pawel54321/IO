@@ -1,19 +1,19 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
-const Foother = () => (
-    <div className="App-foother">
+import { Link } from 'react-router-dom';
+const Footer = () => (
+    <div className="App-footer">
         <footer>
-           <Sprawdz_Foother/>
+           <SprawdzFooter/>
         </footer>
     </div>
 );
 
-const Sprawdz_Foother = () => {
+const SprawdzFooter = () => {
  
     var a = window.location.pathname;
 
-    if(a!="/")
+    if(a!=="/")
     {
         return (<Link to="/">Wróć do Strony Głównej</Link>);
     }
@@ -24,6 +24,6 @@ const Sprawdz_Foother = () => {
 }
 
 
-export default Foother;
+export default Footer;
 
 
