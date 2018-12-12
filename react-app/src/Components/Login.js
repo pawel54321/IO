@@ -1,34 +1,55 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-//import axios from 'axios';
+import axios from 'axios';
 
 class Login extends Component {
-   /* 
-    constructor(props) {
+
+constructor(props) {
     super(props);
 
+    this.ZmianaWCzasieRzeczywistynInput = this.ZmianaWCzasieRzeczywistynInput.bind(this);
+    //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji
+
     this.state = {
-        seenIndexes: [],
-        values: {},
-        index: ''
+        login:'',
+        haslo:''
     }
 }
-  fetchIndexes = async () => {
-    const seenIndexes = await axios.get('/api/values/all');
-    
-    this.setState({
-        seenIndexes: seenIndexes.data
+
+
+KlikniecieSubmit = async (event) => {
+    event.preventDefault();
+
+    const OdpowiedzSerwera = await axios.post('/api/Uzytkownik/Logowanie', {
+        login: this.state.login,
+        haslo: this.state.haslo
     });
+
+    this.setState({
+        login:'',
+        haslo:'',
+        
+    });
+
+    if(OdpowiedzSerwera.data.zwracam_czy_poprawne===true)
+    alert("Zostałeś zalogowany!")
+    else
+    alert("BŁĄD! Nie poprawne dane!")
+} 
+
+
+ZmianaWCzasieRzeczywistynInput(event) 
+{
+    const target = event.target;
+    const value = target.value;
+    
+    const state = {...this.state}
+
+    state[target.name] = value;
+    
+    this.setState(state);
 }
-renderSeenIndexes() {
-  return this.state.seenIndexes.map(({ number }) => number).join(', ');
-}
-<p>INDEX:{this.renderSeenIndexes()}</p>
-*/
-
-
-
 
 render() {
     return (
@@ -39,9 +60,9 @@ render() {
             <div id="BarLogow2">
                 <form onSubmit=""> 
                     <label>Login: </label><br/>
-                    <input type="text" required onChange=""/><br/>
+                    <input type="text" name="login" value= {this.state.login} required onChange=""/><br/>
                     <label>Hasło: </label><br/>
-                    <input type="password" required onChange=""/><br/><br/>
+                    <input type="password" name="haslo" value= {this.state.haslo} required onChange=""/><br/><br/>
                     <button id="zalo">Zaloguj się!</button>
 
                     <center><p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link></center>

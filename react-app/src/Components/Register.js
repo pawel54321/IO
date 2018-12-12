@@ -22,7 +22,7 @@ class Register extends Component {
     KlikniecieSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.post('/api/Uzytkownik', {
+        const OdpowiedzSerwera = await axios.post('/api/Uzytkownik/Rejestracja', {
             imie: this.state.imie,
             nazwisko: this.state.nazwisko,
             login: this.state.login,
@@ -37,7 +37,10 @@ class Register extends Component {
             
         });
 
-        alert("Użytkownik pomyślnie został zarejestrowany!")
+        if(OdpowiedzSerwera.data.zwracam_czy_stworzono===true)
+        alert("Użytkownik został pomyślnie zarejestrowany!")
+        else
+        alert("BŁĄD! Użytkownik już istnieje!")
     } 
 
     ZmianaWCzasieRzeczywistynInput(event) {
@@ -49,6 +52,8 @@ class Register extends Component {
         
         const state = {...this.state}
 
+        state[target.name] = value;
+        /*
         if(target.name==="imie")
         {
         const inputImie = target.name;
@@ -71,7 +76,7 @@ class Register extends Component {
         const inputHaslo = target.name;      
         state[inputHaslo] = value;
         }
-       
+       */
         this.setState(state);
         
     }

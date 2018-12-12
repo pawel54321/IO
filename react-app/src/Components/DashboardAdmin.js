@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class Site extends Component {
+class DashboardAdmin extends Component {
 
     render() {
         return (
             <div>
-                <p>Hello World</p>
+                <p>Panel Admina</p>
             </div>
         );
     }
 }
 
-export default Site;
+export default DashboardAdmin;
