@@ -58,12 +58,15 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
 
     var czy_poprawne = false;
 
-    const zapytanie = pgClient.query("SELECT * FROM Uzytkownik WHERE login='"+login+"' AND haslo='"+haslo+"'")
+    const zapytanie2 = await pgClient.query("SELECT COUNT(*) FROM Uzytkownik WHERE login='"+login+"' AND haslo='"+haslo+"'")
     .catch((error) => {
         console.log(error);
     });
 
-    if(zapytanie.rows[0]==1)
+    const tablica = zapytanie2.rows;
+    console.log(tablica[0]);
+
+    if(tablica[0].count==1)
         czy_poprawne = true;
     else
         czy_poprawne = false;
@@ -75,6 +78,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
         zwracam_czy_poprawne: czy_poprawne
   
     });
+    
 });
 
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {
