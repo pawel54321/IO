@@ -58,8 +58,6 @@ class Register extends Component {
         else if(OdpowiedzSerwera.data.zwracam_czy_stworzono===false)
         document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";  
             
-
-
     } 
 
  

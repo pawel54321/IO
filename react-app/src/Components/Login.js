@@ -72,9 +72,7 @@ render() {
     return (
         <div>  
             <div id="BarLogowPOPRAWNIE">
-             <form>
              <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
-             </form>
              </div>
 
             <div id="BarLogow">
