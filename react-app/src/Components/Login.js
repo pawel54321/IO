@@ -34,13 +34,20 @@ KlikniecieSubmit2 = async (event) => {
 
     if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===true)
     {
+        document.getElementById("BarLogowPOPRAWNIE").style.display="block";
+        document.getElementById("BarLogow").style.display="none";
+        document.getElementById("BarLogow2").style.display="none";
+
+        document.getElementById("KomunikatSUCCESS2").innerHTML = "Logowanie przebiegło pomyślnie!"; 
         window.setTimeout(() => 
         {
         this.props.history.push('/')
-        }, 3000)
+        }, 2000)
     }
     else if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===false)
-    document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";  
+    {
+        document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";  
+    }
    
 
 } 
@@ -48,7 +55,8 @@ KlikniecieSubmit2 = async (event) => {
 
 ZmianaWCzasieRzeczywistynInput2(event) 
 {
-  
+    document.getElementById("KomunikatERROR2").innerHTML = "";  
+
     const target = event.target;
     const value = target.value;
     
@@ -63,6 +71,12 @@ ZmianaWCzasieRzeczywistynInput2(event)
 render() {
     return (
         <div>  
+            <div id="BarLogowPOPRAWNIE">
+             <form>
+             <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
+             </form>
+             </div>
+
             <div id="BarLogow">
                 <h3>Logowanie:</h3>
             </div>

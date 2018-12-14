@@ -45,10 +45,15 @@ class Register extends Component {
 
         if(OdpowiedzSerwera.data.zwracam_czy_stworzono===true)
         {
+            document.getElementById("BarLogowPOPRAWNIE").style.display="block";
+            document.getElementById("BarLogow").style.display="none";
+            document.getElementById("BarLogow2").style.display="none";
+    
+            document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!"; 
             window.setTimeout(() => 
             {
             this.props.history.push('/logowanie')
-            }, 3000)
+            }, 2000)
         }
         else if(OdpowiedzSerwera.data.zwracam_czy_stworzono===false)
         document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";  
@@ -61,7 +66,7 @@ class Register extends Component {
 
     ZmianaWCzasieRzeczywistynInput(event) {
     
-        
+        document.getElementById("KomunikatERROR").innerHTML = "";  
 
         const target = event.target;
         const value = target.value;
@@ -91,6 +96,10 @@ class Register extends Component {
     render() {
         return (
             <div>  
+                <div id="BarLogowPOPRAWNIE">
+                    <center><p><font color="green" id="KomunikatSUCCESS"></font></p></center>
+                </div>
+
                 <div id="BarLogow">
                     <h3>Rejestracja:</h3>
                 </div>
