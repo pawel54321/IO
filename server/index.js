@@ -64,7 +64,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     });
 
     const tablica = zapytanie2.rows;
-    console.log(tablica[0]);
+    //console.log(tablica[0]);
 
     if(tablica[0].count==1)
         czy_poprawne = true;

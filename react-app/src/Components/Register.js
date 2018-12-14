@@ -14,9 +14,15 @@ class Register extends Component {
             imie:'',
             nazwisko:'',
             login:'',
-            haslo:''
+            haslo:'',
+
         }
     }
+    
+
+   
+   
+
 
 
     KlikniecieSubmit = async (event) => {
@@ -38,10 +44,20 @@ class Register extends Component {
         });
 
         if(OdpowiedzSerwera.data.zwracam_czy_stworzono===true)
-        alert("Użytkownik został pomyślnie zarejestrowany!")
-        else
-        alert("BŁĄD! Użytkownik już istnieje!")
+        {
+            window.setTimeout(() => 
+            {
+            this.props.history.push('/logowanie')
+            }, 3000)
+        }
+        else if(OdpowiedzSerwera.data.zwracam_czy_stworzono===false)
+        document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";  
+            
+
+
     } 
+
+ 
 
     ZmianaWCzasieRzeczywistynInput(event) {
     
@@ -54,17 +70,6 @@ class Register extends Component {
 
         state[target.name] = value;
         /*
-        if(target.name==="imie")
-        {
-        const inputImie = target.name;
-        state[inputImie] = value;
-        }
-
-        if(target.name==="nazwisko")
-        {
-        const inputNazwisko = target.name;
-        state[inputNazwisko] = value;
-        }
         if(target.name==="login")
         {
         const inputLogin = target.name;
@@ -100,6 +105,8 @@ class Register extends Component {
                         <label>Hasło: </label><br/>
                         <input type="password" name="haslo" value= {this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput}/><br/><br/>
                         <button id="zarej">Zarejestruj się!</button>
+
+                        <center><p><font color="red" id="KomunikatERROR"></font></p></center>
 
                         <center><p>Masz konto? </p><Link to="/logowanie">Zaloguj się!</Link></center>
                         

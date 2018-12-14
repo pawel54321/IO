@@ -33,9 +33,16 @@ KlikniecieSubmit2 = async (event) => {
     });
 
     if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===true)
-    alert("Zostałeś zalogowany!")
-    else
-    alert("BŁĄD! Nie poprawne dane!")
+    {
+        window.setTimeout(() => 
+        {
+        this.props.history.push('/')
+        }, 3000)
+    }
+    else if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===false)
+    document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";  
+   
+
 } 
 
 
@@ -66,6 +73,8 @@ render() {
                     <label>Hasło: </label><br/>
                     <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2}/><br/><br/>
                     <button id="zalo">Zaloguj się!</button>
+
+                    <center><p><font color="red" id="KomunikatERROR2"></font></p></center>
 
                     <center><p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link></center>
                     
