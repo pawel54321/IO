@@ -35,6 +35,24 @@ pgClient
         console.log(error);
     });
 
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Atrakcja (index SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), index_miejscowosc INT)')
+    .catch((error) => {
+        console.log(error);
+    });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (index SERIAL PRIMARY KEY, nazwa VARCHAR(255))')
+    .catch((error) => {
+        console.log(error);
+    });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (index SERIAL PRIMARY KEY, index_uzytkownik INT, index_atrakcja INT)')
+    .catch((error) => {
+        console.log(error);
+    });
+
 // Express route handlers
 
 app.get('/', (req, res) => {
@@ -81,6 +99,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     
 });
 
+
 app.post('/Uzytkownik/Rejestracja', async (req, res) => {
 
 
@@ -120,6 +139,77 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     });
 });
 
+
+
+
+app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
+
+    const nazwa= req.body.nazwa;
+    const adres= req.body.adres;
+    const liczba_miejsc= req.body.liczba_miejsc;
+    const godzina_otwarcia= req.body.godzina_otwarcia;
+    const godzina_zamkniecia= req.body.godzina_zamkniecia;
+    const cena= req.body.cena;
+    const index_miejscowosc= req.body.index_miejscowosc;
+
+    const zapytanie = await pgClient.query("SELECT COUNT(nazwa) FROM Atrakcja WHERE nazwa='"+nazwa+"'")
+    console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    //console.log(tablica[0].count);
+    var czy_stworzono = false;
+
+    if(tablica[0].count==0)
+    {
+
+        // min = "0" naprawic zeby nie bylo duplikacji sprawdzac SELECT (zmienic na liste rozwijana zamiast int tekst)
+        //dodawanie miejscowosci tylko przez liste rozwijana 
+
+        pgClient.query('INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, index_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)', 
+        [nazwa,adres,liczba_miejsc,godzina_otwarcia,godzina_zamkniecia,cena,index_miejscowosc])
+        .catch((error) => {
+            console.log(error);
+        });
+
+        czy_stworzono = true;
+    }
+    else
+    {
+        czy_stworzono = false;
+    }
+
+    res.send({
+        nazwa:req.body.nazwa,
+        adres:req.body.adres  ,          
+        liczba_miejsc:req.body.liczba_miejsc,
+        godzina_otwarcia:req.body.godzina_otwarcia,
+        godzina_zamkniecia:req.body.godzina_zamkniecia,
+        cena:req.body.cena,
+        index_miejscowosc:req.body.index_miejscowosc,
+
+        zwracam_czy_poprawnie_dodalem_atrakcje: czy_stworzono
+  
+    });
+    
+});
+
+
+
+
+
+app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
+
+    
+ 
+    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja")
+   // console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    
+   
+    res.send({
+        wiersz: tablica
+    });
+    
+});
 
 
 app.listen(5000, error => {
