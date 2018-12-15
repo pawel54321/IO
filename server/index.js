@@ -193,8 +193,40 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
 });
 
 
+app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
+    const nazwaMiejscowosc= req.body.nazwaMiejscowosc;
 
+    const zapytanie = await pgClient.query("SELECT COUNT(nazwa) FROM Miejscowosc WHERE nazwa='"+nazwaMiejscowosc+"'")
+    console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    //console.log(tablica[0].count);
+    var czy_stworzono = false;
+
+    if(tablica[0].count==0)
+    {
+
+        pgClient.query('INSERT INTO Miejscowosc(nazwa) VALUES($1)',[nazwaMiejscowosc])
+        .catch((error) => {
+            console.log(error);
+        });
+
+        czy_stworzono = true;
+    }
+    else
+    {
+        czy_stworzono = false;
+    }
+
+    res.send({
+        nazwa:req.body.nazwa,
+
+        zwracam_czy_poprawnie_dodalem_miejscowosc: czy_stworzono
+  
+    });
+    
+});
+/*
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
@@ -210,7 +242,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
     });
     
 });
-
+*/
 
 app.listen(5000, error => {
     console.log('Listening on port 5000');

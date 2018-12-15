@@ -8,7 +8,7 @@ class DashboardAdmin extends Component {
         super(props);
     
         this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
-        
+        this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
         
         //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji
     
@@ -21,7 +21,10 @@ class DashboardAdmin extends Component {
             cena:'',
             index_miejscowosc:'',
 
-            wiersz:[]
+            nazwaMiejscowosc:''
+            //,
+
+           // wiersz:[]
         }
     }
     KlikniecieSubmit3 = async (event) => {
@@ -93,6 +96,7 @@ class DashboardAdmin extends Component {
         //pobrac z bazy, kiedy klikne?
     }
 */
+/*
     ZwrocenieTabeliAtrakcja = async (event) => 
     {
        // const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{wiersz:this.state.wiersz});
@@ -104,6 +108,55 @@ class DashboardAdmin extends Component {
         );
        
     }
+*/
+
+KlikniecieSubmit4 = async (event) => {
+    event.preventDefault();
+
+    const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/PanelAdmina2', {
+        nazwaMiejscowosc: this.state.nazwaMiejscowosc       
+    });
+
+    this.setState({
+        nazwaMiejscowosc:''
+        
+    });
+
+    if(OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc===true)
+    {    
+        document.getElementById("KomunikatSUCCESS4").innerHTML = "Dodano nową miejscowość!"; 
+        // window.setTimeout(() => 
+        // {
+        // this.props.history.push('/')
+        // }, 2000)
+
+        //refresh tabeli
+    }
+    else if(OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc===false)
+    {
+        document.getElementById("KomunikatERROR4").innerHTML = "Miejscowość o takiej nazwie istnieje!";  
+    }
+ 
+
+} 
+
+ZmianaWCzasieRzeczywistynInput4(event) 
+{
+    document.getElementById("KomunikatERROR4").innerHTML = "";  
+    document.getElementById("KomunikatSUCCESS4").innerHTML = "";  
+
+    const target = event.target;
+    const value = target.value;
+    
+    const state = {...this.state}
+
+    state[target.name] = value;
+   
+   
+    this.setState(state);
+}
+
+
 
     render() {
         return (
@@ -150,6 +203,27 @@ class DashboardAdmin extends Component {
                 
         
                 </form>
+
+                <form onSubmit={this.KlikniecieSubmit4}> 
+                    <h4>Miejscowość: </h4>
+                    <table border="0">
+                    <tr>
+                        <td>Nazwa</td>
+                    </tr>
+                    <tr>
+                    <td><input type="text" name="nazwaMiejscowosc" value={this.state.nazwaMiejscowosc} required onChange={this.ZmianaWCzasieRzeczywistynInput4}/></td>                 
+                    </tr>
+                    </table>
+                    <br/>
+                    <button>Dodaj!</button>
+
+                    <p><font color="red" id="KomunikatERROR4"></font></p>
+                    <p><font color="green" id="KomunikatSUCCESS4"></font></p>
+                
+        
+                </form>
+
+
                 {/*
                 <form onSubmit={this.ZwrocenieTabeliAtrakcja}> 
                     <button>Wczytaj!</button>
