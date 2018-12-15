@@ -1,0 +1,122 @@
+.App {
+  /*text-align: center;*/
+}
+body
+{
+  background-color: #a36e18; /*Tlo*/
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header, .App-footer {
+  background-color: #775012;
+  min-height: 10vh;
+  display: flex;
+  /*flex-direction: column;*/
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-footer
+{
+  min-height: 5vh !important;
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.Element-menu
+{
+  padding-right: 3%;
+}
+
+p, h1, h2, h3 ,h4, div
+{
+  color: #31220b;
+}
+/*
+.App-header > :link
+{
+}
+*/
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:active, a:hover
+{
+  color: #969696;
+  text-decoration: none;
+}
+/*
+.App-link {
+  color: #61dafb;
+}
+*/
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+#BarLogowPOPRAWNIE
+{
+float:left;
+min-height: 10vh;
+font-size: calc(30px + 2vmin);
+background-color: #a36e18;
+font-style: italic;
+padding-left:30%;
+padding-right:30%;
+padding-top:10%;
+
+display:none;
+
+}
+
+
+#BarLogow
+{
+float:left;
+min-height: 10vh;
+font-size: calc(10px + 2vmin);
+background-color: #a36e18;
+font-style: italic;
+padding-left:45%;
+padding-right:45%;
+}
+
+#BarLogow2
+{
+float:left;
+min-height: 5vh;
+font-size: calc(5px + 2vmin);
+background-color: #a36e18;
+line-height: 1.3;
+font-style: italic;
+padding-left:42%;
+padding-right:42%;
+}
+
+
+
+
+button#zalo
+{
+  padding-left:31.5%;
+  padding-right:31.5%;
+}
+button#zarej
+{
+  padding-left:26.5%;
+  padding-right:26.5%;
+}
