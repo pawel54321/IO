@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 //import ReactTable from 'react-table';
 
 class DashboardAdmin extends Component {
@@ -99,12 +100,13 @@ class DashboardAdmin extends Component {
 /*
     ZwrocenieTabeliAtrakcja = async (event) => 
     {
-       // const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{wiersz:this.state.wiersz});
+        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{wiersz:this.state.wiersz});
         
         return(
-            // <ReactTable
-            // data={OdpowiedzSerwera4.data.wiersz}/>
-            <div></div>
+            <div>
+             <ReactTable
+             data={OdpowiedzSerwera4.data.wiersz}/>
+            </div>
         );
        
     }
@@ -164,7 +166,7 @@ ZmianaWCzasieRzeczywistynInput4(event)
                 <h2>Panel Admina</h2>
 
                 <form onSubmit={this.KlikniecieSubmit3}> 
-                    <h4>Atrakcje: </h4>
+                    <h4>Atrakcja: </h4>
                     <table border="0">
                     <tr>
                         <td>Nazwa</td>
