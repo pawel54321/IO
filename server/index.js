@@ -4,8 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
-
 // express app setup
 const appHandlers = [
     cors(), 
@@ -226,8 +224,8 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
     });
     
 });
-/*
 
+/*
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
     
@@ -235,10 +233,10 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
     const zapytanie = await pgClient.query("SELECT * FROM Atrakcja")
    // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
-    
-   
+    //console.log(tablica);
+
     res.send({
-        wiersz: tablica
+        daneAtrakcja: tablica
     });
     
 });

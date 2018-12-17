@@ -3,6 +3,7 @@ import axios from 'axios';
 
 //import ReactTable from 'react-table';
 
+
 class DashboardAdmin extends Component {
 
     constructor(props) {
@@ -11,8 +12,8 @@ class DashboardAdmin extends Component {
         this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
         this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
         
-        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji
-    
+        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji     
+            
         this.state = {
             nazwa:'',
             adres:''  ,          
@@ -22,10 +23,11 @@ class DashboardAdmin extends Component {
             cena:'',
             index_miejscowosc:'',
 
-            nazwaMiejscowosc:''
+            nazwaMiejscowosc:'',
             //,
 
-           // wiersz:[]
+           // daneAtrakcja:[]
+             
         }
     }
     KlikniecieSubmit3 = async (event) => {
@@ -98,18 +100,14 @@ class DashboardAdmin extends Component {
     }
 */
 /*
-    ZwrocenieTabeliAtrakcja = async (event) => 
-    {
-        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{wiersz:this.state.wiersz});
+ZwrocenieTabeliAtrakcja = async (event) => 
+{
+    event.preventDefault();
+        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{daneAtrakcja:this.state.daneAtrakcja});
         
-        return(
-            <div>
-             <ReactTable
-             data={OdpowiedzSerwera4.data.wiersz}/>
-            </div>
-        );
-       
-    }
+        this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
+        this.Tabela()
+}
 */
 
 KlikniecieSubmit4 = async (event) => {
@@ -158,11 +156,71 @@ ZmianaWCzasieRzeczywistynInput4(event)
     this.setState(state);
 }
 
+ //Tabela() {
+     /*
+    var a = this.state.daneAtrakcja;
+    
 
+    const Wiersz = a.map((itemek) =>
+      <td>{itemek}</td>
+    );
+    return (
+      <tr>{Wiersz}</tr>
+    );
+    */
+   /*
+   const wiersz = this.state.daneAtrakcja;
+
+
+   for (var i = 0; i < this.wiersz.length; i++) 
+   {
+       <tr>
+           <td>{wiersz[i].nazwa}</td>
+           <td>{wiersz[i].adres}</td> 
+           <td>{wiersz[i].liczba_miejsc}</td> 
+           <td>{wiersz[i].godzina_otwarcia}</td> 
+           <td>{wiersz[i].godzina_zamkniecia} </td>
+           <td>{wiersz[i].cena}</td>
+           <td>{wiersz[i].index_miejscowosc}</td>
+       </tr>
+   }*/
+
+//return(
+  //  <table border="1"><this.NumberList/></table>
+//);
+
+
+
+    /*
+   const all = Object.keys(this.state.daneAtrakcja.data).map((key) => (
+<div className="container">
+        <span className="left">{key}</span>
+        <span className="right">{this.state.daneAtrakcja[key].nazwa}</span>
+    </div>));*/
+  // prompt(all);
+    //   return(all);
+  // return this.state.daneAtrakcja[0].map(({ number }) => number).join(', ');
+ /* }
+  ListItem(props) {
+    return <td>{props.value}</td>;
+  }
+  
+ NumberList() {
+    const wiersz = this.state.daneAtrakcja;
+    return (
+      <tr>
+        {wiersz.map((number) =>
+          <this.ListItem key={number.toString()} value={number}/>
+        )}
+      </tr>
+    );
+  }
+*/
 
     render() {
         return (
             <div>
+               
                 <h2>Panel Admina</h2>
 
                 <form onSubmit={this.KlikniecieSubmit3}> 
@@ -225,12 +283,16 @@ ZmianaWCzasieRzeczywistynInput4(event)
         
                 </form>
 
-
                 {/*
+            
                 <form onSubmit={this.ZwrocenieTabeliAtrakcja}> 
                     <button>Wczytaj!</button>
+                    
                 </form>
-                */}
+    
+                <this.Tabela/>*/}
+                
+                
             </div>
         );
     }
