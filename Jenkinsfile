@@ -12,7 +12,7 @@ pipeline {
       steps{
         dir('react-app') {
           sh 'npm install'
-          sh 'npm install --save enzyme-adapter-react-16 react-test-renderer'
+          sh 'npm install --save enzyme enzyme-adapter-react-16 react-test-renderer'
           sh 'npm run build'
         }
       }
