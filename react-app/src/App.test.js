@@ -8,7 +8,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 import Header from './Components/Header';
 import DashboardAdmin from './Components/DashboardAdmin';
-import DashboardUser from './Components/DashboardUser';
+//import DashboardUser from './Components/DashboardUser';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Footer from './Components/Footer';
@@ -34,9 +34,9 @@ it('renders without crashing - DashboardAdmin', () => {
   shallow(<DashboardAdmin />);
 });
 
-it('renders without crashing - DashboardUser', () => {
-  shallow(<DashboardUser />);
-});
+//it('renders without crashing - DashboardUser', () => {
+//  shallow(<DashboardUser />);
+//});
 
 it('renders without crashing - Login', () => {
   shallow(<Login />);
@@ -70,10 +70,10 @@ it('includes DashboardAdmin', () => {
   expect(app.containsMatchingElement(<DashboardAdmin />)).toEqual(false)
 });
 
-it('includes DashboardUser', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(false)
-});
+//it('includes DashboardUser', () => {
+//  const app = shallow(<App />);
+//  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(false)
+//});
 
 it('includes Login', () => {
   const app = shallow(<App />);
