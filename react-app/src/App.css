@@ -84,6 +84,21 @@ display:none;
 }
 
 
+#BarLogowPOPRAWNIEAKTYWNY
+{
+  float:left;
+  min-height: 10vh;
+  font-size: calc(30px + 2vmin);
+  background-color: #a36e18;
+  font-style: italic;
+  padding-left:30%;
+  padding-right:30%;
+  padding-top:10%;
+  
+  display:block;
+  
+  }
+
 #BarLogow
 {
 float:left;

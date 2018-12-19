@@ -7,7 +7,7 @@ class DashboardUser extends Component {
         return (
             <div>
                 <p>Panel Użytkownika</p>
-                <p>Witaj! ...</p>
+                <p>Witaj!</p>
             </div>
         );
     }

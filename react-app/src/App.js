@@ -18,26 +18,49 @@ import Footer from './Components/Footer'
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loggedAs: ''
+    }
+  }
+
+  handleUserLoggedChange = (loggedAs) => {
+    debugger
+    this.setState({
+      loggedAs: loggedAs
+    });
+  }
+
+
+
+  LoginComponent = () => {
+    return (<Login onLoggedUserChange={this.handleUserLoggedChange} />);
+  }
+
+
+
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Header/>
-          <main>                 
+          <Header loggedAs={this.state.loggedAs} />
+          <main>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/admin" component={DashboardAdmin} />
             <Route exact path="/uzytkownik" component={DashboardUser} />
             <Route exact path="/wyloguj" component={Logout} />
 
-            <Route exact path="/logowanie" component={Login} />
-            <Route exact path="/rejestracja" component={Register} />  
+            <Route exact path="/logowanie" component={this.LoginComponent} />
+            <Route exact path="/rejestracja" component={Register} />
           </main>
-          <Footer/>
+          <Footer />
         </div>
       </Router>
     );
   }
 }
-     
+
 export default App;

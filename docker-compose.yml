@@ -13,6 +13,9 @@ services:
       context: ./nginx
     ports:
       - '3050:80'
+    depends_on:
+      - node-server
+      - react-app
 
   node-server:
     build:
@@ -27,6 +30,8 @@ services:
       - PG_DATABASE=postgres
       - PG_PASSWORD=postgres_password
       - PG_PORT=5432
+    depends_on:
+      - postgres
 
   react-app:
     build:
@@ -35,3 +40,5 @@ services:
     volumes:
       - /app/node_modules
       - ./react-app:/app
+    depends_on:
+      - node-server

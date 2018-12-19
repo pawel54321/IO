@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import Header from './Header';
 
 class Login extends Component {
 
@@ -13,11 +14,22 @@ constructor(props) {
 
     this.state = {
         login:'',
-        haslo:''
+        haslo:'',
+        userLogged:false,
+        adminLogged:false
     }
 }
 
+LoggedState(){
+    if(this.state.userLoged === true){
+        return(<Header userLogged={true}/>)
+    }
 
+    if(this.state.adminLogged === true){
+        return(<Header adminLogged={true}/>)
+    }
+
+}
 KlikniecieSubmit2 = async (event) => {
     event.preventDefault();
 
@@ -25,27 +37,24 @@ KlikniecieSubmit2 = async (event) => {
         login: this.state.login,
         haslo: this.state.haslo
     });
+    console.log(OdpowiedzSerwera2)
 
     this.setState({
         login:'',
-        haslo:''
-        
+        haslo:'',        
     });
 
-    if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===true)
-    {
+    if(OdpowiedzSerwera2.data.zwracam_czy_poprawne) {
+        
+        this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
+
         document.getElementById("BarLogowPOPRAWNIE").style.display="block";
         document.getElementById("BarLogow").style.display="none";
         document.getElementById("BarLogow2").style.display="none";
 
         document.getElementById("KomunikatSUCCESS2").innerHTML = "Logowanie przebiegło pomyślnie!"; 
-        window.setTimeout(() => 
-        {
-        this.props.history.push('/')
-        }, 2000)
     }
-    else if(OdpowiedzSerwera2.data.zwracam_czy_poprawne===false)
-    {
+    else {
         document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";  
     }
    
@@ -71,6 +80,7 @@ ZmianaWCzasieRzeczywistynInput2(event)
 render() {
     return (
         <div>  
+            {this.LoggedState()}
             <div id="BarLogowPOPRAWNIE">
              <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
              </div>

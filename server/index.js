@@ -28,7 +28,7 @@ pgClient.on('error', () => {
 });
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Uzytkownik (index SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), czy_admin BOOL)')
+    .query('CREATE TABLE IF NOT EXISTS Uzytkownik (index SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), stan VARCHAR(255))')
     .catch((error) => {
         console.log(error);
     });
@@ -81,6 +81,8 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
 
     const tablica = zapytanie2.rows;
     //console.log(tablica[0]);
+    const stan = await pgClient.query("SELECT stan FROM Uzytkownik WHERE login='"+login+"'")
+    const tablica2 = stan.rows;
 
     if(tablica[0].count==1)
         czy_poprawne = true;
@@ -91,7 +93,8 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
         login : req.body.login,
         haslo : req.body.haslo,
 
-        zwracam_czy_poprawne: czy_poprawne
+        zwracam_czy_poprawne: czy_poprawne,
+        jaki_user: tablica2[0].stan
   
     });
     
@@ -105,7 +108,7 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     const nazwisko = req.body.nazwisko;
     const login = req.body.login;
     const haslo = req.body.haslo;
-    const czy_admin = false;
+    const stan = 'User'; //'User' 'Admin'
 
     const zapytanie = await pgClient.query("SELECT COUNT(login) FROM Uzytkownik WHERE login='"+login+"'")
     //console.log(zapytanie.rows);
@@ -113,9 +116,12 @@ app.post('/Uzytkownik/Rejestracja', async (req, res) => {
     //console.log(tablica[0].count);
     var czy_stworzono = false;
 
+    
+
+
     if(tablica[0].count==0)
     {
-        pgClient.query('INSERT INTO Uzytkownik(imie, nazwisko, login, haslo, czy_admin) VALUES($1,$2,$3,$4,$5)', [imie,nazwisko,login,haslo,czy_admin])
+        pgClient.query('INSERT INTO Uzytkownik(imie, nazwisko, login, haslo, stan) VALUES($1,$2,$3,$4,$5)', [imie,nazwisko,login,haslo,stan])
         .catch((error) => {
             console.log(error);
         });
@@ -225,7 +231,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
     
 });
 
-/*
+
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
     
@@ -240,7 +246,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
     });
     
 });
-*/
+
 
 app.listen(5000, error => {
     console.log('Listening on port 5000');
