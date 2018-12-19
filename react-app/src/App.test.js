@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
 import App from './App';
 import Header from './Components/Header';
 import DashboardAdmin from './Components/DashboardAdmin';
@@ -9,6 +12,9 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Footer from './Components/Footer';
 import HomePage from './Components/HomePage';
+
+
+configuer({ adapter: new Adapter() });
 
 
 it('renders without crashing', () => {
