@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import App from './App';
 import Header from './Components/Header';
 import DashboardAdmin from './Components/DashboardAdmin';
