@@ -18,35 +18,35 @@ import HomePage from './Components/HomePage';
 configure({ adapter: new Adapter() });
 
 
-it('renders without crashing', () => {
+it('renders without crashing - App', () => {
   shallow(<App />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing = Header', () => {
   shallow(<Header />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - Footer', () => {
   shallow(<Footer />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - DashboardAdmin', () => {
   shallow(<DashboardAdmin />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - DashboardUser', () => {
   shallow(<DashboardUser />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - Login', () => {
   shallow(<Login />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - Register', () => {
   shallow(<Register />);
 });
 
-it('renders without crashing', () => {
+it('renders without crashing - HomePage', () => {
   shallow(<HomePage />);
 });
 
@@ -62,25 +62,25 @@ it('includes Footer', () => {
 
 it('includes HomePage', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<HomePage />)).toEqual(true)
+  expect(app.containsMatchingElement(<HomePage />)).toEqual(false)
 });
 
 it('includes DashboardAdmin', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<DashboardAdmin />)).toEqual(true)
+  expect(app.containsMatchingElement(<DashboardAdmin />)).toEqual(false)
 });
 
 it('includes DashboardUser', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(true)
+  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(false)
 });
 
 it('includes Login', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Login />)).toEqual(true)
+  expect(app.containsMatchingElement(<Login />)).toEqual(false)
 });
 
 it('includes Register', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Register />)).toEqual(true)
+  expect(app.containsMatchingElement(<Register />)).toEqual(false)
 });
