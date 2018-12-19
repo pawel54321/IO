@@ -14,7 +14,7 @@ import Footer from './Components/Footer';
 import HomePage from './Components/HomePage';
 
 
-configuer({ adapter: new Adapter() });
+configure({ adapter: new Adapter() });
 
 
 it('renders without crashing', () => {
