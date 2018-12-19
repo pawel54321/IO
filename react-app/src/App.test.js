@@ -52,35 +52,35 @@ it('renders without crashing', () => {
 
 it('includes Header', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<Header />)).toEqual(true)
+  expect(app.containsMatchingElement(<Header />)).toEqual(true)
 });
 
 it('includes Footer', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<Footer />)).toEqual(true)
+  expect(app.containsMatchingElement(<Footer />)).toEqual(true)
 });
 
 it('includes HomePage', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<HomePage />)).toEqual(true)
+  expect(app.containsMatchingElement(<HomePage />)).toEqual(true)
 });
 
 it('includes DashboardAdmin', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<DashboardAdmin />)).toEqual(true)
+  expect(app.containsMatchingElement(<DashboardAdmin />)).toEqual(true)
 });
 
 it('includes DashboardUser', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<DashboardUser />)).toEqual(true)
+  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(true)
 });
 
 it('includes Login', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<Login />)).toEqual(true)
+  expect(app.containsMatchingElement(<Login />)).toEqual(true)
 });
 
 it('includes Register', () => {
   const app = shallow(<App />);
-  expect(app.containsMathingElement(<Register />)).toEqual(true)
+  expect(app.containsMatchingElement(<Register />)).toEqual(true)
 });
