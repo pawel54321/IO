@@ -4,21 +4,19 @@ import { Link } from 'react-router-dom';
 const Footer = () => (
     <div className="App-footer">
         <footer>
-           <SprawdzFooter/>
+            <SprawdzFooter />
         </footer>
     </div>
 );
 
 const SprawdzFooter = () => {
- 
+
     var a = window.location.pathname;
 
-    if(a!=="/")
-    {
+    if (a !== "/") {
         return (<Link to="/">Wróć do Strony Głównej</Link>);
     }
-    else
-    {
+    else {
         return (<div>Strona Główna</div>);
     }
 }

@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 
 class DashboardUser extends Component {
 
+
     render() {
         return (
             <div>
-                <p>Panel Użytkownika</p>
-                <p>Witaj!</p>
+                {this.Wywolaj}
+                <h2>Panel Użytkownika</h2>
+                <p>Witaj! {/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}</p>
             </div>
         );
     }

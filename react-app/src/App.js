@@ -27,20 +27,15 @@ class App extends Component {
   }
 
   handleUserLoggedChange = (loggedAs) => {
-    debugger
+    // debugger
     this.setState({
       loggedAs: loggedAs
     });
   }
 
-
-
   LoginComponent = () => {
     return (<Login onLoggedUserChange={this.handleUserLoggedChange} />);
   }
-
-
-
 
   render() {
     return (
