@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//import StronaGlowna from '../Images/StronaGlowna.png';
+import PanelUzytkownika from '../Images/PanelUzytkownika.png';
+import PanelAdmina from '../Images/PanelAdmina.png';
+
+import Zalogujsie from '../Images/Zalogujsie.png';
+import Zarejestrujsie from '../Images/Zarejestrujsie.png';
+import Wyloguj from '../Images/Wyloguj.png';
+
 const ROLES = {
     ADMIN: 'Admin',
     USER: 'User'
@@ -13,13 +21,13 @@ function Visible(props) {
             <nav>
                 <header className="App-header">
                     <div className="Element-menu">
-                        <Link to="/">Strona Główna</Link>
+                        <Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color:'grey'}}/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/uzytkownik">Panel Użytkownika</Link>
+                        <Link to="/uzytkownik"><img src={PanelUzytkownika} alt=""/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/wyloguj">Wyloguj</Link>
+                        <Link to="/wyloguj"><img src={Wyloguj} alt=""/></Link>
                     </div>
                 </header>
             </nav>);
@@ -29,13 +37,13 @@ function Visible(props) {
             <nav>
                 <header className="App-header">
                     <div className="Element-menu">
-                        <Link to="/">Strona Główna</Link>
+                        <Link to="/"><i class="fa fa-home" style={{ fontSize: '50px', color:'grey'}}/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/admin">Panel Admina</Link>
+                        <Link to="/admin"><img src={PanelAdmina} alt=""/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/wyloguj">Wyloguj</Link>
+                        <Link to="/wyloguj"><img src={Wyloguj} alt=""/></Link>
                     </div>
                 </header>
             </nav>
@@ -46,13 +54,14 @@ function Visible(props) {
             <nav>
                 <header className="App-header">
                     <div className="Element-menu">
-                        <Link to="/">Strona Główna</Link>
+                        <Link to="/"><i class="fa fa-home" style={{ fontSize: '50px', color:'grey'}}/></Link>
+                    </div>
+                  
+                    <div className="Element-menu">
+                        <Link to="/logowanie"><img src={Zalogujsie} alt=""/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/logowanie">Zaloguj się</Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/rejestracja">Zarejestruj się</Link>
+                        <Link to="/rejestracja"><img src={Zarejestrujsie} alt=""/></Link>
                     </div>
                 </header>
             </nav>

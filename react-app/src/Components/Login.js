@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import Header from './Header';
+//import Header from './Header';
 
 class Login extends Component {
 
@@ -14,12 +14,14 @@ class Login extends Component {
 
         this.state = {
             login: '',
-            haslo: '',
+            haslo: ''/*,
+            
             userLogged: false,
             adminLogged: false
+            */
         }
     }
-
+/*
     LoggedState() {
         if (this.state.userLoged === true) {
             return (<Header userLogged={true} />)
@@ -29,7 +31,7 @@ class Login extends Component {
             return (<Header adminLogged={true} />)
         }
 
-    }
+    }*/
     KlikniecieSubmit2 = async (event) => {
         event.preventDefault();
 
@@ -79,7 +81,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                {this.LoggedState()}
+                {/*this.LoggedState()*/}
                 <div id="BarLogowPOPRAWNIE">
                     <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
                 </div>

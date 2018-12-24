@@ -1,5 +1,8 @@
 import React from 'react';
 
+import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.png';
+//import StronaGlowna from '../Images/StronaGlowna.png';
+
 import { Link } from 'react-router-dom';
 const Footer = () => (
     <div className="App-footer">
@@ -14,10 +17,10 @@ const SprawdzFooter = () => {
     var a = window.location.pathname;
 
     if (a !== "/") {
-        return (<Link to="/">Wróć do Strony Głównej</Link>);
+        return (<Link to="/"><img src={WrocdoStronyGlownej} alt=""/></Link>);
     }
     else {
-        return (<div>Strona Główna</div>);
+        return (<div>{/*<img src={StronaGlowna} alt=""/>*/}</div>);
     }
 }
 

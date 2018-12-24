@@ -36,6 +36,12 @@ class App extends Component {
   LoginComponent = () => {
     return (<Login onLoggedUserChange={this.handleUserLoggedChange} />);
   }
+  
+  LogoutComponent = () => {
+    return (<Logout onLoggedUserChange2={this.handleUserLoggedChange} />);
+  }
+
+  
 
   render() {
     return (
@@ -46,7 +52,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/admin" component={DashboardAdmin} />
             <Route exact path="/uzytkownik" component={DashboardUser} />
-            <Route exact path="/wyloguj" component={Logout} />
+            <Route exact path="/wyloguj" component={this.LogoutComponent}/> 
 
             <Route exact path="/logowanie" component={this.LoginComponent} />
             <Route exact path="/rejestracja" component={Register} />
