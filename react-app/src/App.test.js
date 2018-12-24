@@ -22,7 +22,7 @@ it('renders without crashing - App', () => {
   shallow(<App />);
 });
 
-it('renders without crashing = Header', () => {
+it('renders without crashing - Header', () => {
   shallow(<Header />);
 });
 
