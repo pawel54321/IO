@@ -1,7 +1,7 @@
 import React from 'react';
 
-import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.png';
-//import StronaGlowna from '../Images/StronaGlowna.png';
+import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.jpg';
+//import StronaGlowna from '../Images/StronaGlowna.jpg';
 
 import { Link } from 'react-router-dom';
 const Footer = () => (

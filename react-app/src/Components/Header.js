@@ -1,20 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-//import StronaGlowna from '../Images/StronaGlowna.png';
-import PanelUzytkownika from '../Images/PanelUzytkownika.png';
-import PanelAdmina from '../Images/PanelAdmina.png';
+//import StronaGlowna from '../Images/StronaGlowna.jpg';
+import PanelUzytkownika from '../Images/PanelUzytkownika.jpg';
+import PanelAdmina from '../Images/PanelAdmina.jpg';
 
-import Zalogujsie from '../Images/Zalogujsie.png';
-import Zarejestrujsie from '../Images/Zarejestrujsie.png';
-import Wyloguj from '../Images/Wyloguj.png';
+import Zalogujsie from '../Images/Zalogujsie.jpg';
+import Zarejestrujsie from '../Images/Zarejestrujsie.jpg';
+import Wyloguj from '../Images/Wyloguj.jpg';
 
 const ROLES = {
     ADMIN: 'Admin',
     USER: 'User'
 }
 
+function Wylogowanie ()
+{
+    this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
+    this.props.onLoggedUserChange2('');
+}
+
+
+
 function Visible(props) {
+   
 
     if (props.loggedAs === ROLES.USER) {
         return (
@@ -27,7 +36,7 @@ function Visible(props) {
                         <Link to="/uzytkownik"><img src={PanelUzytkownika} alt=""/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/wyloguj"><img src={Wyloguj} alt=""/></Link>
+                        <Link to="/wyloguj" onClick={Wylogowanie}><img src={Wyloguj} alt=""/></Link>
                     </div>
                 </header>
             </nav>);
@@ -43,7 +52,7 @@ function Visible(props) {
                         <Link to="/admin"><img src={PanelAdmina} alt=""/></Link>
                     </div>
                     <div className="Element-menu">
-                        <Link to="/wyloguj"><img src={Wyloguj} alt=""/></Link>
+                        <Link to="/wyloguj" onClick={Wylogowanie}><img src={Wyloguj} alt=""/></Link>
                     </div>
                 </header>
             </nav>
@@ -70,6 +79,7 @@ function Visible(props) {
 
 }
 const Header = (props) => (
+    
     Visible(props)
 );
 
