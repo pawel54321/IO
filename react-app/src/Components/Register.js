@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import Alert from 'react-s-alert';
+
 class Register extends Component {
 
     constructor(props) {
@@ -38,17 +40,22 @@ class Register extends Component {
         });
 
         if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true) {
-            document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
+           // document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
             document.getElementById("BarLogow").style.display = "none";
             document.getElementById("BarLogow2").style.display = "none";
 
-            document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!";
+            //document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!";
+            Alert.success('Rejestracja przebiegła pomyślnie!',{position:'top'});
+
             window.setTimeout(() => {
                 this.props.history.push('/logowanie')
             }, 2000)
         }
         else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false)
-            document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";
+        {
+            Alert.error('Użytkownik istnieje!',{position:'bottom'});
+        //document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";
+        }
 
     }
 
@@ -56,7 +63,7 @@ class Register extends Component {
 
     ZmianaWCzasieRzeczywistynInput(event) {
 
-        document.getElementById("KomunikatERROR").innerHTML = "";
+        //document.getElementById("KomunikatERROR").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -86,10 +93,11 @@ class Register extends Component {
     render() {
         return (
             <div>
+                {/*
                 <div id="BarLogowPOPRAWNIE">
                     <center><p><font color="green" id="KomunikatSUCCESS"></font></p></center>
                 </div>
-
+                */}
                 <div id="BarLogow">
                     <h3>Rejestracja:</h3>
                 </div>
@@ -105,7 +113,7 @@ class Register extends Component {
                         <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
                         <button id="zarej">Zarejestruj się!</button>
 
-                        <center><p><font color="red" id="KomunikatERROR"></font></p></center>
+                       {/* <center><p><font color="red" id="KomunikatERROR"></font></p></center>*/}
 
                         <center><p>Masz konto? </p><Link to="/logowanie">Zaloguj się!</Link></center>
 

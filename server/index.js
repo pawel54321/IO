@@ -73,6 +73,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     const haslo = req.body.haslo; // Moze hashowanie?
 
     var czy_poprawne = false;
+    var stanstan = '';
 
     const zapytanie2 = await pgClient.query("SELECT COUNT(*) FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + haslo + "'")
         .catch((error) => {
@@ -85,7 +86,10 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
     const tablica2 = stan.rows;
 
     if (tablica[0].count == 1)
+    {
         czy_poprawne = true;
+        stanstan = tablica2[0].stan;
+    }
     else
         czy_poprawne = false;
 
@@ -94,7 +98,7 @@ app.post('/Uzytkownik/Logowanie', async (req, res) => {
         haslo: req.body.haslo,
 
         zwracam_czy_poprawne: czy_poprawne,
-        jaki_user: tablica2[0].stan
+        jaki_user: stanstan
 
     });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 //import ReactTable from 'react-table';
-
+import Alert from 'react-s-alert';
 
 class DashboardAdmin extends Component {
 
@@ -54,11 +54,13 @@ class DashboardAdmin extends Component {
 
         });
         if (OdpowiedzSerwera3.data.zwracam_czy_stworzonoBrakPodanejMiejscowosci === false) {
-            document.getElementById("KomunikatERROR3").innerHTML = "Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!";
+            Alert.error("Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!", { position: 'bottom' });
+            //document.getElementById("KomunikatERROR3").innerHTML = "Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!";
         }
         else {
             if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === true) {
-                document.getElementById("KomunikatSUCCESS3").innerHTML = "Dodano nową atrakcje!";
+                Alert.success('Dodano nową atrakcje!', { position: 'top' });
+                //document.getElementById("KomunikatSUCCESS3").innerHTML = "Dodano nową atrakcje!";
                 // window.setTimeout(() => 
                 // {
                 // this.props.history.push('/')
@@ -67,15 +69,16 @@ class DashboardAdmin extends Component {
                 //refresh tabeli
             }
             else if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === false) {
-                document.getElementById("KomunikatERROR3").innerHTML = "Atrakcja o takiej nazwie istnieje!";
+                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });
+                //document.getElementById("KomunikatERROR3").innerHTML = "Atrakcja o takiej nazwie istnieje!";
             }
         }
 
     }
 
     ZmianaWCzasieRzeczywistynInput3(event) {
-        document.getElementById("KomunikatERROR3").innerHTML = "";
-        document.getElementById("KomunikatSUCCESS3").innerHTML = "";
+       // document.getElementById("KomunikatERROR3").innerHTML = "";
+      //  document.getElementById("KomunikatSUCCESS3").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -124,7 +127,9 @@ class DashboardAdmin extends Component {
 
 
         if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === true) {
-            document.getElementById("KomunikatSUCCESS4").innerHTML = "Dodano nową miejscowość!";
+            Alert.success('Dodano nową miejscowość!', { position: 'top' });
+            //document.getElementById("KomunikatSUCCESS4").innerHTML = "Dodano nową miejscowość!";
+
             // window.setTimeout(() => 
             // {
             // this.props.history.push('/')
@@ -133,15 +138,16 @@ class DashboardAdmin extends Component {
             //refresh tabeli
         }
         else if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === false) {
-            document.getElementById("KomunikatERROR4").innerHTML = "Miejscowość o takiej nazwie istnieje!";
+            Alert.error('Miejscowość o takiej nazwie istnieje!', { position: 'bottom' });
+            //document.getElementById("KomunikatERROR4").innerHTML = "Miejscowość o takiej nazwie istnieje!";
         }
 
 
     }
 
     ZmianaWCzasieRzeczywistynInput4(event) {
-        document.getElementById("KomunikatERROR4").innerHTML = "";
-        document.getElementById("KomunikatSUCCESS4").innerHTML = "";
+        //document.getElementById("KomunikatERROR4").innerHTML = "";
+       // document.getElementById("KomunikatSUCCESS4").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -256,8 +262,8 @@ class DashboardAdmin extends Component {
                     <br />
                     <button>Dodaj!</button>
 
-                    <p><font color="red" id="KomunikatERROR3"></font></p>
-                    <p><font color="green" id="KomunikatSUCCESS3"></font></p>
+                   {/* <p><font color="red" id="KomunikatERROR3"></font></p>
+                    <p><font color="green" id="KomunikatSUCCESS3"></font></p>*/}
 
 
                 </form>
@@ -275,8 +281,8 @@ class DashboardAdmin extends Component {
                     <br />
                     <button>Dodaj!</button>
 
-                    <p><font color="red" id="KomunikatERROR4"></font></p>
-                    <p><font color="green" id="KomunikatSUCCESS4"></font></p>
+                   {/* <p><font color="red" id="KomunikatERROR4"></font></p>
+                    <p><font color="green" id="KomunikatSUCCESS4"></font></p>*/}
 
 
                 </form>

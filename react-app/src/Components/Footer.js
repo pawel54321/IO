@@ -1,7 +1,7 @@
 import React from 'react';
 
 import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.jpg';
-//import StronaGlowna from '../Images/StronaGlowna.jpg';
+import StronaGlowna from '../Images/StronaGlowna.jpg';
 
 import { Link } from 'react-router-dom';
 const Footer = () => (
@@ -20,7 +20,7 @@ const SprawdzFooter = () => {
         return (<Link to="/"><img src={WrocdoStronyGlownej} alt=""/></Link>);
     }
     else {
-        return (<div>{/*<img src={StronaGlowna} alt=""/>*/}</div>);
+        return (<div>{<img src={StronaGlowna} alt=""/>}</div>);
     }
 }
 

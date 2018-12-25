@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 //import Header from './Header';
 
+import Alert from 'react-s-alert';
+
+
 class Login extends Component {
 
     constructor(props) {
@@ -21,17 +24,17 @@ class Login extends Component {
             */
         }
     }
-/*
-    LoggedState() {
-        if (this.state.userLoged === true) {
-            return (<Header userLogged={true} />)
-        }
-
-        if (this.state.adminLogged === true) {
-            return (<Header adminLogged={true} />)
-        }
-
-    }*/
+    /*
+        LoggedState() {
+            if (this.state.userLoged === true) {
+                return (<Header userLogged={true} />)
+            }
+    
+            if (this.state.adminLogged === true) {
+                return (<Header adminLogged={true} />)
+            }
+    
+        }*/
     KlikniecieSubmit2 = async (event) => {
         event.preventDefault();
 
@@ -46,18 +49,31 @@ class Login extends Component {
             haslo: '',
         });
 
-        if (OdpowiedzSerwera2.data.zwracam_czy_poprawne) {
+        if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === true) {
 
             this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
 
-            document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
+            //document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
             document.getElementById("BarLogow").style.display = "none";
             document.getElementById("BarLogow2").style.display = "none";
 
-            document.getElementById("KomunikatSUCCESS2").innerHTML = "Logowanie przebiegło pomyślnie!";
+            // document.getElementById("KomunikatSUCCESS2").innerHTML = "Logowanie przebiegło pomyślnie!";
+            Alert.success('Logowanie przebiegło pomyślnie!', { position: 'top' });
+            /*
+                        if(OdpowiedzSerwera2.data.jaki_user==='Admin')
+                        {
+                            this.props.history.push('/admin');
+                        }
+                        else if(OdpowiedzSerwera2.data.jaki_user==='User')
+                        {
+                            this.props.history.push('/uzytkownik');
+                        }
+                        */
+
         }
-        else {
-            document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";
+        else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {
+            // document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";
+            Alert.error('Niepoprawne dane!', { position: 'bottom' });
         }
 
 
@@ -65,7 +81,7 @@ class Login extends Component {
 
 
     ZmianaWCzasieRzeczywistynInput2(event) {
-        document.getElementById("KomunikatERROR2").innerHTML = "";
+        //document.getElementById("KomunikatERROR2").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -82,9 +98,9 @@ class Login extends Component {
         return (
             <div>
                 {/*this.LoggedState()*/}
-                <div id="BarLogowPOPRAWNIE">
+                {/*<div id="BarLogowPOPRAWNIE">
                     <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
-                </div>
+                </div>*/}
 
                 <div id="BarLogow">
                     <h3>Logowanie:</h3>
@@ -97,7 +113,7 @@ class Login extends Component {
                         <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
                         <button id="zalo">Zaloguj się!</button>
 
-                        <center><p><font color="red" id="KomunikatERROR2"></font></p></center>
+                        {/*<center><p><font color="red" id="KomunikatERROR2"></font></p></center>*/}
 
                         <center><p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link></center>
 
