@@ -50,7 +50,7 @@ class Login extends Component {
         });
 
         if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === true) {
-
+            localStorage.setItem('loggedAs',OdpowiedzSerwera2.data.jaki_user);
             this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
 
             //document.getElementById("BarLogowPOPRAWNIE").style.display = "block";

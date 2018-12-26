@@ -37,19 +37,19 @@ pgClient
     .query('CREATE TABLE IF NOT EXISTS Atrakcja (index SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), index_miejscowosc INT)')
     .catch((error) => {
         console.log(error);
-    });
+    }); // DODAC czy_wycofana
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (index SERIAL PRIMARY KEY, nazwa VARCHAR(255))')
+    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (index SERIAL PRIMARY KEY, nazwa VARCHAR(255))') // DODAC kraj
     .catch((error) => {
         console.log(error);
     });
 
-pgClient
+/*pgClient
     .query('CREATE TABLE IF NOT EXISTS Tabela_Posrednia (index SERIAL PRIMARY KEY, index_uzytkownik INT, index_atrakcja INT)')
     .catch((error) => {
         console.log(error);
-    });
+    });*/
 
 // Express route handlers
 

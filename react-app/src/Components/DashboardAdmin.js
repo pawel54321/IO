@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 //import ReactTable from 'react-table';
+//import 'react-table/react-table.css'
+
 import Alert from 'react-s-alert';
 
 class DashboardAdmin extends Component {
@@ -77,8 +79,8 @@ class DashboardAdmin extends Component {
     }
 
     ZmianaWCzasieRzeczywistynInput3(event) {
-       // document.getElementById("KomunikatERROR3").innerHTML = "";
-      //  document.getElementById("KomunikatSUCCESS3").innerHTML = "";
+        // document.getElementById("KomunikatERROR3").innerHTML = "";
+        //  document.getElementById("KomunikatSUCCESS3").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -147,7 +149,7 @@ class DashboardAdmin extends Component {
 
     ZmianaWCzasieRzeczywistynInput4(event) {
         //document.getElementById("KomunikatERROR4").innerHTML = "";
-       // document.getElementById("KomunikatSUCCESS4").innerHTML = "";
+        // document.getElementById("KomunikatSUCCESS4").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -224,7 +226,33 @@ class DashboardAdmin extends Component {
     render() {
         return (
             <div>
-
+{/*
+                <ReactTable
+                    data={[{
+                        name: 'Tanner Linsley',
+                        age: 26,
+                        friend: {
+                          name: 'Jason Maurer',
+                          age: 23,
+                        }
+                      }]}
+                    columns={[{
+                        Header: 'Name',
+                        accessor: 'name' // String-based value accessors!
+                      }, {
+                        Header: 'Age',
+                        accessor: 'age',
+                        Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
+                      }, {
+                        id: 'friendName', // Required because our accessor is not a string
+                        Header: 'Friend Name',
+                        accessor: d => d.friend.name // Custom value accessors!
+                      }, {
+                        Header: props => <span>Friend Age</span>, // Custom header components!
+                        accessor: 'friend.age'
+                      }]}
+                />
+*/}
                 <h2>Panel Admina</h2>
                 <p>Witaj! {/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}</p>
                 <form onSubmit={this.KlikniecieSubmit3}>
@@ -262,7 +290,7 @@ class DashboardAdmin extends Component {
                     <br />
                     <button>Dodaj!</button>
 
-                   {/* <p><font color="red" id="KomunikatERROR3"></font></p>
+                    {/* <p><font color="red" id="KomunikatERROR3"></font></p>
                     <p><font color="green" id="KomunikatSUCCESS3"></font></p>*/}
 
 
@@ -281,7 +309,7 @@ class DashboardAdmin extends Component {
                     <br />
                     <button>Dodaj!</button>
 
-                   {/* <p><font color="red" id="KomunikatERROR4"></font></p>
+                    {/* <p><font color="red" id="KomunikatERROR4"></font></p>
                     <p><font color="green" id="KomunikatSUCCESS4"></font></p>*/}
 
 

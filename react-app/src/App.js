@@ -32,11 +32,15 @@ class App extends Component {
 
     this.state = {
       loggedAs: ''
+     
     }
+   
   }
 
   handleUserLoggedChange = (loggedAs) => {
     // debugger
+    //localStorage.setItem('loggedAs',loggedAs);
+    //alert(localStorage.getItem('loggedAs'));
 
     this.setState({
       loggedAs: loggedAs
@@ -61,11 +65,11 @@ class App extends Component {
       <Router>
 
         <div className="App">
-          <Header loggedAs={this.state.loggedAs} />
       
+          <Header loggedAs={/*this.state.loggedAs*/localStorage.getItem('loggedAs')} />
           <main>
             {this.props.children}
-            <center><Alert stack={{ limit: 2 }} html={false} effect='bouncyflip' offset={69} /></center>
+            <center><Alert stack={{ limit: 1}} html={false} timeout={2000} effect='bouncyflip' offset={69} /></center>
 
             <Route exact path="/" component={HomePage} />
             <Route exact path="/admin" component={DashboardAdmin} />
