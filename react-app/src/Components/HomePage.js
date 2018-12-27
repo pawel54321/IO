@@ -4,7 +4,7 @@ import React from 'react';
 export default () => {
     return (
         <div>
-            <h3>Strona Główna</h3>
+            <h5>Strona Główna</h5>
         </div>
     );
 }

@@ -4,7 +4,12 @@ import axios from 'axios';
 //import ReactTable from 'react-table';
 //import 'react-table/react-table.css'
 
+import TabelaMiejscowosc from './TabelaMiejscowosc';
+
 import Alert from 'react-s-alert';
+import { //Button, 
+    Col, Row
+} from 'reactstrap';
 
 class DashboardAdmin extends Component {
 
@@ -14,7 +19,7 @@ class DashboardAdmin extends Component {
         this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
         this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
 
-        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji     
+        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji  
 
         this.state = {
             nazwa: '',
@@ -23,15 +28,37 @@ class DashboardAdmin extends Component {
             godzina_otwarcia: '',
             godzina_zamkniecia: '',
             cena: '',
-            index_miejscowosc: '',
+            id_miejscowosc: '',
 
             nazwaMiejscowosc: '',
-            //,
+            kraj: ''
+            ,
 
-            // daneAtrakcja:[]
+            daneAtrakcja: [],
+            daneMiejscowosc: []
 
         }
+
+        this.ZwrocenieTabeliMiejscowosc();
+
+  
     }
+
+    ZwrocenieTabeliMiejscowosc = async () => 
+    {
+    const OdpowiedzSerwera5 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', { daneMiejscowosc: this.state.daneMiejscowosc });
+    //  this.state.daneMiejscowosc = OdpowiedzSerwera5.data.daneMiejscowosc;
+
+    //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+    this.setState({
+        daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
+     });
+     //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+     //prompt(JSON.stringify(this.state.daneMiejscowosc));
+     }
+
+
+
     KlikniecieSubmit3 = async (event) => {
         event.preventDefault();
 
@@ -42,7 +69,7 @@ class DashboardAdmin extends Component {
             godzina_otwarcia: this.state.godzina_otwarcia,
             godzina_zamkniecia: this.state.godzina_zamkniecia,
             cena: this.state.cena,
-            index_miejscowosc: this.state.index_miejscowosc,
+            id_miejscowosc: this.state.id_miejscowosc,
         });
 
         this.setState({
@@ -52,35 +79,27 @@ class DashboardAdmin extends Component {
             godzina_otwarcia: '',
             godzina_zamkniecia: '',
             cena: '',
-            index_miejscowosc: ''
+            id_miejscowosc: ''
 
         });
         if (OdpowiedzSerwera3.data.zwracam_czy_stworzonoBrakPodanejMiejscowosci === false) {
-            Alert.error("Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!", { position: 'bottom' });
+            Alert.error("Podana wartość 'Id Miejscowość' nie istnieje w tabeli Miejscowość!", { position: 'bottom' });
             //document.getElementById("KomunikatERROR3").innerHTML = "Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!";
         }
         else {
             if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === true) {
                 Alert.success('Dodano nową atrakcje!', { position: 'top' });
-                //document.getElementById("KomunikatSUCCESS3").innerHTML = "Dodano nową atrakcje!";
-                // window.setTimeout(() => 
-                // {
-                // this.props.history.push('/')
-                // }, 2000)
-
+    
                 //refresh tabeli
             }
             else if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === false) {
-                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });
-                //document.getElementById("KomunikatERROR3").innerHTML = "Atrakcja o takiej nazwie istnieje!";
+                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });                
             }
         }
 
     }
 
     ZmianaWCzasieRzeczywistynInput3(event) {
-        // document.getElementById("KomunikatERROR3").innerHTML = "";
-        //  document.getElementById("KomunikatSUCCESS3").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -88,7 +107,6 @@ class DashboardAdmin extends Component {
         const state = { ...this.state }
 
         state[target.name] = value;
-
 
         this.setState(state);
     }
@@ -104,52 +122,44 @@ class DashboardAdmin extends Component {
             //pobrac z bazy, kiedy klikne?
         }
     */
-    /*
-    ZwrocenieTabeliAtrakcja = async (event) => 
-    {
-        event.preventDefault();
-            const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja',{daneAtrakcja:this.state.daneAtrakcja});
-            
-            this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
-            this.Tabela()
+  
+/*
+    ZwrocenieTabeliAtrakcja = async () => {
+        // event.preventDefault();
+        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', { daneAtrakcja: this.state.daneAtrakcja });
+        this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
+        //  this.Tabela()
     }
-    */
+*/
 
     KlikniecieSubmit4 = async (event) => {
         event.preventDefault();
 
         const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/PanelAdmina2', {
-            nazwaMiejscowosc: this.state.nazwaMiejscowosc
+            nazwaMiejscowosc: this.state.nazwaMiejscowosc,
+            kraj: this.state.kraj
         });
 
         this.setState({
-            nazwaMiejscowosc: ''
+            nazwaMiejscowosc: '',
+            kraj: ''
 
         });
 
 
         if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === true) {
             Alert.success('Dodano nową miejscowość!', { position: 'top' });
-            //document.getElementById("KomunikatSUCCESS4").innerHTML = "Dodano nową miejscowość!";
-
-            // window.setTimeout(() => 
-            // {
-            // this.props.history.push('/')
-            // }, 2000)
 
             //refresh tabeli
         }
         else if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === false) {
             Alert.error('Miejscowość o takiej nazwie istnieje!', { position: 'bottom' });
-            //document.getElementById("KomunikatERROR4").innerHTML = "Miejscowość o takiej nazwie istnieje!";
         }
 
 
     }
 
     ZmianaWCzasieRzeczywistynInput4(event) {
-        //document.getElementById("KomunikatERROR4").innerHTML = "";
-        // document.getElementById("KomunikatSUCCESS4").innerHTML = "";
 
         const target = event.target;
         const value = target.value;
@@ -162,99 +172,33 @@ class DashboardAdmin extends Component {
         this.setState(state);
     }
 
-    //Tabela() {
-    /*
-   var a = this.state.daneAtrakcja;
-   
-
-   const Wiersz = a.map((itemek) =>
-     <td>{itemek}</td>
-   );
-   return (
-     <tr>{Wiersz}</tr>
-   );
-   */
-    /*
-    const wiersz = this.state.daneAtrakcja;
- 
- 
-    for (var i = 0; i < this.wiersz.length; i++) 
-    {
-        <tr>
-            <td>{wiersz[i].nazwa}</td>
-            <td>{wiersz[i].adres}</td> 
-            <td>{wiersz[i].liczba_miejsc}</td> 
-            <td>{wiersz[i].godzina_otwarcia}</td> 
-            <td>{wiersz[i].godzina_zamkniecia} </td>
-            <td>{wiersz[i].cena}</td>
-            <td>{wiersz[i].index_miejscowosc}</td>
-        </tr>
-    }*/
-
-    //return(
-    //  <table border="1"><this.NumberList/></table>
-    //);
-
-
-
-    /*
-   const all = Object.keys(this.state.daneAtrakcja.data).map((key) => (
-<div className="container">
-        <span className="left">{key}</span>
-        <span className="right">{this.state.daneAtrakcja[key].nazwa}</span>
-    </div>));*/
-    // prompt(all);
-    //   return(all);
-    // return this.state.daneAtrakcja[0].map(({ number }) => number).join(', ');
-    /* }
-     ListItem(props) {
-       return <td>{props.value}</td>;
-     }
-     
-    NumberList() {
-       const wiersz = this.state.daneAtrakcja;
-       return (
-         <tr>
-           {wiersz.map((number) =>
-             <this.ListItem key={number.toString()} value={number}/>
-           )}
-         </tr>
-       );
-     }
-   */
 
     render() {
         return (
             <div>
-{/*
-                <ReactTable
-                    data={[{
-                        name: 'Tanner Linsley',
-                        age: 26,
-                        friend: {
-                          name: 'Jason Maurer',
-                          age: 23,
-                        }
-                      }]}
-                    columns={[{
-                        Header: 'Name',
-                        accessor: 'name' // String-based value accessors!
-                      }, {
-                        Header: 'Age',
-                        accessor: 'age',
-                        Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-                      }, {
-                        id: 'friendName', // Required because our accessor is not a string
-                        Header: 'Friend Name',
-                        accessor: d => d.friend.name // Custom value accessors!
-                      }, {
-                        Header: props => <span>Friend Age</span>, // Custom header components!
-                        accessor: 'friend.age'
-                      }]}
-                />
-*/}
-                <h2>Panel Admina</h2>
-                <p>Witaj! {/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}</p>
+            
+                <h5>Panel Admina</h5>
+
+                <Row className="show-grid">
+
+                    <Col xs={6} md={3} >
+                    </Col>
+                    <Col xs={6} md={6} >
+                        {/*this.ZwrocenieTabeliAtrakcja*/}
+
+
+                        <TabelaMiejscowosc daneMiejscowosc={this.state.daneMiejscowosc} />
+
+
+
+                    </Col>
+                    <Col xs={6} md={3} >
+                    </Col>
+                </Row>
+
+
+                {/*<p>Witaj! */}{/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}{/*</p>*/}
+
                 <form onSubmit={this.KlikniecieSubmit3}>
                     <h4>Atrakcja: </h4>
                     <table border="0">
@@ -265,7 +209,7 @@ class DashboardAdmin extends Component {
                             <td>Godzina otwarcia</td>
                             <td>Godzina zamknięcia</td>
                             <td>Cena</td>
-                            <td>Index Miejscowość</td>
+                            <td>Id Miejscowość</td>
                         </tr>
                         <tr>
                             <td><input type="text" name="nazwa" value={this.state.nazwa} required onChange={this.ZmianaWCzasieRzeczywistynInput3} /></td>
@@ -282,7 +226,7 @@ class DashboardAdmin extends Component {
 
                             <td>
                                 {/* <this.ZwrocWybor/>*/}
-                                <input type="number" min="0" name="index_miejscowosc" value={this.state.index_miejscowosc} required onChange={this.ZmianaWCzasieRzeczywistynInput3} />
+                                <input type="number" min="0" name="id_miejscowosc" value={this.state.id_miejscowosc} required onChange={this.ZmianaWCzasieRzeczywistynInput3} />
                             </td>
 
                         </tr>

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Alert from 'react-s-alert';
 
+import { Button, Col, Row } from 'reactstrap';
+
 class Register extends Component {
 
     constructor(props) {
@@ -40,21 +42,20 @@ class Register extends Component {
         });
 
         if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true) {
-           // document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
-            document.getElementById("BarLogow").style.display = "none";
-            document.getElementById("BarLogow2").style.display = "none";
+            // document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
+           // document.getElementById("BarLogow").style.display = "none";
+           // document.getElementById("BarLogow2").style.display = "none";
 
             //document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!";
-            Alert.success('Rejestracja przebiegła pomyślnie!',{position:'top'});
+            Alert.success('Rejestracja przebiegła pomyślnie!', { position: 'top' });
 
             window.setTimeout(() => {
                 this.props.history.push('/logowanie')
             }, 2000)
         }
-        else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false)
-        {
-            Alert.error('Użytkownik istnieje!',{position:'bottom'});
-        //document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";
+        else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false) {
+            Alert.error('Użytkownik istnieje!', { position: 'bottom' });
+            //document.getElementById("KomunikatERROR").innerHTML = "Użytkownik istnieje!";
         }
 
     }
@@ -98,28 +99,40 @@ class Register extends Component {
                     <center><p><font color="green" id="KomunikatSUCCESS"></font></p></center>
                 </div>
                 */}
-                <div id="BarLogow">
-                    <h3>Rejestracja:</h3>
-                </div>
-                <div id="BarLogow2">
-                    <form onSubmit={this.KlikniecieSubmit}>
-                        <label>Imię: </label><br />
-                        <input type="text" name="imie" value={this.state.imie} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                        <label>Nazwisko: </label><br />
-                        <input type="text" name="nazwisko" value={this.state.nazwisko} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                        <label>Login: </label><br />
-                        <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
-                        <label>Hasło: </label><br />
-                        <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
-                        <button id="zarej">Zarejestruj się!</button>
 
-                       {/* <center><p><font color="red" id="KomunikatERROR"></font></p></center>*/}
 
-                        <center><p>Masz konto? </p><Link to="/logowanie">Zaloguj się!</Link></center>
+                <Row className="show-grid">
+                    <Col xs={6} md={5}>
+                    </Col>
+                    <Col xs={6} md={2} >
+                        <form onSubmit={this.KlikniecieSubmit}>
+                            <center>
+                                <br />
+                                <h5>Rejestracja:</h5><br />
+                                <label style={{ paddingRight: '150px' }}>Imię: </label><br />
+                                <input type="text" name="imie" value={this.state.imie} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '110px' }}>Nazwisko: </label><br />
+                                <input type="text" name="nazwisko" value={this.state.nazwisko} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '140px' }}>Login: </label><br />
+                                <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />
+                                <label style={{ paddingRight: '140px' }}>Hasło: </label><br />
+                                <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br /><br />
 
-                    </form>
-                </div>
-            </div>
+                                <Button color="primary">Zarejestruj się!</Button>
+
+                                {/*<center><p><font color="red" id="KomunikatERROR2"></font></p></center>*/}
+                                <br /><br />
+
+                                <p>Masz konto? </p><Link to="/logowanie">Zaloguj się!</Link>
+                            </center>
+                        </form>
+
+                    </Col>
+                    <Col xsHidden md={5}>
+                    </Col>
+                </Row>
+
+            </div >
         );
     }
 }

@@ -6,6 +6,9 @@ import axios from 'axios';
 
 import Alert from 'react-s-alert';
 
+import { Button, Col, Row } from 'reactstrap';
+
+
 
 class Login extends Component {
 
@@ -50,12 +53,12 @@ class Login extends Component {
         });
 
         if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === true) {
-            localStorage.setItem('loggedAs',OdpowiedzSerwera2.data.jaki_user);
+            localStorage.setItem('loggedAs', OdpowiedzSerwera2.data.jaki_user);
             this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
 
             //document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
-            document.getElementById("BarLogow").style.display = "none";
-            document.getElementById("BarLogow2").style.display = "none";
+            //  document.getElementById("BarLogow").style.display = "none";
+            //  document.getElementById("BarLogow2").style.display = "none";
 
             // document.getElementById("KomunikatSUCCESS2").innerHTML = "Logowanie przebiegło pomyślnie!";
             Alert.success('Logowanie przebiegło pomyślnie!', { position: 'top' });
@@ -69,6 +72,10 @@ class Login extends Component {
                             this.props.history.push('/uzytkownik');
                         }
                         */
+            //????
+           // document.getElementsByClassName("show-grid")[0].style.display = "none";
+          //   this.props.history.push('/admin');
+            //????
 
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {
@@ -97,28 +104,36 @@ class Login extends Component {
     render() {
         return (
             <div>
+
+                <Row className="show-grid">
+                    <Col xs={6} md={5}>
+                    </Col>
+                    <Col xs={6} md={2} >
+                        <form onSubmit={this.KlikniecieSubmit2}>
+                            <center>
+                                <br />
+                                <h5>Logowanie:</h5><br />
+                                <label style={{ paddingRight: '140px' }}>Login: </label><br />
+                                <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br />
+                                <label style={{ paddingRight: '140px' }}>Hasło: </label><br />
+                                <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
+
+                                <Button color="primary">Zaloguj się!</Button>
+
+                                {/*<center><p><font color="red" id="KomunikatERROR2"></font></p></center>*/}
+                                <br /><br />
+                                <p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link>
+                            </center>
+                        </form>
+
+                    </Col>
+                    <Col xsHidden md={5}>
+                    </Col>
+                </Row>
                 {/*this.LoggedState()*/}
                 {/*<div id="BarLogowPOPRAWNIE">
                     <center><p><font color="green" id="KomunikatSUCCESS2"></font></p></center>
                 </div>*/}
-
-                <div id="BarLogow">
-                    <h3>Logowanie:</h3>
-                </div>
-                <div id="BarLogow2">
-                    <form onSubmit={this.KlikniecieSubmit2}>
-                        <label>Login: </label><br />
-                        <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br />
-                        <label>Hasło: </label><br />
-                        <input type="password" name="haslo" value={this.state.haslo} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br /><br />
-                        <button id="zalo">Zaloguj się!</button>
-
-                        {/*<center><p><font color="red" id="KomunikatERROR2"></font></p></center>*/}
-
-                        <center><p>Nie masz konta? </p><Link to="/rejestracja">Zarejestruj się!</Link></center>
-
-                    </form>
-                </div>
             </div>
         );
     }

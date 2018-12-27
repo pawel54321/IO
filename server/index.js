@@ -28,19 +28,19 @@ pgClient.on('error', () => {
 });
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Uzytkownik (index SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), stan VARCHAR(255))')
+    .query('CREATE TABLE IF NOT EXISTS Uzytkownik (id SERIAL PRIMARY KEY, imie VARCHAR(255), nazwisko VARCHAR(255), login VARCHAR(255), haslo VARCHAR(255), stan VARCHAR(255))')
     .catch((error) => {
         console.log(error);
     });
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Atrakcja (index SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), index_miejscowosc INT)')
+    .query('CREATE TABLE IF NOT EXISTS Atrakcja (id SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), id_miejscowosc INT)')
     .catch((error) => {
         console.log(error);
     }); // DODAC czy_wycofana
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (index SERIAL PRIMARY KEY, nazwa VARCHAR(255))') // DODAC kraj
+    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (id SERIAL PRIMARY KEY, nazwaMiejscowosc VARCHAR(255),kraj VARCHAR(255))') // DODAC kraj
     .catch((error) => {
         console.log(error);
     });
@@ -165,10 +165,10 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
     const godzina_otwarcia = req.body.godzina_otwarcia;
     const godzina_zamkniecia = req.body.godzina_zamkniecia;
     const cena = req.body.cena;
-    const index_miejscowosc = req.body.index_miejscowosc;
+    const id_miejscowosc = req.body.id_miejscowosc;
 
     //Czy istnieje w tabeli Miejscowosc 'ten' indeks = to idziemy dalej
-    const zapytaniesprawdzaczyjestindeks = await pgClient.query("SELECT COUNT(nazwa) FROM Miejscowosc WHERE index='" + index_miejscowosc + "'")
+    const zapytaniesprawdzaczyjestindeks = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE id='" + id_miejscowosc + "'")
     const tabliczapytaniesprawdzaczyjestindeks = zapytaniesprawdzaczyjestindeks.rows;
     console.log(tabliczapytaniesprawdzaczyjestindeks[0].count);
     if (tabliczapytaniesprawdzaczyjestindeks[0].count == 1) {
@@ -186,8 +186,8 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
             // min = "0" naprawic zeby nie bylo duplikacji sprawdzac SELECT (zmienic na liste rozwijana zamiast int tekst)
             //dodawanie miejscowosci tylko przez liste rozwijana 
 
-            pgClient.query('INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, index_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)',
-                [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, index_miejscowosc])
+            pgClient.query('INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)',
+                [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc])
                 .catch((error) => {
                     console.log(error);
                 });
@@ -208,7 +208,7 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
         godzina_otwarcia: req.body.godzina_otwarcia,
         godzina_zamkniecia: req.body.godzina_zamkniecia,
         cena: req.body.cena,
-        index_miejscowosc: req.body.index_miejscowosc,
+        id_miejscowosc: req.body.id_miejscowosc,
 
         zwracam_czy_poprawnie_dodalem_atrakcje: czy_stworzono,
         zwracam_czy_stworzonoBrakPodanejMiejscowosci: czy_stworzonoBrakPodanejMiejscowosci
@@ -221,8 +221,9 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
 app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
     const nazwaMiejscowosc = req.body.nazwaMiejscowosc;
+    const kraj = req.body.kraj;
 
-    const zapytanie = await pgClient.query("SELECT COUNT(nazwa) FROM Miejscowosc WHERE nazwa='" + nazwaMiejscowosc + "'")
+    const zapytanie = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE nazwaMiejscowosc='" + nazwaMiejscowosc + "'")
     console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica[0].count);
@@ -230,7 +231,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
     if (tablica[0].count == 0) {
 
-        pgClient.query('INSERT INTO Miejscowosc(nazwa) VALUES($1)', [nazwaMiejscowosc])
+        pgClient.query('INSERT INTO Miejscowosc(nazwaMiejscowosc,kraj) VALUES($1,$2)', [nazwaMiejscowosc,kraj])
             .catch((error) => {
                 console.log(error);
             });
@@ -242,7 +243,8 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
     }
 
     res.send({
-        nazwa: req.body.nazwa,
+        nazwaMiejscowosc: req.body.nazwaMiejscowosc,
+        kraj: req.body.kraj,
 
         zwracam_czy_poprawnie_dodalem_miejscowosc: czy_stworzono
 
@@ -267,6 +269,26 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 });
 
 
+
+app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) => {
+
+
+
+    const zapytanie = await pgClient.query("SELECT * FROM Miejscowosc")
+    // console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    //console.log(tablica);
+
+    res.send({
+        daneMiejscowosc: tablica
+    });
+
+});
+
+
+
+
 app.listen(5000, error => {
     console.log('Listening on port 5000');
 });
+

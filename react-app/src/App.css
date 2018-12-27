@@ -102,6 +102,7 @@ display:none;
   
   }
 */
+/*
 #BarLogow
 {
 float:left;
@@ -141,4 +142,12 @@ button#zarej
 {
   padding-left:26.5%;
   padding-right:26.5%;
+}*/
+.crud-table
+{
+  width:100%;
+}
+.crud-modal-form__error-message
+{
+  display:none;
 }
