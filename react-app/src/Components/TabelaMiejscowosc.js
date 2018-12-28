@@ -67,6 +67,7 @@ const service = {
             ...task,
             id: count,
         });
+                
         return Promise.resolve(task);
     },
     update: (data) => {
@@ -138,6 +139,10 @@ const TabelaMiejscowosc = (props) => (
 
                     if (!values.kraj) {
                         errors.kraj = 'Wypełnij to pole.';
+                    }
+
+                    if (tasks.find((element) => {return element.nazwamiejscowosc === values.nazwamiejscowosc})) {
+                        errors.nazwamiejscowosc = 'Miejscowość o takiej nazwie istnieje!';
                     }
 
                     return errors;
