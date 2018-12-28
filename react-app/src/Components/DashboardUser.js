@@ -8,7 +8,7 @@ class DashboardUser extends Component {
         return (
             <div>
                 {this.Wywolaj}
-                <h2>Panel Użytkownika</h2>
+                <h5>Panel Użytkownika</h5>
                 <p>Witaj! {/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}</p>
             </div>
         );

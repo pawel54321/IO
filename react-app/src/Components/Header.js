@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 //import StronaGlowna from '../Images/StronaGlowna.jpg';
-import PanelUzytkownika from '../Images/PanelUzytkownika.jpg';
+
+/*import PanelUzytkownika from '../Images/PanelUzytkownika.jpg';
 import PanelAdmina from '../Images/PanelAdmina.jpg';
 
 import Zalogujsie from '../Images/Zalogujsie.jpg';
 import Zarejestrujsie from '../Images/Zarejestrujsie.jpg';
-import Wyloguj from '../Images/Wyloguj.jpg';
+import Wyloguj from '../Images/Wyloguj.jpg';*/
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem,NavLink } from 'reactstrap';
 
 import Alert from 'react-s-alert';
 
@@ -31,21 +33,31 @@ function Visible(props) {
 
 
     if (props.loggedAs === ROLES.USER) {
+
+        //<Link to="/uzytkownik"><img src={PanelUzytkownika} alt="" /></Link>
+
+        //<Link to="/" onClick={Wylogowanie}><img src={Wyloguj} alt="" /></Link>
+
         return (
 
             <nav>
                 <header className="App-header">
 
-                    <div className="Element-menu">
-                        <Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color: 'grey' }} /></Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/uzytkownik"><img src={PanelUzytkownika} alt="" /></Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/" onClick={Wylogowanie}><img src={Wyloguj} alt="" /></Link>
+                    <Navbar color="light" light expand="md">
+                        <NavbarBrand><Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color: 'light' }} /></Link></NavbarBrand>
+                        <NavbarToggler />
+                        <Collapse navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink><Link to="/uzytkownik">Panel Użytkownika</Link></NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink> <Link to="/" onClick={Wylogowanie}>Wyloguj</Link></NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
 
-                    </div>
                 </header>
             </nav>);
     }
@@ -53,15 +65,22 @@ function Visible(props) {
         return (
             <nav>
                 <header className="App-header">
-                    <div className="Element-menu">
-                        <Link to="/"><i class="fa fa-home" style={{ fontSize: '50px', color: 'grey' }} /></Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/admin"><img src={PanelAdmina} alt="" /></Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/" onClick={Wylogowanie}><img src={Wyloguj} alt="" /></Link>
-                    </div>
+
+                    <Navbar color="light" light expand="md">
+                        <NavbarBrand><Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color: 'light' }} /></Link></NavbarBrand>
+                        <NavbarToggler />
+                        <Collapse navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink><Link to="/admin">Panel Admina</Link></NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink> <Link to="/" onClick={Wylogowanie}>Wyloguj</Link></NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
+
                 </header>
             </nav>
         );
@@ -70,16 +89,21 @@ function Visible(props) {
         return (
             <nav>
                 <header className="App-header">
-                    <div className="Element-menu">
-                        <Link to="/"><i class="fa fa-home" style={{ fontSize: '50px', color: 'grey' }} /></Link>
-                    </div>
-
-                    <div className="Element-menu">
-                        <Link to="/logowanie"><img src={Zalogujsie} alt="" /></Link>
-                    </div>
-                    <div className="Element-menu">
-                        <Link to="/rejestracja"><img src={Zarejestrujsie} alt="" /></Link>
-                    </div>
+                
+                    <Navbar color="light" light expand="md">
+                        <NavbarBrand><Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color: 'light' }} /></Link></NavbarBrand>
+                        <NavbarToggler />
+                        <Collapse navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink><Link to="/logowanie">Logowanie</Link></NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink><Link to="/rejestracja">Rejestracja</Link></NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
                 </header>
             </nav>
         );

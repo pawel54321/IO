@@ -1,9 +1,11 @@
 import React from 'react';
 
-import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.jpg';
-import StronaGlowna from '../Images/StronaGlowna.jpg';
+//import WrocdoStronyGlownej from '../Images/WrocdoStronyGlownej.jpg';
+//import StronaGlowna from '../Images/StronaGlowna.jpg';
 
 import { Link } from 'react-router-dom';
+import { Navbar, NavbarBrand} from 'reactstrap';
+
 const Footer = () => (
     <div className="App-footer">
         <footer>
@@ -17,10 +19,26 @@ const SprawdzFooter = () => {
     var a = window.location.pathname;
 
     if (a !== "/") {
-        return (<Link to="/"><img src={WrocdoStronyGlownej} alt="" /></Link>);
+        // <Link to="/"><img src={WrocdoStronyGlownej} alt="" /></Link>
+        return (
+            <div>
+                <Navbar color="light" light expand="md" className="Stopka">
+                    <NavbarBrand><Link to="/">Wróć do Strony Głównej</Link></NavbarBrand>
+                    
+                </Navbar>
+            </div>
+        );
     }
     else {
-        return (<div>{<img src={StronaGlowna} alt="" />}</div>);
+        // <img src={StronaGlowna} alt="" />
+        return (
+            <div>
+                <Navbar color="light" light expand="md" className="Stopka">
+                <NavbarBrand>Znajdujesz się na Stronie Głównej</NavbarBrand>
+                   
+                </Navbar>
+            </div>
+        );
     }
 }
 
