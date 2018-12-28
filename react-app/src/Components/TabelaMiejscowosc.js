@@ -11,6 +11,8 @@ import CRUDTable,
     Pagination
 } from 'react-crud-table';
 
+import axios from 'axios';
+
 // Component's Base CSS
 import '../index.css';
 
@@ -41,7 +43,6 @@ const getSorter = (data) => {
 };
 
 
-let count = tasks.length;
 const service = {
     fetchItems: (payload) => {
         const { activePage, itemsPerPage } = payload.pagination;
@@ -56,7 +57,12 @@ const service = {
         return Promise.resolve(tasks.length);
     },
     create: (task) => {
-        count += 1;
+        axios.post('/api/Uzytkownik/PanelAdmina2', {
+            nazwaMiejscowosc: task.nazwamiejscowosc,
+            kraj: task.kraj
+        });
+
+        let count = tasks.length + 1;
         tasks.push({
             ...task,
             id: count,
