@@ -17,8 +17,8 @@ const ROLES = {
 }
 
 function Wylogowanie() {
-   // this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
-   localStorage.setItem('loggedAs','');
+    // this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
+    localStorage.setItem('loggedAs', '');
     this.props.onLoggedUserChange2('');
     //????
     Alert.success('Pomyślnie wylogowano!', { position: 'top' });
@@ -32,10 +32,10 @@ function Visible(props) {
 
     if (props.loggedAs === ROLES.USER) {
         return (
-            
+
             <nav>
                 <header className="App-header">
-               
+
                     <div className="Element-menu">
                         <Link to="/"><i className="fa fa-home" style={{ fontSize: '50px', color: 'grey' }} /></Link>
                     </div>
@@ -44,7 +44,7 @@ function Visible(props) {
                     </div>
                     <div className="Element-menu">
                         <Link to="/" onClick={Wylogowanie}><img src={Wyloguj} alt="" /></Link>
-                        
+
                     </div>
                 </header>
             </nav>);

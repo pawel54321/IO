@@ -43,8 +43,8 @@ class Register extends Component {
 
         if (OdpowiedzSerwera.data.zwracam_czy_stworzono === true) {
             // document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
-           // document.getElementById("BarLogow").style.display = "none";
-           // document.getElementById("BarLogow2").style.display = "none";
+            // document.getElementById("BarLogow").style.display = "none";
+            // document.getElementById("BarLogow2").style.display = "none";
 
             //document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!";
             Alert.success('Rejestracja przebiegła pomyślnie!', { position: 'top' });

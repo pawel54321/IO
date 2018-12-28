@@ -41,21 +41,20 @@ class DashboardAdmin extends Component {
 
         this.ZwrocenieTabeliMiejscowosc();
 
-  
+
     }
 
-    ZwrocenieTabeliMiejscowosc = async () => 
-    {
-    const OdpowiedzSerwera5 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', { daneMiejscowosc: this.state.daneMiejscowosc });
-    //  this.state.daneMiejscowosc = OdpowiedzSerwera5.data.daneMiejscowosc;
+    ZwrocenieTabeliMiejscowosc = async () => {
+        const OdpowiedzSerwera5 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', { daneMiejscowosc: this.state.daneMiejscowosc });
+        //  this.state.daneMiejscowosc = OdpowiedzSerwera5.data.daneMiejscowosc;
 
-    //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
-    this.setState({
-        daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
-     });
-     //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
-     //prompt(JSON.stringify(this.state.daneMiejscowosc));
-     }
+        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        this.setState({
+            daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
+        });
+        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        //prompt(JSON.stringify(this.state.daneMiejscowosc));
+    }
 
 
 
@@ -89,11 +88,11 @@ class DashboardAdmin extends Component {
         else {
             if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === true) {
                 Alert.success('Dodano nową atrakcje!', { position: 'top' });
-    
+
                 //refresh tabeli
             }
             else if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === false) {
-                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });                
+                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });
             }
         }
 
@@ -122,15 +121,15 @@ class DashboardAdmin extends Component {
             //pobrac z bazy, kiedy klikne?
         }
     */
-  
-/*
-    ZwrocenieTabeliAtrakcja = async () => {
-        // event.preventDefault();
-        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', { daneAtrakcja: this.state.daneAtrakcja });
-        this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
-        //  this.Tabela()
-    }
-*/
+
+    /*
+        ZwrocenieTabeliAtrakcja = async () => {
+            // event.preventDefault();
+            const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', { daneAtrakcja: this.state.daneAtrakcja });
+            this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
+            //  this.Tabela()
+        }
+    */
 
     KlikniecieSubmit4 = async (event) => {
         event.preventDefault();
@@ -176,7 +175,7 @@ class DashboardAdmin extends Component {
     render() {
         return (
             <div>
-            
+
                 <h5>Panel Admina</h5>
 
                 <Row className="show-grid">

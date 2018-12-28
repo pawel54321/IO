@@ -17,10 +17,10 @@ const SprawdzFooter = () => {
     var a = window.location.pathname;
 
     if (a !== "/") {
-        return (<Link to="/"><img src={WrocdoStronyGlownej} alt=""/></Link>);
+        return (<Link to="/"><img src={WrocdoStronyGlownej} alt="" /></Link>);
     }
     else {
-        return (<div>{<img src={StronaGlowna} alt=""/>}</div>);
+        return (<div>{<img src={StronaGlowna} alt="" />}</div>);
     }
 }
 

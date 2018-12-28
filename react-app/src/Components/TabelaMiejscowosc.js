@@ -1,5 +1,5 @@
 import React//, { Component } 
-from 'react';
+    from 'react';
 
 import CRUDTable,
 {
@@ -51,7 +51,7 @@ const service = {
         result = result.sort(getSorter(payload.sort));
         return Promise.resolve(result.slice(start, end));
     },
-   
+
     fetchTotal: payload => {
         return Promise.resolve(tasks.length);
     },
@@ -78,24 +78,23 @@ const styles = {
     container: {},
 };
 
-function Ustaw(props)
-{
+function Ustaw(props) {
     tasks = props.daneMiejscowosc;
-   // alert(JSON.stringify((props.daneMiejscowosc)));
+    // alert(JSON.stringify((props.daneMiejscowosc)));
 }
 
 const TabelaMiejscowosc = (props) => (
 
-   
+
 
     <div style={styles.container}>
-     {Ustaw(props)}
+        {Ustaw(props)}
 
         <CRUDTable style={{ width: '100%' }}
             caption="Miejscowość"
             actionsLabel="Akcje"
             fetchItems={payload => service.fetchItems(payload)}
-            
+
         >
             <Fields>
                 <Field
