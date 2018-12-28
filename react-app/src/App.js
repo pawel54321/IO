@@ -111,7 +111,7 @@ class App extends Component {
         </div>
       );
     }
-    else if (localStorage.getItem('loggedAs') === '') {
+    else {
       return (
         <div>
           <Route exact path="/" component={HomePage} />
