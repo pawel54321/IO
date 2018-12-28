@@ -66,7 +66,7 @@ const service = {
     update: (data) => {
         const task = tasks.find(t => t.id === data.id);
 
-        task.nazwaMiejscowosc = data.nazwaMiejscowosc;
+        task.nazwamiejscowosc = data.nazwamiejscowosc;
         task.kraj = data.kraj;
 
         return Promise.resolve(task);
@@ -105,7 +105,7 @@ const TabelaMiejscowosc = (props) => (
 
                 />
                 <Field
-                    name="nazwaMiejscowosc"
+                    name="nazwamiejscowosc"
                     label="Nazwa"
                     placeholder="Nazwa"
                 />
@@ -126,8 +126,8 @@ const TabelaMiejscowosc = (props) => (
                 submitText="Dodaj"
                 validate={(values) => {
                     const errors = {};
-                    if (!values.nazwaMiejscowosc) {
-                        errors.nazwaMiejscowosc = 'Wypełnij to pole.';
+                    if (!values.nazwamiejscowosc) {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
 
                     if (!values.kraj) {
@@ -152,8 +152,8 @@ const TabelaMiejscowosc = (props) => (
                         errors.id = 'Wypełnij to pole.';
                     }
 
-                    if (!values.nazwaMiejscowosc) {
-                        errors.nazwaMiejscowosc = 'Wypełnij to pole.';
+                    if (!values.nazwamiejscowosc) {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
 
                     if (!values.kraj) {
