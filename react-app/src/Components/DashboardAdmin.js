@@ -5,6 +5,7 @@ import axios from 'axios';
 //import 'react-table/react-table.css'
 
 import TabelaMiejscowosc from './TabelaMiejscowosc';
+import TabelaAtrakcja from './TabelaAtrakcja';
 
 import Alert from 'react-s-alert';
 import { //Button, 
@@ -17,7 +18,7 @@ class DashboardAdmin extends Component {
         super(props);
 
         this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
-        this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
+     //   this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
 
         //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji  
 
@@ -34,13 +35,14 @@ class DashboardAdmin extends Component {
             kraj: ''
             ,
 
-            daneAtrakcja: [],
-            daneMiejscowosc: []
+            
+            daneMiejscowosc: [],
+            daneAtrakcja: []
 
         }
 
         this.ZwrocenieTabeliMiejscowosc();
-
+        this.ZwrocenieTabeliAtrakcja();
 
     }
 
@@ -51,6 +53,17 @@ class DashboardAdmin extends Component {
         //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
         this.setState({
             daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
+        });
+        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        //prompt(JSON.stringify(this.state.daneMiejscowosc));
+    }
+    ZwrocenieTabeliAtrakcja = async () => {
+        const OdpowiedzSerwera6 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', { daneAtrakcja: this.state.daneAtrakcja });
+        //  this.state.daneMiejscowosc = OdpowiedzSerwera5.data.daneMiejscowosc;
+
+        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        this.setState({
+            daneAtrakcja: OdpowiedzSerwera6.data.daneAtrakcja,
         });
         //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
         //prompt(JSON.stringify(this.state.daneMiejscowosc));
@@ -130,7 +143,7 @@ class DashboardAdmin extends Component {
             //  this.Tabela()
         }
     */
-
+/*
     KlikniecieSubmit4 = async (event) => {
         event.preventDefault();
 
@@ -170,7 +183,7 @@ class DashboardAdmin extends Component {
 
         this.setState(state);
     }
-
+*/
 
     render() {
         return (
@@ -187,7 +200,7 @@ class DashboardAdmin extends Component {
 
 
                         <TabelaMiejscowosc daneMiejscowosc={this.state.daneMiejscowosc} />
-
+                        <TabelaAtrakcja daneAtrakcja={this.state.daneAtrakcja} />
 
 
                     </Col>
@@ -239,6 +252,7 @@ class DashboardAdmin extends Component {
 
                 </form>
 
+{/*}
                 <form onSubmit={this.KlikniecieSubmit4}>
                     <h4>Miejscowość: </h4>
                     <table border="0">
@@ -250,13 +264,13 @@ class DashboardAdmin extends Component {
                         </tr>
                     </table>
                     <br />
-                    <button>Dodaj!</button>
+                <button>Dodaj!</button>*/}
 
                     {/* <p><font color="red" id="KomunikatERROR4"></font></p>
                     <p><font color="green" id="KomunikatSUCCESS4"></font></p>*/}
 
 
-                </form>
+                 {/*</form>*/}
 
                 {/*
             
