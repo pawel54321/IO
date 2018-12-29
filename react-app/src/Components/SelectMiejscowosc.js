@@ -13,7 +13,7 @@ export default class SelectMiejscowosc extends Component {
     ZwrocenieTabeliMiejscowosc = async () => {
         const OdpowiedzSerwera5 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', { daneMiejscowosc: this.state.daneMiejscowosc });
 
-        prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
+        //prompt(JSON.stringify(OdpowiedzSerwera5.data.daneMiejscowosc));
         this.setState({
             daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
         });
