@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DropdownMiejscowosc from './DropdownMiejscowosc';
+import SelectMiejscowosc from './SelectMiejscowosc';
 import CardAtrakcja from './CardAtrakcja';
 import {Row, Col} from 'reactstrap';
 
@@ -58,7 +58,7 @@ class HomePage extends Component {
             <div>
                 <h5>Strona Główna</h5>
     
-                <DropdownMiejscowosc />
+                <SelectMiejscowosc />
                 
                 <Col sm='12' md={{ size: 6, offset: 3 }}>
                     <Row>
