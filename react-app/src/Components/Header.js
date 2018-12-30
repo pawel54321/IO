@@ -9,7 +9,8 @@ import PanelAdmina from '../Images/PanelAdmina.jpg';
 import Zalogujsie from '../Images/Zalogujsie.jpg';
 import Zarejestrujsie from '../Images/Zarejestrujsie.jpg';
 import Wyloguj from '../Images/Wyloguj.jpg';*/
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, NavbarBrand, //NavbarToggler, 
+    Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 
 import Alert from 'react-s-alert';
 

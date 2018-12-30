@@ -142,13 +142,13 @@ const TabelaAtrakcja = (props) => (
               
                 <Field 
                     name="godzina_otwarcia"
-                    label="Godzina otwarcia"
+                    label="Godz. otwarcia"
                     placeholder="10:50"
                     
                 />
                    <Field 
                     name="godzina_zamkniecia"
-                    label="Godzina zamkniecia"
+                    label="Godz. zamknięcia"
                     placeholder="20:50"
                     
                 />

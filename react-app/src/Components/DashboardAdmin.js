@@ -7,43 +7,63 @@ import axios from 'axios';
 import TabelaMiejscowosc from './TabelaMiejscowosc';
 import TabelaAtrakcja from './TabelaAtrakcja';
 
-import Alert from 'react-s-alert';
-import { //Button, 
-    Col, Row
+//import Alert from 'react-s-alert';
+
+import {//Button,
+    //Col, Row, 
+    TabContent, TabPane, Nav, NavItem, NavLink, Row, Col
 } from 'reactstrap';
+import classnames from 'classnames';
 
 class DashboardAdmin extends Component {
 
     constructor(props) {
         super(props);
 
-        this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
-     //   this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
-
-        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji  
-
+        this.toggle = this.toggle.bind(this);
         this.state = {
-            nazwa: '',
-            adres: '',
-            liczba_miejsc: '',
-            godzina_otwarcia: '',
-            godzina_zamkniecia: '',
-            cena: '',
-            id_miejscowosc: '',
-
-            nazwaMiejscowosc: '',
-            kraj: ''
-            ,
-
-            
+            activeTab: '0',
             daneMiejscowosc: [],
             daneAtrakcja: []
+        };
 
-        }
+
+        //  this.ZmianaWCzasieRzeczywistynInput3 = this.ZmianaWCzasieRzeczywistynInput3.bind(this);
+        //   this.ZmianaWCzasieRzeczywistynInput4 = this.ZmianaWCzasieRzeczywistynInput4.bind(this);
+
+        //Aby Scope w funkcji ZmianaWCzasieRzeczywistynInput byl scopem klasy - nie funkcji  
+        /*
+                this.state = {
+                   
+                    nazwa: '',
+                    adres: '',
+                    liczba_miejsc: '',
+                    godzina_otwarcia: '',
+                    godzina_zamkniecia: '',
+                    cena: '',
+                    id_miejscowosc: '',
+        
+                    nazwaMiejscowosc: '',
+                    kraj: ''
+                    ,
+                   
+        
+                    daneMiejscowosc: [],
+                    daneAtrakcja: []
+        
+            }*/
 
         this.ZwrocenieTabeliMiejscowosc();
         this.ZwrocenieTabeliAtrakcja();
 
+    }
+
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     ZwrocenieTabeliMiejscowosc = async () => {
@@ -69,148 +89,136 @@ class DashboardAdmin extends Component {
         //prompt(JSON.stringify(this.state.daneMiejscowosc));
     }
 
-
-
-    KlikniecieSubmit3 = async (event) => {
-        event.preventDefault();
-
-        const OdpowiedzSerwera3 = await axios.post('/api/Uzytkownik/PanelAdmina', {
-            nazwa: this.state.nazwa,
-            adres: this.state.adres,
-            liczba_miejsc: this.state.liczba_miejsc,
-            godzina_otwarcia: this.state.godzina_otwarcia,
-            godzina_zamkniecia: this.state.godzina_zamkniecia,
-            cena: this.state.cena,
-            id_miejscowosc: this.state.id_miejscowosc,
-        });
-
-        this.setState({
-            nazwa: '',
-            adres: '',
-            liczba_miejsc: '',
-            godzina_otwarcia: '',
-            godzina_zamkniecia: '',
-            cena: '',
-            id_miejscowosc: ''
-
-        });
-        if (OdpowiedzSerwera3.data.zwracam_czy_stworzonoBrakPodanejMiejscowosci === false) {
-            Alert.error("Podana wartość 'Id Miejscowość' nie istnieje w tabeli Miejscowość!", { position: 'bottom' });
-            //document.getElementById("KomunikatERROR3").innerHTML = "Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!";
-        }
-        else {
-            if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === true) {
-                Alert.success('Dodano nową atrakcje!', { position: 'top' });
-
-                //refresh tabeli
-            }
-            else if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === false) {
-                Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });
-            }
-        }
-
-    }
-
-    ZmianaWCzasieRzeczywistynInput3(event) {
-
-        const target = event.target;
-        const value = target.value;
-
-        const state = { ...this.state }
-
-        state[target.name] = value;
-
-        this.setState(state);
-    }
     /*
-        ZwrocWybor()
-        {
-            return(
-            <select name="miejscowosc">
-                <option>Testowanie</option>
-                <option>Testowanie2</option>
-            </select>
-            );
-            //pobrac z bazy, kiedy klikne?
+    
+        KlikniecieSubmit3 = async (event) => {
+            event.preventDefault();
+    
+            const OdpowiedzSerwera3 = await axios.post('/api/Uzytkownik/PanelAdmina', {
+                nazwa: this.state.nazwa,
+                adres: this.state.adres,
+                liczba_miejsc: this.state.liczba_miejsc,
+                godzina_otwarcia: this.state.godzina_otwarcia,
+                godzina_zamkniecia: this.state.godzina_zamkniecia,
+                cena: this.state.cena,
+                id_miejscowosc: this.state.id_miejscowosc,
+            });
+    
+            this.setState({
+                nazwa: '',
+                adres: '',
+                liczba_miejsc: '',
+                godzina_otwarcia: '',
+                godzina_zamkniecia: '',
+                cena: '',
+                id_miejscowosc: ''
+    
+            });
+            if (OdpowiedzSerwera3.data.zwracam_czy_stworzonoBrakPodanejMiejscowosci === false) {
+                Alert.error("Podana wartość 'Id Miejscowość' nie istnieje w tabeli Miejscowość!", { position: 'bottom' });
+                //document.getElementById("KomunikatERROR3").innerHTML = "Podana wartość 'Index Miejscowość' nie istnieje w tabeli Miejscowość!";
+            }
+            else {
+                if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === true) {
+                    Alert.success('Dodano nową atrakcje!', { position: 'top' });
+    
+                    //refresh tabeli
+                }
+                else if (OdpowiedzSerwera3.data.zwracam_czy_poprawnie_dodalem_atrakcje === false) {
+                    Alert.error('Atrakcja o takiej nazwie istnieje!', { position: 'bottom' });
+                }
+            }
+    
         }
+    
+        ZmianaWCzasieRzeczywistynInput3(event) {
+    
+            const target = event.target;
+            const value = target.value;
+    
+            const state = { ...this.state }
+    
+            state[target.name] = value;
+    
+            this.setState(state);
+        }
+       
     */
-
-    /*
-        ZwrocenieTabeliAtrakcja = async () => {
-            // event.preventDefault();
-            const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', { daneAtrakcja: this.state.daneAtrakcja });
-            this.state.daneAtrakcja = OdpowiedzSerwera4.data.daneAtrakcja;
-            //  this.Tabela()
-        }
-    */
-/*
-    KlikniecieSubmit4 = async (event) => {
-        event.preventDefault();
-
-        const OdpowiedzSerwera4 = await axios.post('/api/Uzytkownik/PanelAdmina2', {
-            nazwaMiejscowosc: this.state.nazwaMiejscowosc,
-            kraj: this.state.kraj
-        });
-
-        this.setState({
-            nazwaMiejscowosc: '',
-            kraj: ''
-
-        });
-
-
-        if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === true) {
-            Alert.success('Dodano nową miejscowość!', { position: 'top' });
-
-            //refresh tabeli
-        }
-        else if (OdpowiedzSerwera4.data.zwracam_czy_poprawnie_dodalem_miejscowosc === false) {
-            Alert.error('Miejscowość o takiej nazwie istnieje!', { position: 'bottom' });
-        }
-
-
-    }
-
-    ZmianaWCzasieRzeczywistynInput4(event) {
-
-        const target = event.target;
-        const value = target.value;
-
-        const state = { ...this.state }
-
-        state[target.name] = value;
-
-
-        this.setState(state);
-    }
-*/
-
     render() {
         return (
             <div>
-
                 <h5>Panel Admina</h5>
+                <Nav tabs>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggle('1'); }}
+                        >
+                            Miejscowość
+                </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggle('2'); }}
+                        >
+                            Atrakcja
+            </NavLink>
+                    </NavItem>
+                </Nav>
+                <TabContent activeTab={this.state.activeTab}>
 
-                <Row className="show-grid">
 
-                    <Col xs={6} md={3} >
-                    </Col>
-                    <Col xs={6} md={6} >
-                        {/*this.ZwrocenieTabeliAtrakcja*/}
+                    <TabPane tabId="0">
+                        <Row>
+                            <Col xs={6} md={3} >
+                            </Col>
+                            <Col xs={6} md={6} >
+                                <br /><br /><br /><br /><br /><br /><br /><br />
+                                <center><h5>Znajdujesz się w Panelu Administratora.<br />W tym miejscu możesz zarządzać swoim systemem.<br />Wybierz odpowiednią zakładkę u góry strony, aby dokonać zmian w systemie.</h5></center>
 
+                            </Col>
+                            <Col xs={6} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
 
-                        <TabelaMiejscowosc daneMiejscowosc={this.state.daneMiejscowosc} />
-                        <TabelaAtrakcja daneAtrakcja={this.state.daneAtrakcja} />
+                    <TabPane tabId="1">
+                        <Row className="show-grid">
 
+                            <Col xs={6} md={3} >
+                            </Col>
+                            <Col xs={6} md={6} >
+                                {/*this.ZwrocenieTabeliMiejscowosc*/}
+                                <br />
+                                <TabelaMiejscowosc daneMiejscowosc={this.state.daneMiejscowosc} />
+                                <br /><br /><br /><br /><br />
+                             
+                            </Col>
+                            <Col xs={6} md={3} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                        <Row className="show-grid">
 
-                    </Col>
-                    <Col xs={6} md={3} >
-                    </Col>
-                </Row>
+                            <Col xs={6} md={2} >
+                            </Col>
+                            <Col xs={6} md={8} >
+                                {/*this.ZwrocenieTabeliAtrakcja*/}
+                                <br />
+                                <TabelaAtrakcja daneAtrakcja={this.state.daneAtrakcja} />
+                                <br /><br /><br /><br /><br />
+                            </Col>
+                            <Col xs={6} md={2} >
+                            </Col>
+                        </Row>
+                    </TabPane>
+                </TabContent>
 
 
                 {/*<p>Witaj! */}{/*{this.props.imie} {this.props.nazwisko}, ({this.props.login})*/}{/*</p>*/}
-
+                {/*
                 <form onSubmit={this.KlikniecieSubmit3}>
                     <h4>Atrakcja: </h4>
                     <table border="0">
@@ -237,22 +245,22 @@ class DashboardAdmin extends Component {
                             <td><input type="number" step="0.01" name="cena" value={this.state.cena} required onChange={this.ZmianaWCzasieRzeczywistynInput3} /></td>
 
                             <td>
-                                {/* <this.ZwrocWybor/>*/}
+                               
                                 <input type="number" min="0" name="id_miejscowosc" value={this.state.id_miejscowosc} required onChange={this.ZmianaWCzasieRzeczywistynInput3} />
                             </td>
 
                         </tr>
                     </table>
                     <br />
-                    <button>Dodaj!</button>
+                    <button>Dodaj!</button>*/}
 
-                    {/* <p><font color="red" id="KomunikatERROR3"></font></p>
+                {/* <p><font color="red" id="KomunikatERROR3"></font></p>
                     <p><font color="green" id="KomunikatSUCCESS3"></font></p>*/}
 
 
-                </form>
+                {/*</form>*/}
 
-{/*}
+                {/*}
                 <form onSubmit={this.KlikniecieSubmit4}>
                     <h4>Miejscowość: </h4>
                     <table border="0">
@@ -266,11 +274,11 @@ class DashboardAdmin extends Component {
                     <br />
                 <button>Dodaj!</button>*/}
 
-                    {/* <p><font color="red" id="KomunikatERROR4"></font></p>
+                {/* <p><font color="red" id="KomunikatERROR4"></font></p>
                     <p><font color="green" id="KomunikatSUCCESS4"></font></p>*/}
 
 
-                 {/*</form>*/}
+                {/*</form>*/}
 
                 {/*
             
