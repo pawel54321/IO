@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SelectMiejscowosc from './SelectMiejscowosc';
+import DropdownMiejscowosc from './DropdownMiejscowosc';
 import CardAtrakcja from './CardAtrakcja';
 import {Row, Col} from 'reactstrap';
 
@@ -54,19 +54,32 @@ class HomePage extends Component {
             )
         });
 
-        return (
-            <div>
-                <h5>Strona Główna</h5>
-    
-                <SelectMiejscowosc />
-                
-                <Col sm='12' md={{ size: 6, offset: 3 }}>
-                    <Row>
-                        {atrakcjeCards}
-                    </Row>
-                </Col>
-            </div>
-        );
+        if (localStorage.getItem('loggedAs') === 'User' || localStorage.getItem('loggedAs') === 'Admin') {
+            return (
+                <div>
+                    <h5>Strona Główna</h5>
+        
+                    <DropdownMiejscowosc />
+                    
+                    <Col sm='12' md={{ size: 6, offset: 3 }}>
+                        <Row>
+                            {atrakcjeCards}
+                        </Row>
+                    </Col>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <h5>Strona Główna</h5>
+                    <Col sm='12' md={{ size: 6, offset: 3 }}>
+                        <Row>
+                            <h3 style={{textAlign: 'center', width: '100%'}}>Powitanie + informacja o koniecznosci logowania</h3>
+                        </Row>
+                    </Col>
+                </div>
+            );
+        }
     }
 }
 

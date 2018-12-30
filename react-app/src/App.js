@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, /*Link*/ } from 'react-router-dom';
+import { Router, Route, /*Link*/ } from 'react-router-dom';
+
+import history from './history';
 
 import HomePage from './Components/HomePage';
 
@@ -62,7 +64,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
 
         <div className="App">
 

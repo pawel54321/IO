@@ -8,6 +8,7 @@ import Alert from 'react-s-alert';
 
 import { Button, Col, Row } from 'reactstrap';
 
+import history from '../history';
 
 
 class Login extends Component {
@@ -77,6 +78,7 @@ class Login extends Component {
             //   this.props.history.push('/admin');
             //????
 
+            history.push('/');
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {
             // document.getElementById("KomunikatERROR2").innerHTML = "Niepoprawne dane!";

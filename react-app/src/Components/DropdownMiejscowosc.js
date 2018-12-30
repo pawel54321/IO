@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class SelectMiejscowosc extends Component {
+export default class DropdownMiejscowosc extends Component {
     constructor(props) {
         super(props);
 
