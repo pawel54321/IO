@@ -3,50 +3,38 @@ import DropdownMiejscowosc from './DropdownMiejscowosc';
 import CardAtrakcja from './CardAtrakcja';
 import {Row, Col} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class HomePage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            atrakcje: [
-                {
-                    nazwa: 'nazwa1',
-                    adres: 'adres1'
-                },
-                {
-                    nazwa: 'nazwa2',
-                    adres: 'adres2'
-                },
-                {
-                    nazwa: 'nazwa3',
-                    adres: 'adres4'
-                },
-                {
-                    nazwa: 'nazwa5',
-                    adres: 'adres6'
-                },
-                {
-                    nazwa: 'nazwa17',
-                    adres: 'adres8'
-                },
-                {
-                    nazwa: 'nazwa28',
-                    adres: 'adres29'
-                },
-                {
-                    nazwa: 'nazwa11',
-                    adres: 'adres11'
-                },
-                {
-                    nazwa: 'nazwa22',
-                    adres: 'adres22'
-                }
-            ]
+            atrakcje: [],
+            miejscowosc: ''
         }
     }
 
+    ZwrocenieTabeliAtrakcja = async () => {
+        //prompt(JSON.stringify(this.props.idMiejscowosc));
+        const OdpowiedzSerwera99 = await axios.post('/api/Uzytkownik/Panel_Admina/Zwroc_Atrakcje_Z_Miejscowosci', { miejscowosc: this.state.miejscowosc });
+
+        this.setState({
+            atrakcje: OdpowiedzSerwera99.data.daneAtrakcja,
+        });
+        //prompt(JSON.stringify(this.state.atrakcje));
+        //console.log(this.state.miejscowosc);
+    }
+
+    nazwamiejscowosc = (Miejscowosc) => {
+        this.setState ({
+            miejscowosc: Miejscowosc
+        });
+    }
+
     render() {
+        {this.ZwrocenieTabeliAtrakcja()}
+
         let atrakcjeCards = this.state.atrakcje.map(atrakcja => {
             return (
                 <Col xl='4' lg='6' xs='12'>
@@ -59,9 +47,11 @@ class HomePage extends Component {
             return (
                 <div>
                     <h5>Strona Główna</h5>
-        
-                    <DropdownMiejscowosc />
-                    
+                    <Row>
+                        <Col sm='12' md={{ size: 6, offset: 3 }}>
+                            <DropdownMiejscowosc miejscowosc={this.nazwamiejscowosc}/>
+                        </Col>
+                    </Row>
                     <Col sm='12' md={{ size: 6, offset: 3 }}>
                         <Row>
                             {atrakcjeCards}
@@ -75,9 +65,9 @@ class HomePage extends Component {
                     <h5>Strona Główna</h5>
                     <Col sm='12' md={{ size: 12, offset: 0 }}>
                         <Row>
-                          
+
                             <h4 style={{textAlign: 'center', width: '100%'}}>
-                            <br/> <br/> <br/> <br/> <br/>  
+                            <br/> <br/> <br/> <br/> <br/>
                             <h1>Witamy!</h1><br/>
                             Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br/>
                             Zarejestruj się klikająć w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/rejestracja">Tutaj</Link>.<br/><br/>

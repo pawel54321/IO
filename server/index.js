@@ -268,6 +268,21 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
 });
 
+app.post('/Uzytkownik/Panel_Admina/Zwroc_Atrakcje_Z_Miejscowosci', async (req, res) => {
+
+    const miejscowosc = req.body.miejscowosc;
+    //console.log(miejscowosc);
+    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc")
+    // console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    //console.log(tablica);
+
+    res.send({
+        daneAtrakcja: tablica
+    });
+
+});
+
 
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) => {

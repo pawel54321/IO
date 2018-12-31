@@ -6,8 +6,11 @@ export default class DropdownMiejscowosc extends Component {
         super(props);
 
         this.state = {
-            daneMiejscowosc: []
+            daneMiejscowosc: [],
+            Miejscowosc: ''
         };
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     ZwrocenieTabeliMiejscowosc = async () => {
@@ -17,7 +20,14 @@ export default class DropdownMiejscowosc extends Component {
         this.setState({
             daneMiejscowosc: OdpowiedzSerwera5.data.daneMiejscowosc,
         });
-    } 
+    }
+
+    handleChange(event) {
+        this.props.miejscowosc(event.target.value);
+        this.setState({
+            Miejscowosc: event.target.value
+        });
+    }
 
     render() {
         this.ZwrocenieTabeliMiejscowosc();
@@ -28,7 +38,7 @@ export default class DropdownMiejscowosc extends Component {
         });
 
         return (
-            <select value={this.state.id} onChange={this.handleChange}>
+            <select value={this.state.Miejscowosc} onChange={this.handleChange}>
                 {miejscowosci}
             </select>
         );
