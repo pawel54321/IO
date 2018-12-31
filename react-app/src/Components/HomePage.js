@@ -70,7 +70,7 @@ class HomePage extends Component {
                             <br/> <br/> <br/> <br/> <br/>
                             <h1>Witamy!</h1><br/>
                             Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br/>
-                            Zarejestruj się klikająć w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/rejestracja">Tutaj</Link>.<br/><br/>
+                            Zarejestruj się, klikając w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/rejestracja">Tutaj</Link>.<br/><br/>
                             <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!</h3></h4>
                         </Row>
                     </Col>
