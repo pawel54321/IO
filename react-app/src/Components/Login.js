@@ -113,7 +113,7 @@ class Login extends Component {
                     <Col xs={6} md={2} >
                         <form onSubmit={this.KlikniecieSubmit2}>
                             <center>
-                                <br />
+                            <br/> <br/> <br/> <br/> <br/> 
                                 <h5>Logowanie:</h5><br />
                                 <label style={{ paddingRight: '140px' }}>Login: </label><br />
                                 <input type="text" name="login" value={this.state.login} required onChange={this.ZmianaWCzasieRzeczywistynInput2} /><br />

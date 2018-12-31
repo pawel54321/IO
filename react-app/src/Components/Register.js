@@ -49,9 +49,9 @@ class Register extends Component {
             //document.getElementById("KomunikatSUCCESS").innerHTML = "Rejestracja przebiegła pomyślnie!";
             Alert.success('Rejestracja przebiegła pomyślnie!', { position: 'top' });
 
-            window.setTimeout(() => {
-                this.props.history.push('/logowanie')
-            }, 2000)
+            //window.setTimeout(() => {
+                this.props.history.push('/logowanie');
+           // }, 2000)
         }
         else if (OdpowiedzSerwera.data.zwracam_czy_stworzono === false) {
             Alert.error('Użytkownik istnieje!', { position: 'bottom' });
@@ -107,7 +107,7 @@ class Register extends Component {
                     <Col xs={6} md={2} >
                         <form onSubmit={this.KlikniecieSubmit}>
                             <center>
-                                <br />
+                            <br/> <br/> <br/>
                                 <h5>Rejestracja:</h5><br />
                                 <label style={{ paddingRight: '150px' }}>Imię: </label><br />
                                 <input type="text" name="imie" value={this.state.imie} required onChange={this.ZmianaWCzasieRzeczywistynInput} /><br />

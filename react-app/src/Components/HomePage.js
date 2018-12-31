@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import DropdownMiejscowosc from './DropdownMiejscowosc';
 import CardAtrakcja from './CardAtrakcja';
 import {Row, Col} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
 
@@ -72,9 +73,15 @@ class HomePage extends Component {
             return (
                 <div>
                     <h5>Strona Główna</h5>
-                    <Col sm='12' md={{ size: 6, offset: 3 }}>
+                    <Col sm='12' md={{ size: 12, offset: 0 }}>
                         <Row>
-                            <h3 style={{textAlign: 'center', width: '100%'}}>Powitanie + informacja o koniecznosci logowania</h3>
+                          
+                            <h4 style={{textAlign: 'center', width: '100%'}}>
+                            <br/> <br/> <br/> <br/> <br/>  
+                            <h1>Witamy!</h1><br/>
+                            Do prawidłowego korzystania z serwisu wymagane jest posiadanie konta!<br/>
+                            Zarejestruj się klikająć w odpowiedni przycisk w panelu nawigacyjnym lub <Link to="/rejestracja">Tutaj</Link>.<br/><br/>
+                            <h3>Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!</h3></h4>
                         </Row>
                     </Col>
                 </div>

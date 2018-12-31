@@ -175,7 +175,7 @@ class DashboardAdmin extends Component {
                             </Col>
                             <Col xs={6} md={6} >
                                 <br /><br /><br /><br /><br /><br /><br /><br />
-                                <center><h5>Znajdujesz się w Panelu Administratora.<br />W tym miejscu możesz zarządzać swoim systemem.<br />Wybierz odpowiednią zakładkę u góry strony, aby dokonać zmian w systemie.</h5></center>
+                                <center><h5><h1>Znajdujesz się w Panelu Administratora!</h1><br />W tym miejscu możesz zarządzać swoim systemem.<br />Wybierz odpowiednią zakładkę u góry strony, aby dokonać zmian w systemie.</h5></center>
 
                             </Col>
                             <Col xs={6} md={3} >
