@@ -11,6 +11,8 @@ export default class DropdownMiejscowosc extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+
+        this.ZwrocenieTabeliMiejscowosc();
     }
 
     ZwrocenieTabeliMiejscowosc = async () => {
@@ -30,7 +32,6 @@ export default class DropdownMiejscowosc extends Component {
     }
 
     render() {
-        this.ZwrocenieTabeliMiejscowosc();
         let miejscowosci = this.state.daneMiejscowosc.map(miejscowosc => {
             return (
                 <option id={miejscowosc.id}>{miejscowosc.nazwamiejscowosc}</option>
@@ -39,6 +40,7 @@ export default class DropdownMiejscowosc extends Component {
 
         return (
             <select value={this.state.Miejscowosc} onChange={this.handleChange}>
+                <option>-</option>
                 {miejscowosci}
             </select>
         );

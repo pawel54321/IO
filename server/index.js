@@ -165,41 +165,54 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
     const godzina_otwarcia = req.body.godzina_otwarcia;
     const godzina_zamkniecia = req.body.godzina_zamkniecia;
     const cena = req.body.cena;
-    const id_miejscowosc = req.body.id_miejscowosc;
+    const miejscowosc = req.body.nazwamiejscowosc;
 
     //Czy istnieje w tabeli Miejscowosc 'ten' indeks = to idziemy dalej
-    const zapytaniesprawdzaczyjestindeks = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE id='" + id_miejscowosc + "'")
-    const tabliczapytaniesprawdzaczyjestindeks = zapytaniesprawdzaczyjestindeks.rows;
-    console.log(tabliczapytaniesprawdzaczyjestindeks[0].count);
-    if (tabliczapytaniesprawdzaczyjestindeks[0].count == 1) {
+    //const zapytaniesprawdzaczyjestindeks = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE id='" + id_miejscowosc + "'")
+    //const tabliczapytaniesprawdzaczyjestindeks = zapytaniesprawdzaczyjestindeks.rows;
+    //console.log(tabliczapytaniesprawdzaczyjestindeks[0].count);
+    //if (tabliczapytaniesprawdzaczyjestindeks[0].count == 1) {
         //czy duplikat?
-        const zapytanie = await pgClient.query("SELECT COUNT(nazwa) FROM Atrakcja WHERE nazwa='" + nazwa + "'")
-        console.log(zapytanie.rows);
-        const tablica = zapytanie.rows;
+        //const zapytanie = await pgClient.query("SELECT COUNT(nazwa) FROM Atrakcja WHERE nazwa='" + nazwa + "'")
+        //console.log(zapytanie.rows);
+        //const tablica = zapytanie.rows;
         //console.log(tablica[0].count);
         var czy_stworzono = false;
 
-        var czy_stworzonoBrakPodanejMiejscowosci = true;
+        //var czy_stworzonoBrakPodanejMiejscowosci = true;
 
-        if (tablica[0].count == 0) {
+        //if (tablica[0].count == 0) {
 
             // min = "0" naprawic zeby nie bylo duplikacji sprawdzac SELECT (zmienic na liste rozwijana zamiast int tekst)
             //dodawanie miejscowosci tylko przez liste rozwijana 
 
-            pgClient.query('INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)',
+            const zapytanie = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE nazwaMiejscowosc='" + miejscowosc + "'")
+            //console.log(zapytanie.rows);
+            const tablica = zapytanie.rows;
+
+            if (tablica[0].count == 0) {
+                pgClient.query("INSERT INTO Miejscowosc(nazwaMiejscowosc,kraj) VALUES ('"+miejscowosc+"','niezdefiniowany')");
+            }
+            const id_m = await pgClient.query("SELECT id FROM Miejscowosc WHERE nazwaMiejscowosc='" + miejscowosc + "'");
+            //console.log(id_m.rows);
+            const id_tab = id_m.rows;
+            const id_miejscowosc = id_tab[0].id;
+            //console.log(id_miejscowosc);
+
+            pgClient.query("INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)",
                 [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc])
                 .catch((error) => {
                     console.log(error);
                 });
 
             czy_stworzono = true;
-        }
-        else {
-            czy_stworzono = false;
-        }
-    }
-    else
-        czy_stworzonoBrakPodanejMiejscowosci = false;
+        //}
+        //else {
+        //    czy_stworzono = false;
+        //}
+    //}
+    //else
+    //    czy_stworzonoBrakPodanejMiejscowosci = false;
 
     res.send({
         nazwa: req.body.nazwa,
@@ -211,7 +224,7 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
         id_miejscowosc: req.body.id_miejscowosc,
 
         zwracam_czy_poprawnie_dodalem_atrakcje: czy_stworzono,
-        zwracam_czy_stworzonoBrakPodanejMiejscowosci: czy_stworzonoBrakPodanejMiejscowosci
+        //zwracam_czy_stworzonoBrakPodanejMiejscowosci: czy_stworzonoBrakPodanejMiejscowosci
 
     });
 
@@ -255,9 +268,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
-
-
-    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja")
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, a.godzina_otwarcia, a.godzina_zamkniecia, a.cena, m.nazwaMiejscowosc FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
@@ -300,8 +311,70 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) =
 
 });
 
+app.post('/Uzytkownik/Panel_Admina3', async (req, res) => {
+
+    const id_m = req.body.id;
+    const nazwa = req.body.nazwamiejscowosc;
+    const kr = req.body.kraj;
+
+    pgClient.query("UPDATE Miejscowosc SET nazwaMiejscowosc = $1, kraj = $2 WHERE id = $3",[nazwa,kr,id_m])
+    .catch((error) => {
+        console.log(error);
+    });
+
+    res.send({
+        id: req.body.id,
+        nazwaMiejscowosc: req.body.nazwamiejscowosc,
+        kraj: req.body.kraj
+    });
+
+});
 
 
+app.post('/Uzytkownik/Panel_Admina4', async (req, res) => {
+
+    const id = req.body.id;
+    const nazwa = req.body.nazwa;
+    const adres = req.body.adres;
+    const liczba_miejsc = req.body.liczba_miejsc;
+    const godzina_otwarcia = req.body.godzina_otwarcia;
+    const godzina_zamkniecia = req.body.godzina_zamkniecia;
+    const cena = req.body.cena;
+    const miejscowosc = req.body.nazwamiejscowosc;
+
+    const countmiejsc = await pgClient.query("SELECT COUNT(nazwamiejscowosc) FROM Miejscowosc WHERE nazwaMiejscowosc='"+miejscowosc+"'");
+    const wynik = countmiejsc.rows;
+
+    if (wynik[0].count == 0) {
+        pgClient.query("INSERT INTO Miejscowosc(nazwaMiejscowosc,kraj) VALUES ('"+miejscowosc+"','niezdefiniowany')");
+    }
+    const id_m = await pgClient.query("SELECT id FROM Miejscowosc WHERE nazwaMiejscowosc='" + miejscowosc + "'");
+    //console.log(id_m.rows);
+    const id_tab = id_m.rows;
+    const id_miejscowosc = id_tab[0].id;
+
+    pgClient.query("UPDATE Atrakcja SET nazwa = $1, adres = $2, liczba_miejsc = $3, godzina_otwarcia = $4, godzina_zamkniecia = $5, cena = $6, id_miejscowosc = $7 WHERE id = $8",
+        [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc, id])
+        .catch((error) => {
+            console.log(error);
+        }
+    );
+
+    res.send({
+        nazwa: req.body.nazwa,
+        adres: req.body.adres,
+        liczba_miejsc: req.body.liczba_miejsc,
+        godzina_otwarcia: req.body.godzina_otwarcia,
+        godzina_zamkniecia: req.body.godzina_zamkniecia,
+        cena: req.body.cena,
+        id_miejscowosc: id_miejscowosc,
+
+        //zwracam_czy_poprawnie_dodalem_atrakcje: czy_stworzono,
+        //zwracam_czy_stworzonoBrakPodanejMiejscowosci: czy_stworzonoBrakPodanejMiejscowosci
+
+    });
+
+});
 
 app.listen(5000, error => {
     console.log('Listening on port 5000');

@@ -17,7 +17,7 @@ class CardAtrakcja extends Component {
                     <CardText><b>Godz. otwarcia:</b> {this.props.atrakcja.godzina_otwarcia}</CardText>
                     <CardText><b>Godz. zamkniecia:</b> {this.props.atrakcja.godzina_zamkniecia}</CardText>
                     <CardTitle><b>Cena: </b> {this.props.atrakcja.cena}</CardTitle>
-                    <Button color='primary'>Zarezerwuj</Button>
+                    <Button color='primary'>Wybierz</Button>
                 </CardBody>
             </Card>
         );

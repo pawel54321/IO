@@ -16,9 +16,9 @@ import axios from 'axios';
 // Component's Base CSS
 import '../index.css';
 
-const DescriptionRenderer = ({ field }) => <textarea {...field} />;
+//const DescriptionRenderer = ({ field }) => <textarea {...field} />;
 
-var tasks2 = [];
+var tasks = [];
 
 const SORTERS = {
     NUMBER_ASCENDING: mapper => (a, b) => mapper(a) - mapper(b),
@@ -43,32 +43,33 @@ const getSorter = (data) => {
 };
 
 
-const service2 = {
+const service = {
     fetchItems: (payload) => {
         const { activePage, itemsPerPage } = payload.pagination;
         const start = (activePage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
-        let result2 = Array.from(tasks2);
-        result2 = result2.sort(getSorter(payload.sort));
-        return Promise.resolve(result2.slice(start, end));
+        let result = Array.from(tasks);
+        result = result.sort(getSorter(payload.sort));
+        return Promise.resolve(result.slice(start, end));
     },
 
     fetchTotal: payload => {
-        return Promise.resolve(tasks2.length);
+        return Promise.resolve(tasks.length);
     },
     create: (task) => {
-        axios.post('/api/Uzytkownik/PanelAdmina2', {
+        //console.log(task.nazwa);
+        axios.post('/api/Uzytkownik/PanelAdmina', {
             nazwa: task.nazwa,
             adres: task.adres,
             liczba_miejsc: task.liczba_miejsc,
             godzina_otwarcia: task.godzina_otwarcia,
             godzina_zamkniecia: task.godzina_zamkniecia,
-
-            kraj: task.kraj
+            cena: task.cena,
+            nazwamiejscowosc: task.nazwamiejscowosc
         });
 
-        let count = tasks2.length + 1;
-        tasks2.push({
+        let count = tasks.length + 1;
+        tasks.push({
             ...task,
             id: count,
         });
@@ -76,15 +77,26 @@ const service2 = {
         return Promise.resolve(task);
     },
     update: (data) => {
-        const task = tasks2.find(t => t.id === data.id);
+        const task = tasks.find(t => t.id === data.id);
 
         task.nazwa = data.nazwa;
         task.adres = data.adres;
         task.liczba_miejsc = data.liczba_miejsc;
         task.godzina_otwarcia = data.godzina_otwarcia;
         task.godzina_zamkniecia = data.godzina_zamkniecia;
+        task.cena = data.cena;
+        task.nazwamiejscowosc = data.nazwamiejscowosc;
 
-        task.kraj = data.kraj;
+        axios.post('/api/Uzytkownik/Panel_Admina4', {
+            id: task.id,
+            nazwa: task.nazwa,
+            adres: task.adres,
+            liczba_miejsc: task.liczba_miejsc,
+            godzina_otwarcia: task.godzina_otwarcia,
+            godzina_zamkniecia: task.godzina_zamkniecia,
+            cena: task.cena,
+            nazwamiejscowosc: task.nazwamiejscowosc
+        });
 
         return Promise.resolve(task);
     },
@@ -97,7 +109,7 @@ const styles = {
 };
 
 function Ustaw(props) {
-    tasks2 = props.daneAtrakcja;
+    tasks = props.daneAtrakcja;
     // alert(JSON.stringify((props.daneMiejscowosc)));
 }
 
@@ -111,7 +123,7 @@ const TabelaAtrakcja = (props) => (
         <CRUDTable style={{ width: '100%' }}
             caption="Atrakcja"
             actionsLabel="Akcje"
-            fetchItems={payload => service2.fetchItems(payload)}
+            fetchItems={payload => service.fetchItems(payload)}
 
         >
             <Fields >
@@ -154,29 +166,30 @@ const TabelaAtrakcja = (props) => (
                 />
 
                 <Field
-                    name="kraj"
-                    label="Kraj"
-                    //placeholder="Kraj" - nie dziala
+                    name="cena"
+                    label="Cena"
+                    placeholder="20"
 
-                    render={DescriptionRenderer}
                 />
+                <Field
+                    name="nazwamiejscowosc"
+                    label="Miejscowość"
+                    placeholder="Miejscowość"
+
+               /> 
             </Fields>
             <CreateForm
 
                 title="Dodawanie"
                 message="Dodajesz nowy wiersz!"
                 trigger="Dodaj"
-                onSubmit={task => service2.create(task)}
+                onSubmit={task => service.create(task)}
                 submitText="Dodaj"
 
                 validate={(values) => {
                     const errors = {};
                     if (!values.nazwa) {
                         errors.nazwa = 'Wypełnij to pole.';
-                    }
-
-                    if (!values.kraj) {
-                        errors.kraj = 'Wypełnij to pole.';
                     }
 
                     if (!values.adres) {
@@ -196,10 +209,15 @@ const TabelaAtrakcja = (props) => (
                     if (!values.godzina_zamkniecia) {
                         errors.godzina_zamkniecia = 'Wypełnij to pole.';
                     }
+                    if (!values.cena) {
+                        errors.cena = 'Wypełnij to pole.';
+                    }
+                    if (!values.nazwamiejscowosc) {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole.';
+                    }
 
 
-
-                    if (tasks2.find((element) => {return element.nazwa === values.nazwa})) {
+                    if (tasks.find((element) => {return element.nazwa === values.nazwa})) {
                         errors.nazwa = 'Atrakcja o takiej nazwie istnieje!';
                     }
 
@@ -212,7 +230,7 @@ const TabelaAtrakcja = (props) => (
                 title="Modyfikacja"
                 message="Modyfikujesz podany wiersz!"
                 trigger="Zmodyfikuj"
-                onSubmit={task => service2.update(task)}
+                onSubmit={task => service.update(task)}
                 submitText="Zmodyfikuj"
                 validate={(values) => {
                     const errors = {};
@@ -239,9 +257,16 @@ const TabelaAtrakcja = (props) => (
                         errors.godzina_zamkniecia = 'Wypełnij to pole.';
                     }
 
-                    if (!values.kraj) {
-                        errors.kraj = 'Wypełnij to pole.';
+                    if (!values.cena) {
+                        errors.cena = 'Wypełnij to pole.';
                     }
+                    if (!values.nazwamiejscowosc) {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole.';
+                    }
+
+                    //if (tasks.find((element) => {return element.nazwa === values.nazwa})) {
+                     //   errors.nazwa = 'Atrakcja o takiej nazwie istnieje!';
+                    //}
 
                     return errors;
                 }}
@@ -250,7 +275,7 @@ const TabelaAtrakcja = (props) => (
 
             <Pagination
                 itemsPerPage={5}
-                fetchTotalOfItems={payload => service2.fetchTotal(payload)}
+                fetchTotalOfItems={payload => service.fetchTotal(payload)}
                 activePage={1}
             />
 

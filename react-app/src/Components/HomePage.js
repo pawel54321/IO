@@ -29,12 +29,12 @@ class HomePage extends Component {
     nazwamiejscowosc = (Miejscowosc) => {
         this.setState ({
             miejscowosc: Miejscowosc
+        }, () => {
+            this.ZwrocenieTabeliAtrakcja();
         });
     }
 
     render() {
-        {this.ZwrocenieTabeliAtrakcja()}
-
         let atrakcjeCards = this.state.atrakcje.map(atrakcja => {
             return (
                 <Col xl='4' lg='6' xs='12'>
@@ -48,12 +48,18 @@ class HomePage extends Component {
                 <div>
                     <h5>Strona Główna</h5>
                     <Row>
-                        <Col sm='12' md={{ size: 6, offset: 3 }}>
-                            <DropdownMiejscowosc miejscowosc={this.nazwamiejscowosc}/>
+                        <Col sm='12' md={{ size: 2, offset: 4 }}>
+                            <h5 style={{textAlign: 'center', width: '100%'}}>Wybierz miejscowość</h5>
+                        </Col>
+                        <Col sm='12' md='3'>
+                            <DropdownMiejscowosc miejscowosc={this.nazwamiejscowosc} atrakcje={this.ZwrocenieTabeliAtrakcja}/>
                         </Col>
                     </Row>
+                    <br /><br />
                     <Col sm='12' md={{ size: 6, offset: 3 }}>
                         <Row>
+                            <h5 style={{textAlign: 'center', width: '100%'}}>Wybierz atrakcję</h5>
+                            <br /><br />
                             {atrakcjeCards}
                         </Row>
                     </Col>

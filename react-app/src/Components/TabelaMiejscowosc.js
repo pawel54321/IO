@@ -76,6 +76,14 @@ const service = {
         task.nazwamiejscowosc = data.nazwamiejscowosc;
         task.kraj = data.kraj;
 
+        //console.log(task.kraj);
+
+        axios.post('/api/Uzytkownik/Panel_Admina3', {
+            id: task.id,
+            nazwamiejscowosc: task.nazwamiejscowosc,
+            kraj: task.kraj
+        });
+
         return Promise.resolve(task);
     },
 
@@ -159,10 +167,6 @@ const TabelaMiejscowosc = (props) => (
                 validate={(values) => {
                     const errors = {};
 
-                    if (!values.id) {
-                        errors.id = 'Wypełnij to pole.';
-                    }
-
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
@@ -170,6 +174,10 @@ const TabelaMiejscowosc = (props) => (
                     if (!values.kraj) {
                         errors.kraj = 'Wypełnij to pole.';
                     }
+
+                    //if (tasks.find((element) => {return element.nazwamiejscowosc === values.nazwamiejscowosc})) {
+                    //    errors.nazwamiejscowosc = 'Miejscowość o takiej nazwie istnieje!';
+                    //}
 
                     return errors;
                 }}
