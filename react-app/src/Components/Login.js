@@ -21,7 +21,8 @@ class Login extends Component {
 
         this.state = {
             login: '',
-            haslo: ''/*,
+            haslo: '',
+            login2: ''/*,
             
             userLogged: false,
             adminLogged: false
@@ -48,6 +49,8 @@ class Login extends Component {
         });
         console.log(OdpowiedzSerwera2)
 
+        const l2 = this.state.login;
+
         this.setState({
             login: '',
             haslo: '',
@@ -55,6 +58,7 @@ class Login extends Component {
 
         if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === true) {
             localStorage.setItem('loggedAs', OdpowiedzSerwera2.data.jaki_user);
+            localStorage.setItem('username', l2);
             this.props.onLoggedUserChange(OdpowiedzSerwera2.data.jaki_user);
 
             //document.getElementById("BarLogowPOPRAWNIE").style.display = "block";
@@ -77,7 +81,7 @@ class Login extends Component {
             // document.getElementsByClassName("show-grid")[0].style.display = "none";
             //   this.props.history.push('/admin');
             //????
-
+            
             history.push('/');
         }
         else if (OdpowiedzSerwera2.data.zwracam_czy_poprawne === false) {

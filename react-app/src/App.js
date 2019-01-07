@@ -10,6 +10,8 @@ import DashboardAdmin from './Components/DashboardAdmin';
 import DashboardUser from './Components/DashboardUser';
 //import Logout from './Components/Logout';
 
+import Atrakcja from './Components/Atrakcja';
+
 import Login from './Components/Login';
 import Register from './Components/Register';
 
@@ -107,7 +109,7 @@ class App extends Component {
           {/* <Route exact path="/admin" component={DashboardAdmin} />*/}
           <Route exact path="/uzytkownik" component={DashboardUser} />
           {/* <Route exact path="/wyloguj" component={this.LogoutComponent} /> */}
-
+          <Route exact path="/rezerwacja" component={Atrakcja} />
           {/* <Route exact path="/logowanie" component={this.LoginComponent} />*/}
           {/* <Route exact path="/rejestracja" component={Register} />*/}
         </div>

@@ -22,6 +22,7 @@ const ROLES = {
 function Wylogowanie() {
     // this.preventDefault(); //Potrzebne-?? Odswieza-?? - nie powinno odswiezac, ale odswieza
     localStorage.setItem('loggedAs', '');
+    localStorage.setItem('username','');
     this.props.onLoggedUserChange2('');
     //????
     Alert.success('Pomyślnie wylogowano!', { position: 'top' });

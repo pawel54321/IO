@@ -34,13 +34,25 @@ pgClient
     });
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Atrakcja (id SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), id_miejscowosc INT)')
+    .query('CREATE TABLE IF NOT EXISTS Atrakcja (id SERIAL PRIMARY KEY, nazwa VARCHAR(255), adres VARCHAR(255), liczba_miejsc INT, godzina_otwarcia TIME, godzina_zamkniecia TIME, cena NUMERIC (5, 2), id_miejscowosc INT, wycofana VARCHAR(255))')
     .catch((error) => {
         console.log(error);
     }); // DODAC czy_wycofana
 
 pgClient
     .query('CREATE TABLE IF NOT EXISTS Miejscowosc (id SERIAL PRIMARY KEY, nazwaMiejscowosc VARCHAR(255),kraj VARCHAR(255))') // DODAC kraj
+    .catch((error) => {
+        console.log(error);
+    });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Dostepnosc (id SERIAL PRIMARY KEY, data DATE, wolne_miejsca INT, id_atrakcja INT)')
+    .catch((error) => {
+        console.log(error);
+    });
+
+pgClient
+    .query('CREATE TABLE IF NOT EXISTS Bilety (id SERIAL PRIMARY KEY, data DATE, id_atrakcja INT, id_uzytkownik INT)')
     .catch((error) => {
         console.log(error);
     });
@@ -199,8 +211,8 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
             const id_miejscowosc = id_tab[0].id;
             //console.log(id_miejscowosc);
 
-            pgClient.query("INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc) VALUES($1,$2,$3,$4,$5,$6,$7)",
-                [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc])
+            pgClient.query("INSERT INTO Atrakcja(nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc, wycofana) VALUES($1,$2,$3,$4,$5,$6,$7,$8)",
+                [nazwa, adres, liczba_miejsc, godzina_otwarcia, godzina_zamkniecia, cena, id_miejscowosc, 'Nie'])
                 .catch((error) => {
                     console.log(error);
                 });
@@ -268,7 +280,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
-    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, a.godzina_otwarcia, a.godzina_zamkniecia, a.cena, m.nazwaMiejscowosc FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, a.godzina_otwarcia, a.godzina_zamkniecia, a.cena, m.nazwaMiejscowosc, a.wycofana FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
@@ -283,7 +295,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Atrakcje_Z_Miejscowosci', async (req, r
 
     const miejscowosc = req.body.miejscowosc;
     //console.log(miejscowosc);
-    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc")
+    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc AND a.wycofana='Nie'")
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
@@ -375,6 +387,141 @@ app.post('/Uzytkownik/Panel_Admina4', async (req, res) => {
     });
 
 });
+
+app.post('/Uzytkownik/Rezerwacja', async (req, res) => {
+
+    const idAtrakcja = req.body.idAtrakcja;
+    const dzien = req.body.dzien;
+    const uzytkownik = req.body.uzytkownik;
+    //console.log(idAtrakcja+" "+dzien+" "+uzytkownik);
+    let zarezerwowano = false;
+
+    const zapytanie = await pgClient.query("SELECT COUNT(d.data) FROM Dostepnosc d, Atrakcja a WHERE d.data='" + dzien + "' AND d.id_atrakcja='" + idAtrakcja + "' AND d.id_atrakcja=a.id");
+    //console.log(zapytanie.rows);
+    const tablica = zapytanie.rows;
+    //console.log(tablica[0].count);
+
+    if (tablica[0].count == 0) {
+        const il_m = await pgClient.query("SELECT liczba_miejsc FROM Atrakcja WHERE id='" + idAtrakcja + "'");
+        //console.log(il_m.rows);
+        const il_tab = il_m.rows;
+        const wm = il_tab[0].liczba_miejsc;
+
+        pgClient.query('INSERT INTO Dostepnosc(data, wolne_miejsca, id_atrakcja) VALUES($1,$2,$3)', [dzien,wm,idAtrakcja])
+            .catch((error) => {
+                console.log(error);
+        });
+    }
+
+    const lm = await pgClient.query("SELECT wolne_miejsca FROM Dostepnosc WHERE id_atrakcja='" + idAtrakcja + "' AND data='" + dzien + "'");
+    //console.log(lm.rows);
+    const lm_tab = lm.rows;
+    const wolneMiejsca = lm_tab[0].wolne_miejsca;
+
+    if(wolneMiejsca > 0) {
+        const id = await pgClient.query("SELECT id FROM Uzytkownik WHERE login='" + uzytkownik + "'");
+        //console.log(id.rows);
+        const id_tab = id.rows;
+        const idUzytkownik = id_tab[0].id;
+
+        pgClient.query('INSERT INTO Bilety(data, id_atrakcja, id_uzytkownik) VALUES($1,$2,$3)', [dzien,idAtrakcja,idUzytkownik])
+            .catch((error) => {
+                console.log(error);
+        });
+
+        const wolneMiejsca2 = wolneMiejsca - 1;
+        pgClient.query("UPDATE Dostepnosc SET wolne_miejsca = '" + wolneMiejsca2 +"' WHERE id_atrakcja='" + idAtrakcja + "' AND data='" + dzien + "'")
+            .catch((error) => {
+                console.log(error);
+        });
+        zarezerwowano = true;
+    }
+
+    res.send({
+        idAtrakcja: req.body.idAtrakcja,
+        dzien: req.body.dzien,
+        uzytkownik: req.body.uzytkownik,
+        czy_zarezerwowano: zarezerwowano
+    });
+
+});
+
+app.post('/Uzytkownik/Anulowanie', async (req, res) => {
+
+    const idBilet = req.body.idBilet;
+
+    const id_a = await pgClient.query("SELECT id_atrakcja, data FROM Bilety WHERE id='" + idBilet + "'");
+    //console.log(id_d.rows);
+    const id_a_tab = id_a.rows;
+    const idAtr = id_a_tab[0].id_atrakcja;
+    const dz = id_a_tab[0].data;
+
+    const lm = await pgClient.query("SELECT wolne_miejsca FROM Dostepnosc WHERE id_atrakcja='" + idAtr + "' AND data='" + dz + "'");
+    //console.log(id_d.rows);
+    const lm_tab = lm.rows;
+    const wolneMiejsca = lm_tab[0].wolne_miejsca + 1;
+
+    pgClient.query("UPDATE Dostepnosc SET wolne_miejsca = '" + wolneMiejsca + "' WHERE id_atrakcja='" + idAtr + "' AND data='" + dz + "'")
+        .catch((error) => {
+            console.log(error);
+    });
+
+    pgClient.query("DELETE FROM Bilety WHERE id='" + idBilet + "'")
+        .catch((error) => {
+            console.log(error);
+    });
+
+    res.send({
+        usunieto: 'true',
+        wolneMiejsca: wolneMiejsca
+    });
+
+});
+
+app.post('/Uzytkownik/Wycofanie', async (req, res) => {
+
+    const idAtrakcja = req.body.idAtrakcja;
+
+    pgClient.query("UPDATE Atrakcja SET wycofana = 'Tak' WHERE id='" + idAtrakcja + "'")
+        .catch((error) => {
+            console.log(error);
+    });
+
+    res.send({
+        wycofano: 'true'
+    });
+
+});
+
+app.post('/ZwrocIdAtrakcji', async (req, res) => {
+
+    const nazwa = req.body.nazwaAtrakcji;
+
+    const id = await pgClient.query("SELECT id FROM Atrakcja WHERE nazwa='" + nazwa + "'");
+    const id_tab = id.rows;
+    const idAtr = id_tab[0].id;
+
+    res.send({
+        id: idAtr,
+        nazwa: nazwa
+    });
+
+});
+
+app.post('/ZwrocAtrakcje', async (req, res) => {
+
+    const id = req.body.id;
+
+    const result = await pgClient.query("SELECT * FROM Atrakcja WHERE id='" + id + "'");
+    const tab = result.rows;
+    const atrakcja = tab[0];
+
+    res.send({
+        atrakcja: atrakcja
+    });
+
+});
+
 
 app.listen(5000, error => {
     console.log('Listening on port 5000');

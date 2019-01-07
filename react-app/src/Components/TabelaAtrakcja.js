@@ -7,7 +7,7 @@ import CRUDTable,
     Field,
     CreateForm,
     UpdateForm,
-    // DeleteForm,
+    DeleteForm,
     Pagination
 } from 'react-crud-table';
 
@@ -58,6 +58,7 @@ const service = {
     },
     create: (task) => {
         //console.log(task.nazwa);
+        task.wycofana = "Nie";
         axios.post('/api/Uzytkownik/PanelAdmina', {
             nazwa: task.nazwa,
             adres: task.adres,
@@ -100,6 +101,15 @@ const service = {
 
         return Promise.resolve(task);
     },
+    delete: (data) => {
+        const task = tasks.find(t => t.id === data.id);
+        task.wycofana = "Tak";
+        axios.post('/api/Uzytkownik/Wycofanie', {
+            idAtrakcja: data.id
+        });
+
+        return Promise.resolve(task);
+      },
 
 };
 
@@ -175,8 +185,13 @@ const TabelaAtrakcja = (props) => (
                     name="nazwamiejscowosc"
                     label="Miejscowość"
                     placeholder="Miejscowość"
-
                /> 
+               <Field
+                    name="wycofana"
+                    label="Wycofana"
+                    hideInCreateForm
+                    hideInUpdateForm
+                />
             </Fields>
             <CreateForm
 
@@ -271,6 +286,21 @@ const TabelaAtrakcja = (props) => (
                     return errors;
                 }}
 
+            />
+
+            <DeleteForm
+                title="Wycofanie"
+                message="Jesteś pewien, że chcesz wycofać tę atrakcję?"
+                trigger="Wycofaj"
+                onSubmit={task => service.delete(task)}
+                submitText="Wycofaj"
+                validate={(values) => {
+                const errors = {};
+                if (!values.id) {
+                    errors.id = 'Brak id';
+                }
+                return errors;
+                }}
             />
 
             <Pagination
