@@ -5,8 +5,8 @@ import CRUDTable,
 {
     Fields,
     Field,
-    CreateForm,
-    UpdateForm,
+    //CreateForm,
+    //UpdateForm,
     DeleteForm,
     Pagination
 } from 'react-crud-table';
@@ -105,7 +105,7 @@ const TabelaRezerwacja = (props) => (
                 />
                   <Field
                     name="data"
-                    label="data"
+                    label="Data"
                 />
                 <Field
                     name="cena"
