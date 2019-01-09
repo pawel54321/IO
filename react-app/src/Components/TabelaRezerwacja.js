@@ -75,7 +75,7 @@ const styles = {
 
 function Ustaw(props) {
     tasks = props.daneBilet;
-    // alert(JSON.stringify((props.daneMiejscowosc)));
+    //alert(JSON.stringify((props.daneBilet)));
 }
 
 const TabelaRezerwacja = (props) => (
@@ -93,14 +93,7 @@ const TabelaRezerwacja = (props) => (
         >
             <Fields >
                 <Field
-                    name="id"
-                    label="Id"
-                    hideInCreateForm
-                    hideInUpdateForm
-
-                />
-                <Field
-                    name="nazwaAtrakcji"
+                    name="nazwa"
                     label="Nazwa Atrakcji"
                 />
                   <Field

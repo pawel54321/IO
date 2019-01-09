@@ -18,18 +18,6 @@ class DashboardUser extends Component {
         const OdpowiedzSerwera8 = await axios.post('/api/Uzytkownik/Panel_Uzytkownika/Zwroc_Tabele_Bilety', { login: localStorage.getItem('username') });
         this.setState({
             daneBilet: OdpowiedzSerwera8.data.daneBilet,
-        }, () => {
-            this.zmianaFormatuDaty();
-        });
-        console.log(this.state.daneBilet);
-    }
-
-    zmianaFormatuDaty() {
-        const dzien = this.getParsedDate(this.state.daneBilet.data.toLocaleDateString('en-US'));
-        this.setState({
-            daneBilet: {
-                data: 'dzien'
-            }
         });
     }
 

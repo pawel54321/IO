@@ -40,7 +40,7 @@ pgClient
     }); // DODAC czy_wycofana
 
 pgClient
-    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (id SERIAL PRIMARY KEY, nazwaMiejscowosc VARCHAR(255),kraj VARCHAR(255))') // DODAC kraj
+    .query('CREATE TABLE IF NOT EXISTS Miejscowosc (id SERIAL PRIMARY KEY, nazwaMiejscowosc VARCHAR(255), kraj VARCHAR(255))') // DODAC kraj
     .catch((error) => {
         console.log(error);
     });
@@ -326,8 +326,10 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) =
 app.post('/Uzytkownik/Panel_Uzytkownika/Zwroc_Tabele_Bilety', async (req, res) => {
     const login = req.body.login;
 
-    const zapytanie = await pgClient.query("SELECT b.id, b.data, a.nazwa FROM Bilety b, Uzytkownik u, Atrakcja a WHERE u.login='" + login + "' AND u.id=b.id_uzytkownik AND a.id=b.id_atrakcja");
+    const zapytanie = await pgClient.query("SELECT b.id, to_char(b.data,'YYYY-MM-DD') as data, a.nazwa, a.cena FROM Bilety b, Uzytkownik u, Atrakcja a WHERE u.login='" + login + "' AND u.id=b.id_uzytkownik AND a.id=b.id_atrakcja");
+    //console.log(zapytanie);
     const tablica = zapytanie.rows;
+    //console.log(tablica);
 
     res.send({
         daneBilet: tablica
