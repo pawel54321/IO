@@ -295,7 +295,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Atrakcje_Z_Miejscowosci', async (req, r
 
     const miejscowosc = req.body.miejscowosc;
     //console.log(miejscowosc);
-    const zapytanie = await pgClient.query("SELECT * FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc AND a.wycofana='Nie'")
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,'HH:MM') as godzina_otwarcia, to_char(a.godzina_zamkniecia,'HH:MM') as godzina_zamkniecia, a.cena FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc AND a.wycofana='Nie'")
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
