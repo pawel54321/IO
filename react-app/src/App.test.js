@@ -76,12 +76,37 @@ it('renders without crashing - TabelaRezerwacja', () => {
   shallow(<TabelaRezerwacja />);
 });
 
-it('includes Header', () => {
+it('App includes Header', () => {
   const app = shallow(<App />);
   expect(app.containsMatchingElement(<Header />)).toEqual(true);
 });
 
-it('includes Footer', () => {
+it('App includes Footer', () => {
   const app = shallow(<App />);
   expect(app.containsMatchingElement(<Footer />)).toEqual(true);
+});
+
+it('HomePage includes DropdownMiejscowosc', () => {
+  const app = shallow(<HomePage />);
+  expect(app.containsMatchingElement(<DropdownMiejscowosc />)).toEqual(true);
+});
+
+it('HomePage includes CardAtrakcja', () => {
+  const app = shallow(<HomePage />);
+  expect(app.containsMatchingElement(<CardAtrakcja />)).toEqual(true);
+});
+
+it('DashboardAdmin includes TabelaMiejscowosc', () => {
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
+});
+
+it('DashboardAdmin includes TabelaAtrakcja', () => {
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
+});
+
+it('DashboardUser includes TabelaRezerwacja', () => {
+  const app = shallow(<DashboardUser />);
+  expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
 });
