@@ -61,6 +61,8 @@ class HomePage extends Component {
                             <h5 style={{textAlign: 'center', width: '100%'}}>Wybierz atrakcję</h5>
                             <br /><br />
                             {atrakcjeCards}
+                            <br/><br/><br/><br/> <br/><br/><br/><br/>      <br/><br/><br/><br/> <br/><br/><br/><br/>
+                            <br/>   
                         </Row>
                     </Col>
                 </div>

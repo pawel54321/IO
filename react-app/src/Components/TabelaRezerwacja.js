@@ -112,7 +112,7 @@ const TabelaRezerwacja = (props) => (
                 message="Jesteś pewien, że chcesz anulować rezerwację?"
                 trigger="Anuluj"
                 onSubmit={task => service.delete(task)}
-                submitText="Anuluj"
+                submitText="Tak"
                 validate={(values) => {
                 const errors = {};
                 if (!values.id) {

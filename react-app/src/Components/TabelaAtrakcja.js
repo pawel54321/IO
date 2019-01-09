@@ -293,7 +293,7 @@ const TabelaAtrakcja = (props) => (
                 message="Jesteś pewien, że chcesz wycofać tę atrakcję?"
                 trigger="Wycofaj"
                 onSubmit={task => service.delete(task)}
-                submitText="Wycofaj"
+                submitText="Tak"
                 validate={(values) => {
                 const errors = {};
                 if (!values.id) {

@@ -35,7 +35,10 @@
  /* border:1px solid;*/
  /*box-sizing: 5px 10px grey;*/
 /*}*/
-
+.crud-button--negative
+{
+  float:left;
+}
 
 .App-footer
 {

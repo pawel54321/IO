@@ -94,7 +94,7 @@ class App extends Component {
           <Route exact path="/admin" component={DashboardAdmin} />
           {/*<Route exact path="/uzytkownik" component={DashboardUser} />*/}
           {/* <Route exact path="/wyloguj" component={this.LogoutComponent} /> */}
-
+          <Route exact path="/rezerwacja" component={Atrakcja} />
           {/*<Route exact path="/logowanie" component={this.LoginComponent} />*/}
           {/*<Route exact path="/rejestracja" component={Register} />*/}
         </div>
