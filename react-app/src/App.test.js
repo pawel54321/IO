@@ -60,10 +60,6 @@ it('renders without crashing - Atrakcja', () => {
   shallow(<Atrakcja />);
 });
 
-it('renders without crashing - CardAtrakcja', () => {
-  shallow(<CardAtrakcja />);
-});
-
 it('renders without crashing - DropdownMiejscowosc', () => {
   shallow(<DropdownMiejscowosc />);
 });
@@ -73,7 +69,7 @@ it('renders without crashing - TabelaAtrakcja', () => {
 });
 
 it('renders without crashing - TabelaMiejscowosc', () => {
-  shallow(<TabelaAtrakcjaMiejscowosc />);
+  shallow(<TabelaMiejscowosc />);
 });
 
 it('renders without crashing - TabelaRezerwacja', () => {
@@ -88,10 +84,4 @@ it('includes Header', () => {
 it('includes Footer', () => {
   const app = shallow(<App />);
   expect(app.containsMatchingElement(<Footer />)).toEqual(true);
-});
-
-it('przekazywanie wszystkich miejscowosci', () => {
-  const app = shallow(<HomePage />);
-  app.props.miejscowosc.setProps(['miejscowosc1','miejscowosc2']);
-  expect(app.find('DropdownMiejscowosc').prop('miejscowosc')).toEqual(['miejscowosc1','miejscowosc2']);
 });
