@@ -90,8 +90,8 @@ it('includes Footer', () => {
   expect(app.containsMatchingElement(<Footer />)).toEqual(true);
 });
 
-miejscowosc.setProps(['miejscowosc1','miejscowosc2']);
 it('przekazywanie wszystkich miejscowosci', () => {
   const app = shallow(<HomePage />);
+  app.props.miejscowosc.setProps(['miejscowosc1','miejscowosc2']);
   expect(app.find('DropdownMiejscowosc').prop('miejscowosc')).toEqual(['miejscowosc1','miejscowosc2']);
 });
