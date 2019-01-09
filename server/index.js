@@ -326,7 +326,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) =
 app.post('/Uzytkownik/Panel_Uzytkownika/Zwroc_Tabele_Bilety', async (req, res) => {
     const login = req.body.login;
 
-    const zapytanie = await pgClient.query("SELECT b.id, b.data, a.nazwa FROM Bilety b, Uzytkownik u, Atrakcja a WHERE u.login='" + login + "' AND u.id=b.id_uzytkownik AND a.id=u.id_atrakcja");
+    const zapytanie = await pgClient.query("SELECT b.id, b.data, a.nazwa FROM Bilety b, Uzytkownik u, Atrakcja a WHERE u.login='" + login + "' AND u.id=b.id_uzytkownik AND a.id=b.id_atrakcja");
     const tablica = zapytanie.rows;
 
     res.send({
