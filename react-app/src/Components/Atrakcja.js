@@ -42,7 +42,7 @@ class Atrakcja extends Component {
 
     handleClick = async (event) => {
         event.preventDefault();
-        const dzien = this.getParsedDate(this.state.startDate.toLocaleDateString());
+        const dzien = this.getParsedDate(this.state.startDate.toLocaleDateString('en-US'));
         //console.log(dzien);
         const rezerwacja = await axios.post('/api/Uzytkownik/Rezerwacja', { idAtrakcja: this.props.location.state.id_atr, dzien: dzien, uzytkownik: localStorage.getItem('username') });
         console.log(rezerwacja.data);
