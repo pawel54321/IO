@@ -27,7 +27,9 @@ class DashboardUser extends Component {
     zmianaFormatuDaty() {
         const dzien = this.getParsedDate(this.state.daneBilet.data.toLocaleDateString('en-US'));
         this.setState({
-            daneBilet.data: 'dzien'
+            daneBilet: {
+                data: 'dzien'
+            }
         });
     }
 
