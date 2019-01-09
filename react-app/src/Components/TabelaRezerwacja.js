@@ -139,6 +139,6 @@ const TabelaRezerwacja = (props) => (
     </div>
 );
 
-TabelaAtrakcja.propTypes = {};
+TabelaRezerwacja.propTypes = {};
 
-export default TabelaAtrakcja;
+export default TabelaRezerwacja;
