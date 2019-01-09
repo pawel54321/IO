@@ -280,7 +280,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
-    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, a.godzina_otwarcia, a.godzina_zamkniecia, a.cena, m.nazwaMiejscowosc, a.wycofana FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,"HH:MM") as godzina_otwarcia, to_char(a.godzina_zamkniecia,"HH:MM") as godzina_zamkniecia, a.cena, m.nazwaMiejscowosc, a.wycofana FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
