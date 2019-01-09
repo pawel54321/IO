@@ -8,11 +8,17 @@ import Adapter from 'enzyme-adapter-react-16';
 import App from './App';
 import Header from './Components/Header';
 import DashboardAdmin from './Components/DashboardAdmin';
-//import DashboardUser from './Components/DashboardUser';
+import DashboardUser from './Components/DashboardUser';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Footer from './Components/Footer';
 import HomePage from './Components/HomePage';
+import Atrakcja from './Components/Atrakcja';
+import CardAtrakcja from './Components/CardAtrakcja';
+import DropdownMiejscowosc from './Components/DropdownMiejscowosc';
+import TabelaAtrakcja from './Components/TabelaAtrakcja';
+import TabelaMiejscowosc from './Components/TabelaMiejscowosc';
+import TabelaRezerwacja from './Components/TabelaRezerwacja';
 
 
 configure({ adapter: new Adapter() });
@@ -34,9 +40,9 @@ it('renders without crashing - DashboardAdmin', () => {
   shallow(<DashboardAdmin />);
 });
 
-//it('renders without crashing - DashboardUser', () => {
-//  shallow(<DashboardUser />);
-//});
+it('renders without crashing - DashboardUser', () => {
+  shallow(<DashboardUser />);
+});
 
 it('renders without crashing - Login', () => {
   shallow(<Login />);
@@ -50,37 +56,42 @@ it('renders without crashing - HomePage', () => {
   shallow(<HomePage />);
 });
 
+it('renders without crashing - Atrakcja', () => {
+  shallow(<Atrakcja />);
+});
+
+it('renders without crashing - CardAtrakcja', () => {
+  shallow(<CardAtrakcja />);
+});
+
+it('renders without crashing - DropdownMiejscowosc', () => {
+  shallow(<DropdownMiejscowosc />);
+});
+
+it('renders without crashing - TabelaAtrakcja', () => {
+  shallow(<TabelaAtrakcja />);
+});
+
+it('renders without crashing - TabelaMiejscowosc', () => {
+  shallow(<TabelaAtrakcjaMiejscowosc />);
+});
+
+it('renders without crashing - TabelaRezerwacja', () => {
+  shallow(<TabelaRezerwacja />);
+});
+
 it('includes Header', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Header />)).toEqual(true)
+  expect(app.containsMatchingElement(<Header />)).toEqual(true);
 });
 
 it('includes Footer', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Footer />)).toEqual(true)
+  expect(app.containsMatchingElement(<Footer />)).toEqual(true);
 });
 
-it('includes HomePage', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<HomePage />)).toEqual(false)
-});
-
-it('includes DashboardAdmin', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<DashboardAdmin />)).toEqual(false)
-});
-
-//it('includes DashboardUser', () => {
-//  const app = shallow(<App />);
-//  expect(app.containsMatchingElement(<DashboardUser />)).toEqual(false)
-//});
-
-it('includes Login', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Login />)).toEqual(false)
-});
-
-it('includes Register', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Register />)).toEqual(false)
+miejscowosc.setProps(['miejscowosc1','miejscowosc2']);
+it('przekazywanie wszystkich miejscowosci', () => {
+  const app = shallow(<HomePage />);
+  expect(app.find('DropdownMiejscowosc').prop('miejscowosc')).toEqual(['miejscowosc1','miejscowosc2']);
 });
