@@ -280,7 +280,7 @@ app.post('/Uzytkownik/PanelAdmina2', async (req, res) => {
 
 app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Atrakcja', async (req, res) => {
 
-    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,'HH:MM') as godzina_otwarcia, to_char(a.godzina_zamkniecia,'HH:MM') as godzina_zamkniecia, a.cena, m.nazwaMiejscowosc, a.wycofana FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,'HH24:MM') as godzina_otwarcia, to_char(a.godzina_zamkniecia,'HH24:MM') as godzina_zamkniecia, a.cena, m.nazwaMiejscowosc, a.wycofana FROM Atrakcja a, Miejscowosc m WHERE m.id=a.id_miejscowosc");
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
@@ -295,7 +295,7 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Atrakcje_Z_Miejscowosci', async (req, r
 
     const miejscowosc = req.body.miejscowosc;
     //console.log(miejscowosc);
-    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,'HH:MM') as godzina_otwarcia, to_char(a.godzina_zamkniecia,'HH:MM') as godzina_zamkniecia, a.cena FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc AND a.wycofana='Nie'")
+    const zapytanie = await pgClient.query("SELECT a.id, a.nazwa, a.adres, a.liczba_miejsc, to_char(a.godzina_otwarcia,'HH24:MM') as godzina_otwarcia, to_char(a.godzina_zamkniecia,'HH24:MM') as godzina_zamkniecia, a.cena FROM Atrakcja a, Miejscowosc m WHERE m.nazwamiejscowosc='"+miejscowosc+"' AND m.id=a.id_miejscowosc AND a.wycofana='Nie'")
     // console.log(zapytanie.rows);
     const tablica = zapytanie.rows;
     //console.log(tablica);
