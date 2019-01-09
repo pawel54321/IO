@@ -196,7 +196,7 @@ app.post('/Uzytkownik/PanelAdmina', async (req, res) => {
         //if (tablica[0].count == 0) {
 
             // min = "0" naprawic zeby nie bylo duplikacji sprawdzac SELECT (zmienic na liste rozwijana zamiast int tekst)
-            //dodawanie miejscowosci tylko przez liste rozwijana 
+            //dodawanie miejscowosci tylko przez liste rozwijana
 
             const zapytanie = await pgClient.query("SELECT COUNT(nazwaMiejscowosc) FROM Miejscowosc WHERE nazwaMiejscowosc='" + miejscowosc + "'")
             //console.log(zapytanie.rows);
@@ -319,6 +319,18 @@ app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Miejscowosc', async (req, res) =
 
     res.send({
         daneMiejscowosc: tablica
+    });
+
+});
+
+app.post('/Uzytkownik/Panel_Admina/Zwroc_Tabele_Bilety', async (req, res) => {
+    const login = req.body.login;
+
+    const zapytanie = await pgClient.query("SELECT b.id, b.data, a.nazwa FROM Bilety b, Uzytkownik u, Atrakcja a WHERE u.login='" + login + "' AND u.id=b.id_uzytkownik AND a.id=u.id_atrakcja");
+    const tablica = zapytanie.rows;
+
+    res.send({
+        daneBilet: tablica
     });
 
 });
@@ -456,17 +468,17 @@ app.post('/Uzytkownik/Anulowanie', async (req, res) => {
     const idAtr = id_a_tab[0].id_atrakcja;
     const dz = id_a_tab[0].data;
 
+    pgClient.query("DELETE FROM Bilety WHERE id='" + idBilet + "'")
+        .catch((error) => {
+            console.log(error);
+    });
+
     const lm = await pgClient.query("SELECT wolne_miejsca FROM Dostepnosc WHERE id_atrakcja='" + idAtr + "' AND data='" + dz + "'");
     //console.log(id_d.rows);
     const lm_tab = lm.rows;
     const wolneMiejsca = lm_tab[0].wolne_miejsca + 1;
 
     pgClient.query("UPDATE Dostepnosc SET wolne_miejsca = '" + wolneMiejsca + "' WHERE id_atrakcja='" + idAtr + "' AND data='" + dz + "'")
-        .catch((error) => {
-            console.log(error);
-    });
-
-    pgClient.query("DELETE FROM Bilety WHERE id='" + idBilet + "'")
         .catch((error) => {
             console.log(error);
     });
@@ -526,4 +538,3 @@ app.post('/ZwrocAtrakcje', async (req, res) => {
 app.listen(5000, error => {
     console.log('Listening on port 5000');
 });
-
