@@ -24,56 +24,56 @@ import TabelaRezerwacja from './Components/TabelaRezerwacja';
 configure({ adapter: new Adapter() });
 
 
-it('renders without crashing - Header', () => {
+it('renders Header', () => {
   const header = shallow(<Header />);
-  expect(header.find('Navbar').toEqual(true));
-  expect(header.find('Collapse').toEqual(true));
-  expect(header.find('NavLink').toEqual(true));
   expect(header.find('NavItem').objectContaining('NavLink'));
   expect(header.find('Nav').objectContaining('NavItem'));
 });
 
-it('renders without crashing - Footer', () => {
-  shallow(<Footer />);
+it('renders Footer', () => {
+  const footer = shallow(<Footer />);
+  expect(footer.find('Navbar').objectContaining('NavbarBrand'));
+  expect(footer.find('NavbarBrand').objectContaining('Link'));
 });
 
-it('renders without crashing - DashboardAdmin', () => {
-  shallow(<DashboardAdmin />);
+it('renders DashboardAdmin', () => {
+  const da = shallow(<DashboardAdmin />);
+  expect(da.find(''))
 });
 
-it('renders without crashing - DashboardUser', () => {
+it('renders DashboardUser', () => {
   shallow(<DashboardUser />);
 });
 
-it('renders without crashing - Login', () => {
+it('renders Login', () => {
   shallow(<Login />);
 });
 
-it('renders without crashing - Register', () => {
+it('renders Register', () => {
   shallow(<Register />);
 });
 
-it('renders without crashing - HomePage', () => {
+it('renders HomePage', () => {
   shallow(<HomePage />);
 });
 
-it('renders without crashing - Atrakcja', () => {
+it('renders Atrakcja', () => {
   shallow(<Atrakcja />);
 });
 
-it('renders without crashing - DropdownMiejscowosc', () => {
+it('renders DropdownMiejscowosc', () => {
   shallow(<DropdownMiejscowosc />);
 });
 
-it('renders without crashing - TabelaAtrakcja', () => {
+it('renders TabelaAtrakcja', () => {
   shallow(<TabelaAtrakcja />);
 });
 
-it('renders without crashing - TabelaMiejscowosc', () => {
+it('renders TabelaMiejscowosc', () => {
   shallow(<TabelaMiejscowosc />);
 });
 
-it('renders without crashing - TabelaRezerwacja', () => {
+it('renders TabelaRezerwacja', () => {
   shallow(<TabelaRezerwacja />);
 });
 
