@@ -26,19 +26,19 @@ configure({ adapter: new Adapter() });
 
 it('renders Header', () => {
   const header = shallow(<Header/>);
-  expect(header.find('NavItem').contains('NavLink').toEqual(true));
-  expect(header.find('Nav').contains('NavItem').toEqual(true));
+  expect(header.find('NavItem').contains('NavLink')).toEqual(true);
+  expect(header.find('Nav').contains('NavItem')).toEqual(true);
 });
 
 it('renders Footer', () => {
   const footer = shallow(<Footer/>);
-  expect(footer.find('Navbar').objectContaining('NavbarBrand'));
-  expect(footer.find('NavbarBrand').objectContaining('Link'));
+  expect(footer.find('Navbar').contains('NavbarBrand')).toEqual(true);
+  expect(footer.find('NavbarBrand').contains('Link')).toEqual(true);
 });
 
 it('renders DashboardAdmin', () => {
   const da = shallow(<DashboardAdmin/>);
-  expect(da.find(''))
+  //expect(da.find(''))
 });
 
 it('renders DashboardUser', () => {
