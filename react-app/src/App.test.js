@@ -200,7 +200,7 @@ it('HomePage includes DropdownMiejscowosc while User', () => {
     localStorage.clear();
 });
 
-it('set date after state is changed', () =>{
+it('set date after state is changed', () => {
     localStorage.setItem('loggedAs', 'User');
     const atr = shallow(<Atrakcja/>);
     atr.setState({startDate:'2019-01-15'});
