@@ -200,7 +200,7 @@ it('HomePage includes DropdownMiejscowosc while User', () => {
     localStorage.clear();
 });
 
-t('Atrakcja includes TabelaAtrakcja while User', () => {
+it('Atrakcja includes TabelaAtrakcja while User', () => {
     localStorage.setItem('loggedAs', 'User');
     const hp = shallow(<Atrakcja/>);
     expect(hp.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
