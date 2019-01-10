@@ -24,9 +24,35 @@ import TabelaRezerwacja from './Components/TabelaRezerwacja';
 
 configure({ adapter: new Adapter() });
 
+class LocalStorageMock {
+    constructor() {
+        this.store = {};
+    }
 
-it('renders Header', () => {
-    shallow(<Header/>);
+    clear() {
+        this.store = {};
+    }
+
+    getItem(key) {
+        return this.store[key] || null;
+    }
+
+    setItem(key, value) {
+        this.store[key] = value.toString();
+    }
+
+    removeItem(key) {
+        delete this.store[key];
+    }
+};
+
+global.localStorage = new LocalStorageMock;
+
+it('renders Header while Admin', () => {
+    localStorage.setItem('loggedAs', 'Admin');
+    const header = shallow(<Header/>);
+    expect(header.find("header").length).toBe(1);
+    expect(header.find("header").length).toBe(1);
 });
 
 it('renders Footer', () => {
@@ -51,27 +77,27 @@ it('renders DashboardUser', () => {
 
 it('renders Login', () => {
     const login = shallow(<Login/>);
-    expect(du.find('h5').length).toBe(1);
-    expect(du.find('p').length).toBe(1);
+    expect(login.find('h5').length).toBe(1);
+    expect(login.find('p').length).toBe(1);
     expect(login.find('h5').text()).toEqual('Logowanie:');
     expect(login.find('p').text()).toEqual('Nie masz konta? ');
-    expect(du.find('div').length).toBeGreaterThan(0);
+    expect(login.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders Register', () => {
     const register = shallow(<Register/>);
-    expect(du.find('h5').length).toBe(1);
-    expect(du.find('p').length).toBe(1);
+    expect(register.find('h5').length).toBe(1);
+    expect(register.find('p').length).toBe(1);
     expect(register.find('h5').text()).toEqual('Rejestracja:');
     expect(register.find('p').text()).toEqual('Masz konto? ');
-    expect(du.find('div').length).toBeGreaterThan(0);
+    expect(register.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders HomePage', () => {
     const hp = shallow(<HomePage/>);
-    expect(du.find('h5').length).toBe(1);
-    expect(du.find('h3').length).toBe(1);
-    expect(du.find('h1').length).toBe(1);
+    expect(hp.find('h5').length).toBe(1);
+    expect(hp.find('h3').length).toBe(1);
+    expect(hp.find('h1').length).toBe(1);
     expect(hp.find('h5').text()).toEqual('Strona Główna');
     expect(hp.find('h1').text()).toEqual('Witamy!');
     expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
@@ -83,7 +109,7 @@ it('renders Atrakcja', () => {
 
 it('renders DropdownMiejscowosc', () => {
     const dm = shallow(<DropdownMiejscowosc/>);
-    expect(du.find('select').length).toBe(1);
+    expect(dm.find('select').length).toBe(1);
 });
 
 it('renders TabelaAtrakcja', () => {
@@ -109,16 +135,16 @@ it('App includes Footer', () => {
 });
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
-    const app = shallow(<DashboardAdmin/>);
-    expect(app.containsMatchingElement(<TabelaMiejscowosc/>)).toEqual(true);
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.containsMatchingElement(<TabelaMiejscowosc/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaAtrakcja', () => {
-    const app = shallow(<DashboardAdmin/>);
-    expect(app.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
 });
 
 it('DashboardUser includes TabelaRezerwacja', () => {
-    const app = shallow(<DashboardUser/>);
-    expect(app.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
+    const du = shallow(<DashboardUser/>);
+    expect(du.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
 });
