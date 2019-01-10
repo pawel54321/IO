@@ -30,8 +30,11 @@ it('renders Header', () => {
 
 it('renders Footer', () => {
   const footer = shallow(<Footer/>);
-  expect(footer.find('footer').contains('SprawdzFooter')).toEqual(true);
-  expect(footer.find('SprawdzFooter').contains('Navbar')).toEqual(true);
+  expect(footer.contains('footer')).toEqual(true);
+  expect(footer.contains('Navbar')).toEqual(true);
+  expect(footer.contains('NavbarBrand')).toEqual(true);
+  expect(footer.contains('Link')).toEqual(true);
+  expect(footer.contains('SprawdzFooter')).toEqual(true);
 });
 
 it('renders DashboardAdmin', () => {
