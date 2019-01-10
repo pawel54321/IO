@@ -23,6 +23,7 @@ class DashboardAdmin extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             activeTab: '0',
+            raz:true,
             daneMiejscowosc: [],
             daneAtrakcja: []
         };
@@ -55,15 +56,23 @@ class DashboardAdmin extends Component {
 
         this.ZwrocenieTabeliMiejscowosc();
         this.ZwrocenieTabeliAtrakcja();
-
+        
     }
 
     toggle(tab) {
+        if(this.state.raz===true)
+        {
+        document.getElementsByClassName('crud-table__header-cell')[4].click();   
+        document.getElementsByClassName('crud-table__header-cell')[0].click();
+        }
+
         if (this.state.activeTab !== tab) {
             this.setState({
-                activeTab: tab
+                activeTab: tab,
+                raz:false
             });
         }
+       
     }
 
     ZwrocenieTabeliMiejscowosc = async () => {
@@ -145,6 +154,7 @@ class DashboardAdmin extends Component {
        
     */
     render() {
+        
         return (
             <div>
                 <h5>Panel Admina</h5>

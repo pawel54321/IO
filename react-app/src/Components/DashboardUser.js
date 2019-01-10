@@ -19,6 +19,8 @@ class DashboardUser extends Component {
         this.setState({
             daneBilet: OdpowiedzSerwera8.data.daneBilet,
         });
+
+        document.getElementsByClassName('crud-table__header-cell')[0].click();
     }
 
     render() {
