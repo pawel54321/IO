@@ -45,14 +45,31 @@ class LocalStorageMock {
         delete this.store[key];
     }
 };
-
 global.localStorage = new LocalStorageMock;
+
 
 it('renders Header while Admin', () => {
     localStorage.setItem('loggedAs', 'Admin');
     const header = shallow(<Header/>);
     expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
+});
+
+it('renders Header while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const header = shallow(<Header/>);
     expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
+});
+
+it('renders Header', () => {
+    localStorage.setItem('loggedAs', '');
+    const header = shallow(<Header/>);
+    expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
 });
 
 it('renders Footer', () => {
@@ -95,7 +112,7 @@ it('renders Register', () => {
 
 it('renders HomePage', () => {
     const hp = shallow(<HomePage/>);
-    expect(hp.find('h5').length).toBe(1);
+    expect(hp.find('h5').length).toBe();
     expect(hp.find('h3').length).toBe(1);
     expect(hp.find('h1').length).toBe(1);
     expect(hp.find('h5').text()).toEqual('Strona Główna');
@@ -103,8 +120,11 @@ it('renders HomePage', () => {
     expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
 });
 
-it('renders Atrakcja', () => {
-    shallow(<Atrakcja/>);
+it('renders Atrakcja while Admin', () => {
+    const atr = shallow(<Atrakcja/>);
+    expect(atr.find('div').length).toBeGreaterThan(0);
+    expect(atr.find('h1').text()).toEqual('Uwaga!');
+    expect(atr.find('h4').text()).includes('Jesteś zalogowany jako Administrator!');
 });
 
 it('renders DropdownMiejscowosc', () => {
