@@ -73,7 +73,8 @@ it('renders Header', () => {
 });
 
 it('renders Footer', () => {
-    shallow(<Footer/>);
+    const f = shallow(<Footer/>);
+    expect(f.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders DashboardAdmin', () => {
@@ -120,6 +121,14 @@ it('renders HomePage', () => {
     expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
 });
 
+it('renders HomePage while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const hp = shallow(<HomePage/>);
+    expect(hp.find('h5').length).toBe(3);
+    expect(hp.find('div').length).toBeGreaterThan(0);
+    localStorage.clear();
+});
+
 it('renders Atrakcja while Admin', () => {
     localStorage.setItem('loggedAs', 'Admin');
     const atr = shallow(<Atrakcja/>);
@@ -136,7 +145,6 @@ it('renders Atrakcja while User', () => {
     expect(atr.find('div').length).toBeGreaterThan(0);
     expect(atr.find('h5').length).toBe(3);
     expect(atr.find('h6').length).toBe(5);
-    expect(atr.find('h5').text()).toEqual('Rezerwacja');
     localStorage.clear();
 });
 
@@ -146,15 +154,18 @@ it('renders DropdownMiejscowosc', () => {
 });
 
 it('renders TabelaAtrakcja', () => {
-    shallow(<TabelaAtrakcja/>);
+    const ta = shallow(<TabelaAtrakcja/>);
+    expect(ta.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders TabelaMiejscowosc', () => {
-    shallow(<TabelaMiejscowosc/>);
+    const tm = shallow(<TabelaMiejscowosc/>);
+    expect(tm.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders TabelaRezerwacja', () => {
-    shallow(<TabelaRezerwacja/>);
+    const tr = shallow(<TabelaRezerwacja/>);
+    expect(tr.find('div').length).toBeGreaterThan(0);
 });
 
 it('App includes Header', () => {
@@ -180,4 +191,18 @@ it('DashboardAdmin includes TabelaAtrakcja', () => {
 it('DashboardUser includes TabelaRezerwacja', () => {
     const du = shallow(<DashboardUser/>);
     expect(du.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
+});
+
+it('HomePage includes DropdownMiejscowosc while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const hp = shallow(<HomePage/>);
+    expect(hp.containsMatchingElement(<DropdownMiejscowosc/>)).toEqual(true);
+    localStorage.clear();
+});
+
+t('Atrakcja includes TabelaAtrakcja while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const hp = shallow(<Atrakcja/>);
+    expect(hp.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
+    localStorage.clear();
 });
