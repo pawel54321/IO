@@ -199,13 +199,3 @@ it('HomePage includes DropdownMiejscowosc while User', () => {
     expect(hp.containsMatchingElement(<DropdownMiejscowosc/>)).toEqual(true);
     localStorage.clear();
 });
-
-it('set date after state is changed', () => {
-    localStorage.setItem('loggedAs', 'User');
-    const atr = shallow(<Atrakcja/>);
-    atr.setState({startDate:'2019-01-15'});
-    expect(atr.getElement(<DatePicker/>).props.selected).toEqual('2019-01-15');
-    atr.setState({startDate:'2021-12-19'});
-    expect(atr.getElement(<DatePicker/>).props.selected).toEqual('2021-12-19');
-    localStorage.clear();
-});
