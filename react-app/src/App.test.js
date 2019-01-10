@@ -35,13 +35,18 @@ it('renders Footer', () => {
 
 it('renders DashboardAdmin', () => {
     const da = shallow(<DashboardAdmin/>);
+    expect(da.find('h1').length).toBe(1);
     expect(da.find('h1').text()).toEqual('Znajdujesz się w Panelu Administratora!');
+    expect(da.find('div')).toBeGreaterThan(0);
 });
 
 it('renders DashboardUser', () => {
     const du = shallow(<DashboardUser/>);
+    expect(du.find('h5').length).toBe(1);
+    expect(du.find('p').length).toBe(1);
     expect(du.find('h5').text()).toEqual('Panel Użytkownika');
     expect(du.find('p').text()).toEqual('Witaj! ');
+    expect(du.find('div')).toBeGreaterThan(0);
 });
 
 it('renders Login', () => {
@@ -64,8 +69,7 @@ it('renders HomePage', () => {
 });
 
 it('renders Atrakcja', () => {
-    const rez = shallow(<Atrakcja/>);
-    expect(rez.find("div").length).toBeGreaterThan(0);
+    shallow(<Atrakcja/>);
 });
 
 it('renders DropdownMiejscowosc', () => {
@@ -108,7 +112,7 @@ it('DashboardUser includes TabelaRezerwacja', () => {
     const app = shallow(<DashboardUser/>);
     expect(app.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
 });
-/*
+
 it('changes date according to state', () => {
     const rez = shallow(<Atrakcja/>);
     rez.setState({startDate: '2019-01-15'});
@@ -116,4 +120,3 @@ it('changes date according to state', () => {
     rez.setState({startDate: '2021-04-18'});
     expect(rez.getElement(<DatePicker/>).props.selected).toEqual('2021-04-18');
 });
-*/
