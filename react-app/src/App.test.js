@@ -111,7 +111,7 @@ it('DashboardUser includes TabelaRezerwacja', () => {
 it('changes date according to state', () => {
     const rez = shallow(<Atrakcja/>);
     rez.setState({startDate: '2019-01-15'});
-    expect(rez.find(<DatePicker/>).props().selected).toEqual('2019-01-15');
+    expect(rez.getNode(<DatePicker/>).props.selected).toEqual('2019-01-15');
     rez.setState({startDate: '2021-04-18'});
-    expect(rez.find(<DatePicker/>).props().selected).toEqual('2021-04-18');
+    expect(rez.getNode(<DatePicker/>).props.selected).toEqual('2021-04-18');
 });
