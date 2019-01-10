@@ -54,14 +54,18 @@ it('renders DashboardUser', () => {
 
 it('renders Login', () => {
   const login = shallow(<Login/>);
-  expect(login.find('h5').text()).toEqual('Logowanie:'');
+  expect(login.find('h5').text()).toEqual('Logowanie:');
   expect(login.find('Button').text()).toEqual('Zaloguj się!');
   expect(login.find('p').text()).toEqual('Nie masz konta? ');
   expect(login.find('Link').text()).toEqual('Zarejestruj się!');
 });
 
 it('renders Register', () => {
-  shallow(<Register/>);
+  const register = shallow(<Register/>);
+  expect(register.find('h5').text()).toEqual('Rejestracja:');
+  expect(register.find('Button').text()).toEqual('Zarejestruj się!');
+  expect(register.find('p').text()).toEqual('Masz konto? ');
+  expect(register.find('Link').text()).toEqual('Zaloguj się!');
 });
 
 it('renders HomePage', () => {
