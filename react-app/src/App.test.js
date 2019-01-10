@@ -25,20 +25,11 @@ configure({ adapter: new Adapter() });
 
 
 it('renders Header', () => {
-  const header = shallow(<Header/>);
-  expect(header.containsMatchingElement('header')).toEqual(true);
-  expect(header.containsMatchingElement('Navbar')).toEqual(true);
-  expect(header.containsMatchingElement('NavbarBrand')).toEqual(true);
-  expect(header.containsMatchingElement('NavItem')).toEqual(true);
-  expect(header.containsMatchingElement('NavLink')).toEqual(true);
+  shallow(<Header/>);
 });
 
 it('renders Footer', () => {
-  const footer = shallow(<Footer/>);
-  expect(footer.containsMatchingElement('footer')).toEqual(true);
-  expect(footer.containsMatchingElement('Navbar')).toEqual(true);
-  expect(footer.containsMatchingElement('NavbarBrand')).toEqual(true);
-  expect(footer.containsMatchingElement('Link')).toEqual(true);
+  shallow(<Footer/>);
 });
 
 it('renders DashboardAdmin', () => {
@@ -55,7 +46,6 @@ it('renders DashboardUser', () => {
 it('renders Login', () => {
   const login = shallow(<Login/>);
   expect(login.find('h5').text()).toEqual('Logowanie:');
-  expect(login.find('Button').text()).toEqual('Zaloguj się!');
   expect(login.find('p').text()).toEqual('Nie masz konta? ');
   expect(login.find('Link').text()).toEqual('Zarejestruj się!');
 });
@@ -63,17 +53,21 @@ it('renders Login', () => {
 it('renders Register', () => {
   const register = shallow(<Register/>);
   expect(register.find('h5').text()).toEqual('Rejestracja:');
-  expect(register.find('Button').text()).toEqual('Zarejestruj się!');
   expect(register.find('p').text()).toEqual('Masz konto? ');
   expect(register.find('Link').text()).toEqual('Zaloguj się!');
 });
 
 it('renders HomePage', () => {
-  shallow(<HomePage/>);
+  const hp = shallow(<HomePage/>);
+  expect(hp.find('h5').text()).toEqual('Strona Główna');
+  expect(hp.find('h1').text()).toEqual('Witamy!');
+  expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
+  expect(hp.find('Link').text()).toEqual('Tutaj');
 });
 
 it('renders Atrakcja', () => {
-  shallow(<Atrakcja/>);
+  const rez = shallow(<Atrakcja/>);
+  expect(rez.find('h5').text()).toEqual('Rezerwacja');
 });
 
 it('renders DropdownMiejscowosc', () => {
