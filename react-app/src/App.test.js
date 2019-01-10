@@ -24,64 +24,80 @@ import TabelaRezerwacja from './Components/TabelaRezerwacja';
 configure({ adapter: new Adapter() });
 
 
-it('renders without crashing - App', () => {
-  shallow(<App />);
+it('renders Header', () => {
+  const header = shallow(<Header/>);
+  expect(header.find('NavItem').contains('NavLink')).toEqual(true);
+  expect(header.find('Nav').contains('NavItem')).toEqual(true);
 });
 
-it('renders without crashing - Header', () => {
-  shallow(<Header />);
+it('renders Footer', () => {
+  const footer = shallow(<Footer/>);
+  expect(footer.find('Navbar').contains('NavbarBrand')).toEqual(true);
+  expect(footer.find('NavbarBrand').contains('Link')).toEqual(true);
 });
 
-it('renders without crashing - Footer', () => {
-  shallow(<Footer />);
+it('renders DashboardAdmin', () => {
+  const da = shallow(<DashboardAdmin/>);
+  //expect(da.find(''))
 });
 
-it('renders without crashing - DashboardAdmin', () => {
-  shallow(<DashboardAdmin />);
+it('renders DashboardUser', () => {
+  shallow(<DashboardUser/>);
 });
 
-it('renders without crashing - DashboardUser', () => {
-  shallow(<DashboardUser />);
+it('renders Login', () => {
+  shallow(<Login/>);
 });
 
-it('renders without crashing - Login', () => {
-  shallow(<Login />);
+it('renders Register', () => {
+  shallow(<Register/>);
 });
 
-it('renders without crashing - Register', () => {
-  shallow(<Register />);
+it('renders HomePage', () => {
+  shallow(<HomePage/>);
 });
 
-it('renders without crashing - HomePage', () => {
-  shallow(<HomePage />);
+it('renders Atrakcja', () => {
+  shallow(<Atrakcja/>);
 });
 
-it('renders without crashing - Atrakcja', () => {
-  shallow(<Atrakcja />);
+it('renders DropdownMiejscowosc', () => {
+  shallow(<DropdownMiejscowosc/>);
 });
 
-it('renders without crashing - DropdownMiejscowosc', () => {
-  shallow(<DropdownMiejscowosc />);
+it('renders TabelaAtrakcja', () => {
+  shallow(<TabelaAtrakcja/>);
 });
 
-it('renders without crashing - TabelaAtrakcja', () => {
-  shallow(<TabelaAtrakcja />);
+it('renders TabelaMiejscowosc', () => {
+  shallow(<TabelaMiejscowosc/>);
 });
 
-it('renders without crashing - TabelaMiejscowosc', () => {
-  shallow(<TabelaMiejscowosc />);
+it('renders TabelaRezerwacja', () => {
+  shallow(<TabelaRezerwacja/>);
 });
 
-it('renders without crashing - TabelaRezerwacja', () => {
-  shallow(<TabelaRezerwacja />);
-});
-
-it('includes Header', () => {
+it('App includes Header', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Header />)).toEqual(true);
+  expect(app.containsMatchingElement(<Header/>)).toEqual(true);
 });
 
-it('includes Footer', () => {
+it('App includes Footer', () => {
   const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Footer />)).toEqual(true);
+  expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
+});
+
+it('DashboardAdmin includes TabelaMiejscowosc', () => {
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
+});
+
+it('DashboardAdmin includes TabelaAtrakcja', () => {
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
+});
+
+it('DashboardUser includes TabelaRezerwacja', () => {
+  const app = shallow(<DashboardUser />);
+  expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
 });
