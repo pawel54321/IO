@@ -25,88 +25,90 @@ configure({ adapter: new Adapter() });
 
 
 it('renders Header', () => {
-  shallow(<Header/>);
+    shallow(<Header/>);
 });
 
 it('renders Footer', () => {
-  shallow(<Footer/>);
+    shallow(<Footer/>);
 });
 
 it('renders DashboardAdmin', () => {
-  const da = shallow(<DashboardAdmin/>);
-  expect(da.find('h1').text()).toEqual('Znajdujesz się w Panelu Administratora!');
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.find('h1').text()).toEqual('Znajdujesz się w Panelu Administratora!');
 });
 
 it('renders DashboardUser', () => {
-  const du = shallow(<DashboardUser/>);
-  expect(du.find('h5').text()).toEqual('Panel Użytkownika');
-  expect(du.find('p').text()).toEqual('Witaj! ');
+    const du = shallow(<DashboardUser/>);
+    expect(du.find('h5').text()).toEqual('Panel Użytkownika');
+    expect(du.find('p').text()).toEqual('Witaj! ');
 });
 
 it('renders Login', () => {
-  const login = shallow(<Login/>);
-  expect(login.find('h5').text()).toEqual('Logowanie:');
-  expect(login.find('p').text()).toEqual('Nie masz konta? ');
-  expect(login.find('Link').text()).toEqual('Zarejestruj się!');
+    const login = shallow(<Login/>);
+    expect(login.find('h5').text()).toEqual('Logowanie:');
+    expect(login.find('p').text()).toEqual('Nie masz konta? ');
 });
 
 it('renders Register', () => {
-  const register = shallow(<Register/>);
-  expect(register.find('h5').text()).toEqual('Rejestracja:');
-  expect(register.find('p').text()).toEqual('Masz konto? ');
-  expect(register.find('Link').text()).toEqual('Zaloguj się!');
+    const register = shallow(<Register/>);
+    expect(register.find('h5').text()).toEqual('Rejestracja:');
+    expect(register.find('p').text()).toEqual('Masz konto? ');
 });
 
 it('renders HomePage', () => {
-  const hp = shallow(<HomePage/>);
-  expect(hp.find('h5').text()).toEqual('Strona Główna');
-  expect(hp.find('h1').text()).toEqual('Witamy!');
-  expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
-  expect(hp.find('Link').text()).toEqual('Tutaj');
+    const hp = shallow(<HomePage/>);
+    expect(hp.find('h5').text()).toEqual('Strona Główna');
+    expect(hp.find('h1').text()).toEqual('Witamy!');
+    expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
 });
 
 it('renders Atrakcja', () => {
-  const rez = shallow(<Atrakcja/>);
-  expect(rez.find('h5').text()).toEqual('Rezerwacja');
+    shallow(<Atrakcja/>);
 });
 
 it('renders DropdownMiejscowosc', () => {
-  shallow(<DropdownMiejscowosc/>);
+    shallow(<DropdownMiejscowosc/>);
 });
 
 it('renders TabelaAtrakcja', () => {
-  shallow(<TabelaAtrakcja/>);
+    shallow(<TabelaAtrakcja/>);
 });
 
 it('renders TabelaMiejscowosc', () => {
-  shallow(<TabelaMiejscowosc/>);
+    shallow(<TabelaMiejscowosc/>);
 });
 
 it('renders TabelaRezerwacja', () => {
-  shallow(<TabelaRezerwacja/>);
+    shallow(<TabelaRezerwacja/>);
 });
 
 it('App includes Header', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Header/>)).toEqual(true);
+    const app = shallow(<App/>);
+    expect(app.containsMatchingElement(<Header/>)).toEqual(true);
 });
 
 it('App includes Footer', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
+    const app = shallow(<App/>);
+    expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
-  const app = shallow(<DashboardAdmin />);
-  expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
+    const app = shallow(<DashboardAdmin/>);
+    expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaAtrakcja', () => {
-  const app = shallow(<DashboardAdmin />);
-  expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
+    const app = shallow(<DashboardAdmin/>);
+    expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
 });
 
 it('DashboardUser includes TabelaRezerwacja', () => {
-  const app = shallow(<DashboardUser />);
-  expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
+    const app = shallow(<DashboardUser/>);
+    expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
+});
+
+it('changes date according to state', () => {
+    const rez = shallow(<Atrakcja/>);
+    rez.setState({startDate: '2019-01-15'});
+    expect(rez.find('DatePicker').props().value).toEqual('2019-01-15');
 });
