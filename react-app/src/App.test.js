@@ -26,19 +26,19 @@ configure({ adapter: new Adapter() });
 
 it('renders Header', () => {
   const header = shallow(<Header/>);
-  expect(header.find(<NavItem/>).objectContaining(<NavLink/>));
-  expect(header.find(<Nav/>).objectContaining(<NavItem/>));
+  expect(header.find('NavItem').contains('NavLink').toEqual(true));
+  expect(header.find('Nav').contains('NavItem').toEqual(true));
 });
 
 it('renders Footer', () => {
   const footer = shallow(<Footer/>);
-  expect(footer.find(<Navbar/>).objectContaining(<NavbarBrand/>));
-  expect(footer.find(<NavbarBrand/>).objectContaining(<Link/>));
+  expect(footer.find('Navbar').objectContaining('NavbarBrand'));
+  expect(footer.find('NavbarBrand').objectContaining('Link'));
 });
 
 it('renders DashboardAdmin', () => {
   const da = shallow(<DashboardAdmin/>);
-  //expect(da.find(''))
+  expect(da.find(''))
 });
 
 it('renders DashboardUser', () => {
@@ -78,26 +78,26 @@ it('renders TabelaRezerwacja', () => {
 });
 
 it('App includes Header', () => {
-  const app = shallow(<App/>);
+  const app = shallow(<App />);
   expect(app.containsMatchingElement(<Header/>)).toEqual(true);
 });
 
 it('App includes Footer', () => {
-  const app = shallow(<App/>);
+  const app = shallow(<App />);
   expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
-  const app = shallow(<DashboardAdmin/>);
-  expect(app.containsMatchingElement(<TabelaMiejscowosc/>)).toEqual(true);
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaAtrakcja', () => {
-  const app = shallow(<DashboardAdmin/>);
-  expect(app.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
+  const app = shallow(<DashboardAdmin />);
+  expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
 });
 
 it('DashboardUser includes TabelaRezerwacja', () => {
-  const app = shallow(<DashboardUser/>);
-  expect(app.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
+  const app = shallow(<DashboardUser />);
+  expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
 });
