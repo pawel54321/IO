@@ -168,6 +168,8 @@ it('renders TabelaRezerwacja', () => {
     expect(tr.find('div').length).toBeGreaterThan(0);
 });
 
+
+
 it('App includes Header', () => {
     const app = shallow(<App/>);
     expect(app.containsMatchingElement(<Header/>)).toEqual(true);
