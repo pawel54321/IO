@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { shallowm, mount, configure } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+import DatePicker from "react-datepicker";
 
 import App from './App';
 import Header from './Components/Header';
@@ -107,9 +109,9 @@ it('DashboardUser includes TabelaRezerwacja', () => {
 });
 
 it('changes date according to state', () => {
-    const rez = mount(<Atrakcja/>);
+    const rez = shallow(<Atrakcja/>);
     rez.setState({startDate: '2019-01-15'});
-    expect(rez.find(<DatePicker/>).props().value).toEqual('2019-01-15');
+    expect(rez.find(<DatePicker/>).props().selected).toEqual('2019-01-15');
     rez.setState({startDate: '2021-04-18'});
-    expect(rez.find(<DatePicker/>).props().value).toEqual('2021-04-18');
+    expect(rez.find(<DatePicker/>).props().selected).toEqual('2021-04-18');
 });
