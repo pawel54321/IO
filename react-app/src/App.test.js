@@ -26,14 +26,12 @@ configure({ adapter: new Adapter() });
 
 it('renders Header', () => {
   const header = shallow(<Header/>);
-  expect(header.find('NavItem').contains('NavLink')).toEqual(true);
-  expect(header.find('Nav').contains('NavItem')).toEqual(true);
 });
 
 it('renders Footer', () => {
   const footer = shallow(<Footer/>);
-  expect(footer.find('Navbar').contains('NavbarBrand')).toEqual(true);
-  expect(footer.find('NavbarBrand').contains('Link')).toEqual(true);
+  expect(footer.find('footer').contains('SprawdzFooter')).toEqual(true);
+  expect(footer.find('SprawdzFooter').contains('Navbar')).toEqual(true);
 });
 
 it('renders DashboardAdmin', () => {
