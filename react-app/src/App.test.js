@@ -94,21 +94,21 @@ it('App includes Footer', () => {
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
     const app = shallow(<DashboardAdmin/>);
-    expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
+    expect(app.containsMatchingElement(<TabelaMiejscowosc/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaAtrakcja', () => {
     const app = shallow(<DashboardAdmin/>);
-    expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
+    expect(app.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
 });
 
 it('DashboardUser includes TabelaRezerwacja', () => {
     const app = shallow(<DashboardUser/>);
-    expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
+    expect(app.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
 });
 
 it('changes date according to state', () => {
     const rez = shallow(<Atrakcja/>);
     rez.setState({startDate: '2019-01-15'});
-    expect(rez.find('DatePicker').props().value).toEqual('2019-01-15');
+    expect(rez.find(<DatePicker/>).props().value).toEqual('2019-01-15');
 });
