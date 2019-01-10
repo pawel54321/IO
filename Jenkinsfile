@@ -25,12 +25,12 @@ pipeline {
       }
     }
 
-    stage('Deploy'){
+/*    stage('Deploy'){
       steps {
         dir('react-app') {
           sh 'npm run start'
         }
       }
-    }
+    } */
   }
 }
