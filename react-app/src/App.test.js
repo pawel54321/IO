@@ -24,12 +24,13 @@ import TabelaRezerwacja from './Components/TabelaRezerwacja';
 configure({ adapter: new Adapter() });
 
 
-it('renders without crashing - App', () => {
-  shallow(<App />);
-});
-
 it('renders without crashing - Header', () => {
-  shallow(<Header />);
+  const header = shallow(<Header />);
+  expect(header.find('Navbar').toEqual(true));
+  expect(header.find('Collapse').toEqual(true));
+  expect(header.find('NavLink').toEqual(true));
+  expect(header.find('NavItem').objectContaining('NavLink'));
+  expect(header.find('Nav').objectContaining('NavItem'));
 });
 
 it('renders without crashing - Footer', () => {
@@ -84,16 +85,6 @@ it('App includes Header', () => {
 it('App includes Footer', () => {
   const app = shallow(<App />);
   expect(app.containsMatchingElement(<Footer />)).toEqual(true);
-});
-
-it('HomePage includes DropdownMiejscowosc', () => {
-  const app = shallow(<HomePage />);
-  expect(app.containsMatchingElement(<DropdownMiejscowosc />)).toEqual(true);
-});
-
-it('HomePage includes CardAtrakcja', () => {
-  const app = shallow(<HomePage />);
-  expect(app.containsMatchingElement(<CardAtrakcja />)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
