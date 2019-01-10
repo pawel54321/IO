@@ -112,7 +112,7 @@ it('renders Register', () => {
 
 it('renders HomePage', () => {
     const hp = shallow(<HomePage/>);
-    expect(hp.find('h5').length).toBe(3);
+    expect(hp.find('h5').length).toBe(1);
     expect(hp.find('h3').length).toBe(1);
     expect(hp.find('h1').length).toBe(1);
     expect(hp.find('h5').text()).toEqual('Strona Główna');
@@ -127,7 +127,6 @@ it('renders Atrakcja while Admin', () => {
     expect(atr.find('h1').length).toBe(1);
     expect(atr.find('h4').length).toBe(1);
     expect(atr.find('h1').text()).toEqual('Uwaga!');
-    expect(atr.find('h4').text()).includes('Jesteś zalogowany jako Administrator!');
     localStorage.clear();
 });
 
@@ -136,7 +135,7 @@ it('renders Atrakcja while User', () => {
     const atr = shallow(<Atrakcja/>);
     expect(atr.find('div').length).toBeGreaterThan(0);
     expect(atr.find('h5').length).toBe(3);
-    expect(atr.find('h6').length).toBe(6);
+    expect(atr.find('h6').length).toBe(5);
     expect(atr.find('h5').text()).toEqual('Rezerwacja');
     localStorage.clear();
 });
