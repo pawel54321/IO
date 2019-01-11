@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { shallow } from 'enzyme';
-import { configure } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+import DatePicker from "react-datepicker";
 
 import App from './App';
 import Header from './Components/Header';
@@ -23,81 +24,180 @@ import TabelaRezerwacja from './Components/TabelaRezerwacja';
 
 configure({ adapter: new Adapter() });
 
+class LocalStorageMock {
+    constructor() {
+        this.store = {};
+    }
+
+    clear() {
+        this.store = {};
+    }
+
+    getItem(key) {
+        return this.store[key] || null;
+    }
+
+    setItem(key, value) {
+        this.store[key] = value.toString();
+    }
+
+    removeItem(key) {
+        delete this.store[key];
+    }
+};
+global.localStorage = new LocalStorageMock;
+
+
+it('renders Header while Admin', () => {
+    localStorage.setItem('loggedAs', 'Admin');
+    const header = shallow(<Header/>);
+    expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
+});
+
+it('renders Header while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const header = shallow(<Header/>);
+    expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
+});
 
 it('renders Header', () => {
-  const header = shallow(<Header/>);
-  expect(header.find('NavItem').contains('NavLink')).toEqual(true);
-  expect(header.find('Nav').contains('NavItem')).toEqual(true);
+    localStorage.setItem('loggedAs', '');
+    const header = shallow(<Header/>);
+    expect(header.find("header").length).toBe(1);
+    expect(header.find("nav").length).toBe(1);
+    localStorage.clear();
 });
 
 it('renders Footer', () => {
-  const footer = shallow(<Footer/>);
-  expect(footer.find('Navbar').contains('NavbarBrand')).toEqual(true);
-  expect(footer.find('NavbarBrand').contains('Link')).toEqual(true);
+    const f = shallow(<Footer/>);
+    expect(f.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders DashboardAdmin', () => {
-  const da = shallow(<DashboardAdmin/>);
-  //expect(da.find(''))
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.find('h1').length).toBe(1);
+    expect(da.find('h1').text()).toEqual('Znajdujesz się w Panelu Administratora!');
+    expect(da.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders DashboardUser', () => {
-  shallow(<DashboardUser/>);
+    const du = shallow(<DashboardUser/>);
+    expect(du.find('h5').length).toBe(1);
+    expect(du.find('p').length).toBe(1);
+    expect(du.find('h5').text()).toEqual('Panel Użytkownika');
+    expect(du.find('p').text()).toEqual('Witaj! ');
+    expect(du.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders Login', () => {
-  shallow(<Login/>);
+    const login = shallow(<Login/>);
+    expect(login.find('h5').length).toBe(1);
+    expect(login.find('p').length).toBe(1);
+    expect(login.find('h5').text()).toEqual('Logowanie:');
+    expect(login.find('p').text()).toEqual('Nie masz konta? ');
+    expect(login.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders Register', () => {
-  shallow(<Register/>);
+    const register = shallow(<Register/>);
+    expect(register.find('h5').length).toBe(1);
+    expect(register.find('p').length).toBe(1);
+    expect(register.find('h5').text()).toEqual('Rejestracja:');
+    expect(register.find('p').text()).toEqual('Masz konto? ');
+    expect(register.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders HomePage', () => {
-  shallow(<HomePage/>);
+    const hp = shallow(<HomePage/>);
+    expect(hp.find('h5').length).toBe(1);
+    expect(hp.find('h3').length).toBe(1);
+    expect(hp.find('h1').length).toBe(1);
+    expect(hp.find('h5').text()).toEqual('Strona Główna');
+    expect(hp.find('h1').text()).toEqual('Witamy!');
+    expect(hp.find('h3').text()).toEqual('Dziękujemy za korzystanie z serwisu i życzymy udanych rezerwacji!');
 });
 
-it('renders Atrakcja', () => {
-  shallow(<Atrakcja/>);
+it('renders HomePage while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const hp = shallow(<HomePage/>);
+    expect(hp.find('h5').length).toBe(3);
+    expect(hp.find('div').length).toBeGreaterThan(0);
+    localStorage.clear();
+});
+
+it('renders Atrakcja while Admin', () => {
+    localStorage.setItem('loggedAs', 'Admin');
+    const atr = shallow(<Atrakcja/>);
+    expect(atr.find('div').length).toBeGreaterThan(0);
+    expect(atr.find('h1').length).toBe(1);
+    expect(atr.find('h4').length).toBe(1);
+    expect(atr.find('h1').text()).toEqual('Uwaga!');
+    localStorage.clear();
+});
+
+it('renders Atrakcja while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const atr = shallow(<Atrakcja/>);
+    expect(atr.find('div').length).toBeGreaterThan(0);
+    expect(atr.find('h5').length).toBe(3);
+    expect(atr.find('h6').length).toBe(5);
+    localStorage.clear();
 });
 
 it('renders DropdownMiejscowosc', () => {
-  shallow(<DropdownMiejscowosc/>);
+    const dm = shallow(<DropdownMiejscowosc/>);
+    expect(dm.find('select').length).toBe(1);
 });
 
 it('renders TabelaAtrakcja', () => {
-  shallow(<TabelaAtrakcja/>);
+    const ta = shallow(<TabelaAtrakcja/>);
+    expect(ta.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders TabelaMiejscowosc', () => {
-  shallow(<TabelaMiejscowosc/>);
+    const tm = shallow(<TabelaMiejscowosc/>);
+    expect(tm.find('div').length).toBeGreaterThan(0);
 });
 
 it('renders TabelaRezerwacja', () => {
-  shallow(<TabelaRezerwacja/>);
+    const tr = shallow(<TabelaRezerwacja/>);
+    expect(tr.find('div').length).toBeGreaterThan(0);
 });
 
+
+
 it('App includes Header', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Header/>)).toEqual(true);
+    const app = shallow(<App/>);
+    expect(app.containsMatchingElement(<Header/>)).toEqual(true);
 });
 
 it('App includes Footer', () => {
-  const app = shallow(<App />);
-  expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
+    const app = shallow(<App/>);
+    expect(app.containsMatchingElement(<Footer/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaMiejscowosc', () => {
-  const app = shallow(<DashboardAdmin />);
-  expect(app.containsMatchingElement(<TabelaMiejscowosc />)).toEqual(true);
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.containsMatchingElement(<TabelaMiejscowosc/>)).toEqual(true);
 });
 
 it('DashboardAdmin includes TabelaAtrakcja', () => {
-  const app = shallow(<DashboardAdmin />);
-  expect(app.containsMatchingElement(<TabelaAtrakcja />)).toEqual(true);
+    const da = shallow(<DashboardAdmin/>);
+    expect(da.containsMatchingElement(<TabelaAtrakcja/>)).toEqual(true);
 });
 
 it('DashboardUser includes TabelaRezerwacja', () => {
-  const app = shallow(<DashboardUser />);
-  expect(app.containsMatchingElement(<TabelaRezerwacja />)).toEqual(true);
+    const du = shallow(<DashboardUser/>);
+    expect(du.containsMatchingElement(<TabelaRezerwacja/>)).toEqual(true);
+});
+
+it('HomePage includes DropdownMiejscowosc while User', () => {
+    localStorage.setItem('loggedAs', 'User');
+    const hp = shallow(<HomePage/>);
+    expect(hp.containsMatchingElement(<DropdownMiejscowosc/>)).toEqual(true);
+    localStorage.clear();
 });
