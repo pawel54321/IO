@@ -233,7 +233,7 @@ const TabelaAtrakcja = (props) => (
                     if (!values.liczba_miejsc) {
                         errors.liczba_miejsc = 'Wypełnij to pole liczba.';
                     }
-					else if (!values.liczba_miejsc >= 0)) {
+					else if (!values.liczba_miejsc >= 0) {
                         errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
                     }
                     if (!values.nazwamiejscowosc) {
@@ -272,13 +272,13 @@ const TabelaAtrakcja = (props) => (
                     if (!values.nazwa) {
                         errors.nazwa = 'Wypełnij to pole.';
                     }
-					else if (values.nazwa == ' ')) {
+					else if (values.nazwa == ' ') {
                         errors.nz = 'Wypełnij to pole!';
 					}
                     if (!values.adres) {
                         errors.adres = 'Wypełnij to pole.';
                     }
-					else if (values.adres == ' ')) {
+					else if (values.adres == ' ') {
                         errors.adres = 'Wypełnij to pole!';
 					}
 
@@ -306,7 +306,7 @@ const TabelaAtrakcja = (props) => (
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
-					else if (values.nazwamiejscowosc == ' ')) {
+					else if (values.nazwamiejscowosc == ' ') {
                         errors.nazwamiejscowosc = 'Wypełnij to pole!';
 					}
 
@@ -330,7 +330,7 @@ const TabelaAtrakcja = (props) => (
                 if (!values.id) {
                     errors.id = 'Brak id';
                 }
-				else if (!values.adres>=0)) {
+				else if (!values.adres>=0) {
                         errors.adres = 'Wypełnij to pole liczba!';
 					}
                 return errors;

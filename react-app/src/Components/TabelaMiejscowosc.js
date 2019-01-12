@@ -176,14 +176,14 @@ const TabelaMiejscowosc = (props) => (
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
-					else if (values.nazwamiejscowosc == ' ')) {
+					else if (values.nazwamiejscowosc == ' ') {
                         errors.adres = 'Wypełnij to pole!';
 					}
 
                     if (!values.kraj) {
                         errors.kraj = 'Wypełnij to pole.';
                     }
-					else if (values.kraj == ' ')) {
+					else if (values.kraj == ' ') {
                         errors.kraj = 'Wypełnij to pole!';
 					}
 
