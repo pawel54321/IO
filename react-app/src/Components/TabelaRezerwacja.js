@@ -118,9 +118,9 @@ const TabelaRezerwacja = (props) => (
                 if (!values.id) {
                     errors.id = 'Brak id';
                 }
-				else if (!values.id>= 0) {
-                        errors.id = 'Wypełnij to pole liczba!';
-					}
+				else if (isNaN(values.id)) {
+					errors.id = 'Wypełnij to pole liczbą!';
+				}
                 return errors;
                 }}
             />

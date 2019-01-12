@@ -221,21 +221,21 @@ const TabelaAtrakcja = (props) => (
                     if (!values.liczba_miejsc) {
                         errors.liczba_miejsc = 'Wypełnij to pole.';
                     }
-                    else if (!values.liczba_miejsc >= 0) {
-                        errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
-                    }
+					else if (isNaN(values.liczba_miejsc)) {
+						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
+					}
                     if (!values.godzina_otwarcia) {
                         errors.godzina_otwarcia = 'Wypełnij to pole.';
                     }
                     if (!values.godzina_zamkniecia) {
                         errors.godzina_zamkniecia = 'Wypełnij to pole.';
                     }
-                    if (!values.liczba_miejsc) {
-                        errors.liczba_miejsc = 'Wypełnij to pole liczba.';
+                    if (!values.cena) {
+                        errors.cena = 'Wypełnij to pole liczba.';
                     }
-					else if (!values.liczba_miejsc >= 0) {
-                        errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
-                    }
+					else if (isNaN(values.cena)) {
+						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
+					}
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
@@ -265,9 +265,9 @@ const TabelaAtrakcja = (props) => (
                     if (!values.id) {
                         errors.id = 'Wypełnij to pole.';
                     }
-					else if (!values.id >= 0) {
-                        errors.id = 'Wypełnij to pole liczbą!';
-                    }
+					else if (isNaN(values.id)) {
+						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
+					}
 
                     if (!values.nazwa) {
                         errors.nazwa = 'Wypełnij to pole.';
@@ -285,9 +285,9 @@ const TabelaAtrakcja = (props) => (
                     if (!values.liczba_miejsc) {
                         errors.liczba_miejsc = 'Wypełnij to pole.';
                     }
-					else if (!values.liczba_miejsc >= 0) {
-                        errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
-                    }
+					else if (isNaN(values.liczba_miejsc)) {
+						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
+					}
 					
                     if (!values.godzina_otwarcia) {
                         errors.godzina_otwarcia = 'Wypełnij to pole.';
@@ -299,9 +299,9 @@ const TabelaAtrakcja = (props) => (
                     if (!values.cena) {
                         errors.cena = 'Wypełnij to pole.';
                     }
-					else if (!values.cena >= 0) {
-                        errors.cena = 'Wypełnij to pole liczbą!';
-                    }
+					else if (isNaN(values.cena)) {
+						errors.cena = 'Wypełnij to pole liczbą!';
+					}
 					
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
