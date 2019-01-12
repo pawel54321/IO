@@ -144,10 +144,16 @@ const TabelaMiejscowosc = (props) => (
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
+					else if (values.nazwamiejscowosc == ' ')) {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole!';
+					}
 
                     if (!values.kraj) {
                         errors.kraj = 'Wypełnij to pole.';
                     }
+					else if (values.kraj == ' ')) {
+                        errors.kraj = 'Wypełnij to pole!';
+					}
 
                     if (tasks.find((element) => {return element.nazwamiejscowosc === values.nazwamiejscowosc})) {
                         errors.nazwamiejscowosc = 'Miejscowość o takiej nazwie istnieje!';
@@ -170,10 +176,16 @@ const TabelaMiejscowosc = (props) => (
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
+					else if (values.nazwamiejscowosc == ' ')) {
+                        errors.adres = 'Wypełnij to pole!';
+					}
 
                     if (!values.kraj) {
                         errors.kraj = 'Wypełnij to pole.';
                     }
+					else if (values.kraj == ' ')) {
+                        errors.kraj = 'Wypełnij to pole!';
+					}
 
                     //if (tasks.find((element) => {return element.nazwamiejscowosc === values.nazwamiejscowosc})) {
                     //    errors.nazwamiejscowosc = 'Miejscowość o takiej nazwie istnieje!';
