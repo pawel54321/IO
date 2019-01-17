@@ -1,4 +1,4 @@
-import React//, { Component } 
+import React//, { Component }
     from 'react';
 
 import CRUDTable,
@@ -74,7 +74,7 @@ const service = {
             ...task,
             id: count,
         });
-                
+
         return Promise.resolve(task);
     },
     update: (data) => {
@@ -153,26 +153,26 @@ const TabelaAtrakcja = (props) => (
                     name="adres"
                     label="Adres"
                     placeholder="Adres"
-                   
+
                 />
-                <Field 
+                <Field
                     name="liczba_miejsc"
                     label="Liczba miejsc"
                     placeholder="10"
-                    
+
                 />
-              
-                <Field 
+
+                <Field
                     name="godzina_otwarcia"
                     label="Godz. otwarcia"
                     placeholder="10:50"
-                    
+
                 />
-                   <Field 
+                   <Field
                     name="godzina_zamkniecia"
                     label="Godz. zamknięcia"
                     placeholder="20:50"
-                    
+
                 />
 
                 <Field
@@ -185,7 +185,7 @@ const TabelaAtrakcja = (props) => (
                     name="nazwamiejscowosc"
                     label="Miejscowość"
                     placeholder="Miejscowość"
-               /> 
+               />
                <Field
                     name="wycofana"
                     label="Wycofana"
@@ -265,30 +265,30 @@ const TabelaAtrakcja = (props) => (
                     if (!values.id) {
                         errors.id = 'Wypełnij to pole.';
                     }
-					else if (isNaN(values.id)) {
-						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
-					}
+          					else if (isNaN(values.id)) {
+          						errors.liczba_miejsc = 'Wypełnij to pole liczbą.';
+          					}
 
                     if (!values.nazwa) {
                         errors.nazwa = 'Wypełnij to pole.';
                     }
-					else if (values.nazwa == ' ') {
-                        errors.nz = 'Wypełnij to pole!';
-					}
+          					else if (values.nazwa == ' ') {
+                        errors.nazwa = 'Wypełnij to pole.';
+          					}
                     if (!values.adres) {
                         errors.adres = 'Wypełnij to pole.';
                     }
-					else if (values.adres == ' ') {
-                        errors.adres = 'Wypełnij to pole!';
-					}
+          					else if (values.adres == ' ') {
+                        errors.adres = 'Wypełnij to pole.';
+          					}
 
                     if (!values.liczba_miejsc) {
                         errors.liczba_miejsc = 'Wypełnij to pole.';
                     }
-					else if (isNaN(values.liczba_miejsc)) {
-						errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
-					}
-					
+          					else if (isNaN(values.liczba_miejsc)) {
+          						  errors.liczba_miejsc = 'Wypełnij to pole liczbą!';
+          					}
+
                     if (!values.godzina_otwarcia) {
                         errors.godzina_otwarcia = 'Wypełnij to pole.';
                     }
@@ -299,16 +299,16 @@ const TabelaAtrakcja = (props) => (
                     if (!values.cena) {
                         errors.cena = 'Wypełnij to pole.';
                     }
-					else if (isNaN(values.cena)) {
-						errors.cena = 'Wypełnij to pole liczbą!';
-					}
-					
+          					else if (isNaN(values.cena)) {
+          						errors.cena = 'Wypełnij to pole liczbą.';
+          					}
+
                     if (!values.nazwamiejscowosc) {
                         errors.nazwamiejscowosc = 'Wypełnij to pole.';
                     }
-					else if (values.nazwamiejscowosc == ' ') {
-                        errors.nazwamiejscowosc = 'Wypełnij to pole!';
-					}
+          					else if (values.nazwamiejscowosc == ' ') {
+                        errors.nazwamiejscowosc = 'Wypełnij to pole.';
+          					}
 
                     //if (tasks.find((element) => {return element.nazwa === values.nazwa})) {
                      //   errors.nazwa = 'Atrakcja o takiej nazwie istnieje!';
@@ -330,9 +330,6 @@ const TabelaAtrakcja = (props) => (
                 if (!values.id) {
                     errors.id = 'Brak id';
                 }
-				else if (!values.adres>=0) {
-                        errors.adres = 'Wypełnij to pole liczba!';
-					}
                 return errors;
                 }}
             />
